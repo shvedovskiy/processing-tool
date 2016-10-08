@@ -130,7 +130,7 @@ namespace Graphics
             zedGraphControl4.AxisChange();
             zedGraphControl4.Invalidate();
 
-            /*
+            /* Плотность в виде гистограмм:
             BarItem curve = pane_3.AddBar("Количество значений Y", null, standart.density, Color.Blue);
             curve.Bar.Fill.Color = Color.YellowGreen;
             curve.Bar.Fill.Type = FillType.Solid;
@@ -143,7 +143,8 @@ namespace Graphics
             curve_2.Bar.Fill.Type = FillType.Solid;
             curve_2.Bar.Border.IsVisible = false;
             zedGraphControl4.AxisChange();
-            zedGraphControl4.Invalidate();*/
+            zedGraphControl4.Invalidate();
+            */
         }
     }
 
@@ -357,7 +358,7 @@ namespace Graphics
             int y_length = 2 * this.S + 1;  // длина области значений по Y
             int[] yarr = new int[y_length]; // массив всех значений по Y
             // Создание всех значений по Y:
-            int y = -S;
+            int y = -this.S;
             for (int i = 0; i != yarr.Length; i++)
             {
                 yarr[i] = y;
