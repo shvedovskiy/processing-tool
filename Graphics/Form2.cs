@@ -99,27 +99,17 @@ namespace Graphics
 
             pane.AddCurve("Стандартный", standart.create_pair_list(standart.points, standart.N), Color.Blue, SymbolType.None);
             pane.AddCurve("Кастомный", my.create_pair_list(my.points, my.N), Color.Green, SymbolType.None);
-            zedGraphControl1.AxisChange();
-            zedGraphControl1.Invalidate();
-           
+            
             pane_2.AddCurve("Стандартный генератор", standart.create_pair_list(standart.density, 30), Color.Blue, SymbolType.None);
             pane_2.AddCurve("Кастомный генератор", my.create_pair_list(my.density, 30), Color.Green, SymbolType.None);
-            // Указываем, что расположение легенды мы будет задавать в виде координат левого верхнего угла
             pane_2.Legend.Position = LegendPos.Float;
-            // Координаты будут отсчитываться в системе координат окна графика
             pane_2.Legend.Location.CoordinateFrame = CoordType.ChartFraction;
-            // Задаем выравнивание, относительно которого мы будем задавать координат
             pane_2.Legend.Location.AlignH = AlignH.Right;
             pane_2.Legend.Location.AlignV = AlignV.Bottom;
-            // Задаем координаты легенды, вычитаем 0.02f, чтобы был небольшой зазор между осями и легендой
             pane_2.Legend.Location.TopLeft = new PointF(1.0f - 0.02f, 1.0f - 0.02f); 
-            zedGraphControl2.AxisChange();
-            zedGraphControl2.Invalidate();
-
+            
             pane_3.AddCurve("", my.create_pair_list(my.calculate_more_statistics()[0], my.N), Color.Red, SymbolType.None);
-            zedGraphControl3.AxisChange();
-            zedGraphControl3.Invalidate();
-
+            
             pane_4.AddCurve("R_XY", my.create_pair_list(my.calculate_more_statistics()[1], my.N), Color.Blue, SymbolType.None);
             pane_4.AddCurve("R_YX", my.create_pair_list(my.calculate_more_statistics()[2], my.N), Color.Black, SymbolType.None);
             pane_4.Legend.Position = LegendPos.Float;
@@ -127,30 +117,34 @@ namespace Graphics
             pane_4.Legend.Location.AlignH = AlignH.Right;
             pane_4.Legend.Location.AlignV = AlignV.Bottom;
             pane_4.Legend.Location.TopLeft = new PointF(1.0f - 0.02f, 1.0f - 0.02f); 
-            zedGraphControl4.AxisChange();
-            zedGraphControl4.Invalidate();
-
+            
             /* Плотность в виде гистограмм:
             BarItem curve = pane_3.AddBar("Количество значений Y", null, standart.density, Color.Blue);
             curve.Bar.Fill.Color = Color.YellowGreen;
             curve.Bar.Fill.Type = FillType.Solid;
             curve.Bar.Border.IsVisible = false;
-            zedGraphControl3.AxisChange();
-            zedGraphControl3.Invalidate();
 
             BarItem curve_2 = pane_4.AddBar("Количество значений Y", null, my.density, Color.Blue);
             curve_2.Bar.Fill.Color = Color.YellowGreen;
             curve_2.Bar.Fill.Type = FillType.Solid;
             curve_2.Bar.Border.IsVisible = false;
-            zedGraphControl4.AxisChange();
-            zedGraphControl4.Invalidate();
             */
+
+            zedGraphControl1.AxisChange();
+            zedGraphControl2.AxisChange();
+            zedGraphControl3.AxisChange();
+            zedGraphControl4.AxisChange();
+
+            zedGraphControl1.Invalidate();
+            zedGraphControl2.Invalidate();
+            zedGraphControl3.Invalidate();
+            zedGraphControl4.Invalidate();
         }
     }
 
     public class Graph
     {
-        class MyOwnRandom
+        private class MyOwnRandom
         {
             private const long _a = 6364136223846793005;
             private const long _c = 1442695040888963407;
@@ -159,7 +153,7 @@ namespace Graphics
 
             public MyOwnRandom()
             {
-                _last = (long)Math.Pow(DateTime.Now.TimeOfDay.TotalMilliseconds, 11.0 / 7.0);
+                _last = (long) Math.Pow(DateTime.Now.TimeOfDay.TotalMilliseconds, 11.0 / 7.0);
             }
             public MyOwnRandom(long seed)
             {
@@ -176,13 +170,13 @@ namespace Graphics
             }
         }
 
-        public int      S;        // интервал значений по Y
-        public int      N;        // интервал значений по X (количество точек)
-        public bool     isOwn;    // флаг определения вида рандомайзера
-        public double[] points;   // заполняется в Graph() -> create_random_array()
-        public double[] stat;     // заполняется в Graph() -> calculate_statistics()
-        public double[] density;  // заполняется в Graph() -> calculate_density() 
-        public double[] stability;// заполняется в Graph() -> calculate_stability()
+        public  int      S;        // интервал значений по Y
+        public  int      N;        // интервал значений по X (количество точек)
+        private bool     isOwn;    // флаг определения вида рандомайзера
+        public  double[] points;   // заполняется в Graph() -> create_random_array()
+        public  double[] stat;     // заполняется в Graph() -> calculate_statistics()
+        public  double[] density;  // заполняется в Graph() -> calculate_density() 
+        public  double[] stability;// заполняется в Graph() -> calculate_stability()
 
         public Graph(int S, int N, bool isOwn)
         {
@@ -194,7 +188,7 @@ namespace Graphics
             this.density   = calculate_density();
             this.stability = calculate_stability();
         }
-        public double[]      create_random_array()
+        private double[]      create_random_array()
         {
             double[] rand_arr = new double[this.N];
             double[] points = new double[this.N];
@@ -221,7 +215,7 @@ namespace Graphics
 
             return points;
         }
-        public double[]      calculate_statistics()
+        private double[]      calculate_statistics()
         {
             int len = this.points.Length;
             double[] res = new double[7];
@@ -264,7 +258,7 @@ namespace Graphics
 
             return res;
         }
-        public double[]      calculate_statistics(double[] points)
+        private double[]      calculate_statistics(double[] points)
         {
             int len = points.Length;
             double[] res = new double[7];
@@ -307,7 +301,7 @@ namespace Graphics
 
             return res;
         }
-        public double[][]    calculate_more_statistics() // aka static
+        public  double[][]    calculate_more_statistics() // aka static
         {
             double[][] res = new double[3][];
             res[0] = new double[this.N];
@@ -352,7 +346,7 @@ namespace Graphics
 
             return res;
         }
-        public double[]      calculate_density()
+        private double[]      calculate_density()
         {
             double[] y_counts = new double[30];   // кол-во значений рандомайзера в интервалах
             int y_length = 2 * this.S + 1;  // длина области значений по Y
@@ -403,7 +397,7 @@ namespace Graphics
             
             return y_counts;
         }
-        public double[]      calculate_stability()
+        private double[]      calculate_stability()
         {
             double[]   stability = new double[7];    // Массив усредненных статистик интервалов
             double[][] substats  = new double[50][]; // Массив статистик по интервалам
@@ -465,7 +459,7 @@ namespace Graphics
 
             return stability;
         }
-        public PointPairList create_pair_list(double[] arr, int size)
+        public  PointPairList create_pair_list(double[] arr, int size)
         {
             PointPairList list = new PointPairList();
             for (int x = 0; x != size; ++x)

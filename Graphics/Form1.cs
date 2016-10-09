@@ -40,38 +40,25 @@ namespace Graphics
         }
         private void DrawGraph()
         {
-            // Получим панель для рисования
-            GraphPane pane_1 = zedGraphControl1.GraphPane;
+            GraphPane pane = zedGraphControl1.GraphPane;
             GraphPane pane_2 = zedGraphControl2.GraphPane;
             GraphPane pane_3 = zedGraphControl3.GraphPane;
             GraphPane pane_4 = zedGraphControl4.GraphPane;
 
+            pane.XAxis.Title.Text = pane_2.XAxis.Title.Text = pane_3.XAxis.Title.Text = pane_4.XAxis.Title.Text = "Ось X";
+            pane.YAxis.Title.Text = pane_2.YAxis.Title.Text = pane_3.YAxis.Title.Text = pane_4.YAxis.Title.Text = "Ось Y";
 
-            // Изменим тест надписи по оси X, Y
-            pane_1.XAxis.Title.Text = "Ось X";
-            pane_1.YAxis.Title.Text = "Ось Y";
-            pane_2.XAxis.Title.Text = "Ось X";
-            pane_2.YAxis.Title.Text = "Ось Y";
-            pane_3.XAxis.Title.Text = "Ось X";
-            pane_3.YAxis.Title.Text = "Ось Y";
-            pane_4.XAxis.Title.Text = "Ось X";
-            pane_4.YAxis.Title.Text = "Ось Y";
-
-            // Изменим текст заголовка графика
-            pane_1.Title.Text = "y = ax + b";
+            pane.Title.Text = "y = ax + b";
             pane_2.Title.Text = "y = -ax + b";
             pane_3.Title.Text = "y = ce^(alpha * x)";
             pane_4.Title.Text = "y = ce^(-alpha * x)";
 
-
-            // Очистим список кривых на тот случай, если до этого сигналы уже были нарисованы
-            pane_1.CurveList.Clear();
+            pane.CurveList.Clear();
             pane_2.CurveList.Clear();
             pane_3.CurveList.Clear();
             pane_4.CurveList.Clear();
 
-            // Создадим список точек
-            PointPairList list_1 = new PointPairList();
+            PointPairList list = new PointPairList();
             PointPairList list_2 = new PointPairList();
             PointPairList list_3 = new PointPairList();
             PointPairList list_4 = new PointPairList();
@@ -79,20 +66,18 @@ namespace Graphics
             double xmin = 0;
             double xmax = 100;
 
-            double xmin_limit = -1;
-            double xmax_limit = 105;
+            double xmin_limit   = -1;
+            double xmax_limit   = 105;
             double x_3max_limit = 50;
             double x_4max_limit = 200;
             double x_4min_limit = -100;
-
-            double ymin_limit = -1;
-            double ymax_limit = 200;
+            double ymin_limit   = -1;
+            double ymax_limit   = 200;
             double y_4max_limit = 50;
 
-            // Заполняем список точек
             for (double x = xmin; x <= xmax; x += 0.01)
             {
-                list_1.Add(x, f_1(x));
+                list.Add(x, f_1(x));
                 list_2.Add(x, f_2(x));
                 list_3.Add(x, f_3(x));
             }
@@ -101,34 +86,26 @@ namespace Graphics
                 list_4.Add(x, f_4(x));
             }
 
-            // Создадим кривую
-            pane_1.AddCurve("", list_1, Color.Blue, SymbolType.None);
+            pane.AddCurve("", list, Color.Blue, SymbolType.None);
             pane_2.AddCurve("", list_2, Color.Blue, SymbolType.None);
             pane_3.AddCurve("", list_3, Color.Blue, SymbolType.None);
             pane_4.AddCurve("", list_4, Color.Blue, SymbolType.None);
 
-            // Устанавливаем интересующий нас интервал по оси X
-            pane_1.XAxis.Scale.Min = xmin_limit;
-            pane_1.XAxis.Scale.Max = xmax_limit;
-            pane_2.XAxis.Scale.Min = xmin_limit;
-            pane_2.XAxis.Scale.Max = xmax_limit;
+            pane.XAxis.Scale.Min = pane_2.XAxis.Scale.Min = xmin_limit;
+            pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = xmax_limit;
             pane_3.XAxis.Scale.Max = x_3max_limit;
             pane_4.XAxis.Scale.Min = x_4min_limit;
             pane_4.XAxis.Scale.Max = x_4max_limit;
 
-            pane_2.YAxis.Scale.Min = ymin_limit;
-            pane_2.YAxis.Scale.Max = ymax_limit;
-            pane_3.YAxis.Scale.Min = ymin_limit;
-            pane_3.YAxis.Scale.Max = ymax_limit;
+            pane_2.YAxis.Scale.Min = pane_3.YAxis.Scale.Min = ymin_limit;
+            pane_2.YAxis.Scale.Max = pane_3.YAxis.Scale.Max = ymax_limit;
             pane_4.YAxis.Scale.Max = y_4max_limit;   
 
-            // Вызываем метод AxisChange (), чтобы обновить данные об осях.
             zedGraphControl1.AxisChange();
             zedGraphControl2.AxisChange();
             zedGraphControl3.AxisChange();
             zedGraphControl4.AxisChange();
 
-            // Обновляем график
             zedGraphControl1.Invalidate();
             zedGraphControl2.Invalidate();
             zedGraphControl3.Invalidate();
