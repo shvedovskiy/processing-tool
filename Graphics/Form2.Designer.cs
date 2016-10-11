@@ -88,15 +88,25 @@
             this.s_squaredavgtextbox_own = new System.Windows.Forms.TextBox();
             this.s_dispersiontextbox_own = new System.Windows.Forms.TextBox();
             this.s_epstextbox_own = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.zedGraphControl5 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl8 = new ZedGraph.ZedGraphControl();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // zedGraphControl1
             // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(-3, 42);
+            this.zedGraphControl1.Location = new System.Drawing.Point(-4, 1);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -110,7 +120,7 @@
             // 
             // zedGraphControl2
             // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(-3, 399);
+            this.zedGraphControl2.Location = new System.Drawing.Point(-4, 358);
             this.zedGraphControl2.Name = "zedGraphControl2";
             this.zedGraphControl2.ScrollGrace = 0D;
             this.zedGraphControl2.ScrollMaxX = 0D;
@@ -167,7 +177,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(438, 42);
+            this.groupBox1.Location = new System.Drawing.Point(437, 1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(244, 351);
             this.groupBox1.TabIndex = 5;
@@ -177,7 +187,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 304);
+            this.label16.Location = new System.Drawing.Point(10, 304);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(71, 13);
             this.label16.TabIndex = 15;
@@ -432,7 +442,7 @@
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Location = new System.Drawing.Point(438, 399);
+            this.groupBox2.Location = new System.Drawing.Point(437, 358);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(244, 342);
             this.groupBox2.TabIndex = 14;
@@ -457,7 +467,7 @@
             // 
             // zedGraphControl3
             // 
-            this.zedGraphControl3.Location = new System.Drawing.Point(831, 42);
+            this.zedGraphControl3.Location = new System.Drawing.Point(830, 1);
             this.zedGraphControl3.Name = "zedGraphControl3";
             this.zedGraphControl3.ScrollGrace = 0D;
             this.zedGraphControl3.ScrollMaxX = 0D;
@@ -471,7 +481,7 @@
             // 
             // zedGraphControl4
             // 
-            this.zedGraphControl4.Location = new System.Drawing.Point(831, 401);
+            this.zedGraphControl4.Location = new System.Drawing.Point(830, 358);
             this.zedGraphControl4.Name = "zedGraphControl4";
             this.zedGraphControl4.ScrollGrace = 0D;
             this.zedGraphControl4.ScrollMaxX = 0D;
@@ -493,7 +503,7 @@
             this.groupBox3.Controls.Add(this.s_errtextbox);
             this.groupBox3.Controls.Add(this.s_epstextbox);
             this.groupBox3.Controls.Add(this.s_dispersiontextbox);
-            this.groupBox3.Location = new System.Drawing.Point(688, 42);
+            this.groupBox3.Location = new System.Drawing.Point(687, 1);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(137, 351);
             this.groupBox3.TabIndex = 17;
@@ -566,7 +576,7 @@
             this.groupBox4.Controls.Add(this.s_squaredavgtextbox_own);
             this.groupBox4.Controls.Add(this.s_dispersiontextbox_own);
             this.groupBox4.Controls.Add(this.s_epstextbox_own);
-            this.groupBox4.Location = new System.Drawing.Point(688, 399);
+            this.groupBox4.Location = new System.Drawing.Point(687, 357);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(137, 343);
             this.groupBox4.TabIndex = 18;
@@ -629,22 +639,113 @@
             this.s_epstextbox_own.Size = new System.Drawing.Size(121, 20);
             this.s_epstextbox_own.TabIndex = 16;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(-3, 8);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1290, 733);
+            this.tabControl1.TabIndex = 19;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.zedGraphControl1);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.zedGraphControl4);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.zedGraphControl3);
+            this.tabPage1.Controls.Add(this.zedGraphControl2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1282, 707);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.zedGraphControl8);
+            this.tabPage2.Controls.Add(this.zedGraphControl5);
+            this.tabPage2.Controls.Add(this.zedGraphControl7);
+            this.tabPage2.Controls.Add(this.zedGraphControl6);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1282, 707);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // zedGraphControl5
+            // 
+            this.zedGraphControl5.Location = new System.Drawing.Point(0, 57);
+            this.zedGraphControl5.Name = "zedGraphControl5";
+            this.zedGraphControl5.ScrollGrace = 0D;
+            this.zedGraphControl5.ScrollMaxX = 0D;
+            this.zedGraphControl5.ScrollMaxY = 0D;
+            this.zedGraphControl5.ScrollMaxY2 = 0D;
+            this.zedGraphControl5.ScrollMinX = 0D;
+            this.zedGraphControl5.ScrollMinY = 0D;
+            this.zedGraphControl5.ScrollMinY2 = 0D;
+            this.zedGraphControl5.Size = new System.Drawing.Size(820, 318);
+            this.zedGraphControl5.TabIndex = 0;
+            // 
+            // zedGraphControl6
+            // 
+            this.zedGraphControl6.Location = new System.Drawing.Point(0, 381);
+            this.zedGraphControl6.Name = "zedGraphControl6";
+            this.zedGraphControl6.ScrollGrace = 0D;
+            this.zedGraphControl6.ScrollMaxX = 0D;
+            this.zedGraphControl6.ScrollMaxY = 0D;
+            this.zedGraphControl6.ScrollMaxY2 = 0D;
+            this.zedGraphControl6.ScrollMinX = 0D;
+            this.zedGraphControl6.ScrollMinY = 0D;
+            this.zedGraphControl6.ScrollMinY2 = 0D;
+            this.zedGraphControl6.Size = new System.Drawing.Size(820, 320);
+            this.zedGraphControl6.TabIndex = 1;
+            // 
+            // zedGraphControl7
+            // 
+            this.zedGraphControl7.Location = new System.Drawing.Point(826, 57);
+            this.zedGraphControl7.Name = "zedGraphControl7";
+            this.zedGraphControl7.ScrollGrace = 0D;
+            this.zedGraphControl7.ScrollMaxX = 0D;
+            this.zedGraphControl7.ScrollMaxY = 0D;
+            this.zedGraphControl7.ScrollMaxY2 = 0D;
+            this.zedGraphControl7.ScrollMinX = 0D;
+            this.zedGraphControl7.ScrollMinY = 0D;
+            this.zedGraphControl7.ScrollMinY2 = 0D;
+            this.zedGraphControl7.Size = new System.Drawing.Size(425, 318);
+            this.zedGraphControl7.TabIndex = 2;
+            // 
+            // zedGraphControl8
+            // 
+            this.zedGraphControl8.Location = new System.Drawing.Point(826, 381);
+            this.zedGraphControl8.Name = "zedGraphControl8";
+            this.zedGraphControl8.ScrollGrace = 0D;
+            this.zedGraphControl8.ScrollMaxX = 0D;
+            this.zedGraphControl8.ScrollMaxY = 0D;
+            this.zedGraphControl8.ScrollMaxY2 = 0D;
+            this.zedGraphControl8.ScrollMinX = 0D;
+            this.zedGraphControl8.ScrollMinY = 0D;
+            this.zedGraphControl8.ScrollMinY2 = 0D;
+            this.zedGraphControl8.Size = new System.Drawing.Size(425, 320);
+            this.zedGraphControl8.TabIndex = 3;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 741);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.zedGraphControl4);
-            this.Controls.Add(this.zedGraphControl3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1264, 733);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.SInputButton);
             this.Controls.Add(this.SInput);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.zedGraphControl2);
-            this.Controls.Add(this.zedGraphControl1);
             this.Name = "Form2";
             this.Text = "Form2";
             this.groupBox1.ResumeLayout(false);
@@ -655,6 +756,9 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,5 +825,12 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox kovtextbox_own;
         private System.Windows.Forms.TextBox s_kovtextbox_own;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private ZedGraph.ZedGraphControl zedGraphControl5;
+        private ZedGraph.ZedGraphControl zedGraphControl6;
+        private ZedGraph.ZedGraphControl zedGraphControl7;
+        private ZedGraph.ZedGraphControl zedGraphControl8;
     }
 }
