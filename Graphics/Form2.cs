@@ -32,6 +32,100 @@ namespace Graphics
             S = Convert.ToInt32(SInput.Text);
             DrawGraph(S, N);
         }
+        private void SpikesInput_Rand_Click(object sender, EventArgs e)
+        {
+            GraphPane pane = zedGraphControl1.GraphPane;
+            PointPairList newList = new PointPairList();
+            Random rand = new Random();
+            CurveItem curve = pane.CurveList[0];
+
+            for (int i = 0; i != 5; ++i)
+            {
+                int var = rand.Next(100, curve.Points.Count + 1);
+                curve.Points[var].Y = curve.Points[var].Y * 15;
+            }
+
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                newList.Add(curve.Points[i].X, curve.Points[i].Y);
+            }
+            curve.Points = newList;
+
+            pane.YAxis.Scale.Min = -S * 10;
+            pane.YAxis.Scale.Max = S * 10;
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+        }
+        private void SpikesDelete_Rand_Click(object sender, EventArgs e)
+        {
+            GraphPane pane = zedGraphControl1.GraphPane;
+            PointPairList newList = new PointPairList();
+            Random rand = new Random();
+            CurveItem curve = pane.CurveList[0];
+
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                if (Math.Abs(curve.Points[i].Y) > S)
+                {
+                    curve.Points[i].Y = (curve.Points[i - 1].Y + curve.Points[i + 1].Y) / 2;
+                }
+            }
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                newList.Add(curve.Points[i].X, curve.Points[i].Y);
+            }
+            curve.Points = newList;
+
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+        }
+        private void SpikesInput_Poly_Click(object sender, EventArgs e)
+        {
+            GraphPane pane = zedGraphControl6.GraphPane;
+            PointPairList newList = new PointPairList();
+            Random rand = new Random();
+            CurveItem curve = pane.CurveList[0];
+
+            for (int i = 0; i != 5; ++i)
+            {
+                int var = rand.Next(100, curve.Points.Count + 1);
+                curve.Points[var].Y = curve.Points[var].Y * 15;
+            }
+
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                newList.Add(curve.Points[i].X, curve.Points[i].Y);
+            }
+            curve.Points = newList;
+
+            pane.YAxis.Scale.Min = -S * 10;
+            pane.YAxis.Scale.Max = S * 10;
+            zedGraphControl6.AxisChange();
+            zedGraphControl6.Invalidate();
+        }
+        private void SpikesDelete_Poly_Click(object sender, EventArgs e)
+        {
+            GraphPane pane = zedGraphControl6.GraphPane;
+            PointPairList newList = new PointPairList();
+            Random rand = new Random();
+            CurveItem curve = pane.CurveList[0];
+
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                if (Math.Abs(curve.Points[i].Y) > S)
+                {
+                    curve.Points[i].Y = (curve.Points[i - 1].Y + curve.Points[i + 1].Y) / 2;
+                }
+            }
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                newList.Add(curve.Points[i].X, curve.Points[i].Y);
+            }
+            curve.Points = newList;
+
+            zedGraphControl6.AxisChange();
+            zedGraphControl6.Invalidate();
+        }
         private void DrawGraph(int S, int N)
         {
             // Создание объектов с координатами:
@@ -94,9 +188,9 @@ namespace Graphics
             pane_3.Title.Text = "Автокорелляция";
             pane_4.Title.Text = "Взаимная корелляция (реализации кастомного генератора)";
             pane_5.Title.Text = "Эффект наложения частот";
-            pane_2.Title.Text = "Полигармонический процесс";
-            pane_3.Title.Text = "Плотность полигармонического процесса";
-            pane_4.Title.Text = "Авторреляция полигармонического процесса";
+            pane_6.Title.Text = "Полигармонический процесс";
+            pane_7.Title.Text = "Плотность полигармонического процесса";
+            pane_8.Title.Text = "Авторреляция полигармонического процесса";
 
             pane.CurveList.Clear();
             pane_2.CurveList.Clear();
@@ -107,13 +201,13 @@ namespace Graphics
             pane_7.CurveList.Clear();
             pane_8.CurveList.Clear();
 
-            pane.XAxis.Scale.Min = pane_2.XAxis.Scale.Min = 0;
-            pane.XAxis.Scale.Max = pane_3.XAxis.Scale.Max = pane_4.XAxis.Scale.Max = pane_5.XAxis.Scale.Max = pane_6.XAxis.Scale.Max = pane_8.XAxis.Scale.Max = N;
-            pane.YAxis.Scale.Min = -S;
-            pane.YAxis.Scale.Max = S;
+            pane.XAxis.Scale.Min   = pane_2.XAxis.Scale.Min = 0;
+            pane.XAxis.Scale.Max   = pane_3.XAxis.Scale.Max = pane_4.XAxis.Scale.Max = pane_5.XAxis.Scale.Max = pane_6.XAxis.Scale.Max = pane_8.XAxis.Scale.Max = N;
+            pane.YAxis.Scale.Min   = -S;
+            pane.YAxis.Scale.Max   = S;
             pane_2.XAxis.Scale.Max = pane_7.XAxis.Scale.Max = 30;
 
-            pane.AddCurve("Стандартный", standart.create_pair_list(standart.points, standart.N), Color.Blue, SymbolType.None);
+            //pane.AddCurve("Стандартный", standart.create_pair_list(standart.points, standart.N), Color.Blue, SymbolType.None);
             pane.AddCurve("Кастомный", my.create_pair_list(my.points, my.N), Color.Green, SymbolType.None);
             
             pane_2.AddCurve("Стандартный генератор", standart.create_pair_list(standart.density, 30), Color.Blue, SymbolType.None);

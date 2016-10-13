@@ -48,7 +48,6 @@ namespace Graphics
         public double[] stat;        // заполняется в Graph() -> calculate_statistics()
         public double[] density;     // заполняется в Graph() -> calculate_density() 
         public double[] stationarity;// заполняется в Graph() -> calculate_stability()
-        public double[] spikes;      // заполняется в Graph() -> calculate_spikes()
 
         public Graph(int S, int N, bool isOwn, bool isF, bool isPoly)
         {
@@ -365,20 +364,18 @@ namespace Graphics
 
             return stability;
         }
-        private double[]      calculate_spikes(int m, int k) // неправдоподобные значения 
+        public  void          calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
         {
-            double[] spikes = new double[m];
-            int[] arr = new int[m];
             Random rand = new Random();
-            for (int i = 0; i != arr.Length; ++i)
+            for (int i = 0; i != m; ++i)
             {
-                arr[i] = rand.Next();
+                int val = rand.Next(0, this.N - 1);
+                this.points[val] = this.points[val] * 10 * (this.points.Max() - this.points.Min());
             }
-            for (int i = 0; i != spikes.Length; ++i)
-            {
-                spikes[i] = this.points[arr[i]] * k * (this.points.Max() - this.points.Min());
-            }
-            return spikes;
+        }
+        public  void          delete_spikes() // удаление неправдоподобных значений 
+        {
+
         }
         public  PointPairList create_pair_list(double[] arr, int size)
         {

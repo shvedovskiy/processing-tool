@@ -90,11 +90,15 @@
             this.s_epstextbox_own = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SpikesDelete_Rand = new System.Windows.Forms.Button();
+            this.SpikesInput_Rand = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.zedGraphControl5 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
+            this.SpikesDelete_Poly = new System.Windows.Forms.Button();
+            this.SpikesInput_Poly = new System.Windows.Forms.Button();
             this.zedGraphControl8 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl5 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -106,7 +110,7 @@
             // 
             // zedGraphControl1
             // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(-4, 1);
+            this.zedGraphControl1.Location = new System.Drawing.Point(-4, 43);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -115,12 +119,12 @@
             this.zedGraphControl1.ScrollMinX = 0D;
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(435, 351);
+            this.zedGraphControl1.Size = new System.Drawing.Size(435, 346);
             this.zedGraphControl1.TabIndex = 0;
             // 
             // zedGraphControl2
             // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(-4, 358);
+            this.zedGraphControl2.Location = new System.Drawing.Point(-4, 397);
             this.zedGraphControl2.Name = "zedGraphControl2";
             this.zedGraphControl2.ScrollGrace = 0D;
             this.zedGraphControl2.ScrollMaxX = 0D;
@@ -129,13 +133,13 @@
             this.zedGraphControl2.ScrollMinX = 0D;
             this.zedGraphControl2.ScrollMinY = 0D;
             this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(435, 342);
+            this.zedGraphControl2.Size = new System.Drawing.Size(435, 329);
             this.zedGraphControl2.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(294, 13);
+            this.label1.Location = new System.Drawing.Point(498, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 2;
@@ -143,7 +147,7 @@
             // 
             // SInput
             // 
-            this.SInput.Location = new System.Drawing.Point(376, 10);
+            this.SInput.Location = new System.Drawing.Point(581, 13);
             this.SInput.Name = "SInput";
             this.SInput.Size = new System.Drawing.Size(100, 20);
             this.SInput.TabIndex = 3;
@@ -151,7 +155,7 @@
             // 
             // SInputButton
             // 
-            this.SInputButton.Location = new System.Drawing.Point(493, 8);
+            this.SInputButton.Location = new System.Drawing.Point(687, 11);
             this.SInputButton.Name = "SInputButton";
             this.SInputButton.Size = new System.Drawing.Size(75, 23);
             this.SInputButton.TabIndex = 4;
@@ -177,9 +181,9 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(437, 1);
+            this.groupBox1.Location = new System.Drawing.Point(437, 44);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(244, 351);
+            this.groupBox1.Size = new System.Drawing.Size(244, 329);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Статистические показатели";
@@ -442,9 +446,9 @@
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Location = new System.Drawing.Point(437, 358);
+            this.groupBox2.Location = new System.Drawing.Point(437, 397);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(244, 342);
+            this.groupBox2.Size = new System.Drawing.Size(244, 329);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Статистические показатели";
@@ -467,7 +471,7 @@
             // 
             // zedGraphControl3
             // 
-            this.zedGraphControl3.Location = new System.Drawing.Point(830, 1);
+            this.zedGraphControl3.Location = new System.Drawing.Point(830, 43);
             this.zedGraphControl3.Name = "zedGraphControl3";
             this.zedGraphControl3.ScrollGrace = 0D;
             this.zedGraphControl3.ScrollMaxX = 0D;
@@ -476,12 +480,12 @@
             this.zedGraphControl3.ScrollMinX = 0D;
             this.zedGraphControl3.ScrollMinY = 0D;
             this.zedGraphControl3.ScrollMinY2 = 0D;
-            this.zedGraphControl3.Size = new System.Drawing.Size(430, 351);
+            this.zedGraphControl3.Size = new System.Drawing.Size(430, 346);
             this.zedGraphControl3.TabIndex = 15;
             // 
             // zedGraphControl4
             // 
-            this.zedGraphControl4.Location = new System.Drawing.Point(830, 358);
+            this.zedGraphControl4.Location = new System.Drawing.Point(830, 397);
             this.zedGraphControl4.Name = "zedGraphControl4";
             this.zedGraphControl4.ScrollGrace = 0D;
             this.zedGraphControl4.ScrollMaxX = 0D;
@@ -490,7 +494,7 @@
             this.zedGraphControl4.ScrollMinX = 0D;
             this.zedGraphControl4.ScrollMinY = 0D;
             this.zedGraphControl4.ScrollMinY2 = 0D;
-            this.zedGraphControl4.Size = new System.Drawing.Size(430, 341);
+            this.zedGraphControl4.Size = new System.Drawing.Size(430, 329);
             this.zedGraphControl4.TabIndex = 16;
             // 
             // groupBox3
@@ -503,9 +507,9 @@
             this.groupBox3.Controls.Add(this.s_errtextbox);
             this.groupBox3.Controls.Add(this.s_epstextbox);
             this.groupBox3.Controls.Add(this.s_dispersiontextbox);
-            this.groupBox3.Location = new System.Drawing.Point(687, 1);
+            this.groupBox3.Location = new System.Drawing.Point(687, 44);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(137, 351);
+            this.groupBox3.Size = new System.Drawing.Size(137, 329);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Стационарность";
@@ -576,9 +580,9 @@
             this.groupBox4.Controls.Add(this.s_squaredavgtextbox_own);
             this.groupBox4.Controls.Add(this.s_dispersiontextbox_own);
             this.groupBox4.Controls.Add(this.s_epstextbox_own);
-            this.groupBox4.Location = new System.Drawing.Point(687, 357);
+            this.groupBox4.Location = new System.Drawing.Point(687, 397);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(137, 343);
+            this.groupBox4.Size = new System.Drawing.Size(137, 329);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Стационарность";
@@ -643,15 +647,20 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(-3, 8);
+            this.tabControl1.Location = new System.Drawing.Point(1, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1290, 733);
+            this.tabControl1.Size = new System.Drawing.Size(1290, 752);
             this.tabControl1.TabIndex = 19;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.SpikesDelete_Rand);
+            this.tabPage1.Controls.Add(this.SpikesInput_Rand);
             this.tabPage1.Controls.Add(this.zedGraphControl1);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.SInput);
+            this.tabPage1.Controls.Add(this.SInputButton);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.groupBox2);
@@ -662,13 +671,35 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1282, 707);
+            this.tabPage1.Size = new System.Drawing.Size(1282, 726);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Случайная функция";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // SpikesDelete_Rand
+            // 
+            this.SpikesDelete_Rand.Location = new System.Drawing.Point(953, 11);
+            this.SpikesDelete_Rand.Name = "SpikesDelete_Rand";
+            this.SpikesDelete_Rand.Size = new System.Drawing.Size(117, 23);
+            this.SpikesDelete_Rand.TabIndex = 20;
+            this.SpikesDelete_Rand.Text = "Сгладить спайки";
+            this.SpikesDelete_Rand.UseVisualStyleBackColor = true;
+            this.SpikesDelete_Rand.Click += new System.EventHandler(this.SpikesDelete_Rand_Click);
+            // 
+            // SpikesInput_Rand
+            // 
+            this.SpikesInput_Rand.Location = new System.Drawing.Point(830, 11);
+            this.SpikesInput_Rand.Name = "SpikesInput_Rand";
+            this.SpikesInput_Rand.Size = new System.Drawing.Size(117, 23);
+            this.SpikesInput_Rand.TabIndex = 19;
+            this.SpikesInput_Rand.Text = "Добавить спайки";
+            this.SpikesInput_Rand.UseVisualStyleBackColor = true;
+            this.SpikesInput_Rand.Click += new System.EventHandler(this.SpikesInput_Rand_Click);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.SpikesDelete_Poly);
+            this.tabPage2.Controls.Add(this.SpikesInput_Poly);
             this.tabPage2.Controls.Add(this.zedGraphControl8);
             this.tabPage2.Controls.Add(this.zedGraphControl5);
             this.tabPage2.Controls.Add(this.zedGraphControl7);
@@ -676,56 +707,34 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1282, 707);
+            this.tabPage2.Size = new System.Drawing.Size(1282, 726);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Гармоническая функция";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // zedGraphControl5
+            // SpikesDelete_Poly
             // 
-            this.zedGraphControl5.Location = new System.Drawing.Point(0, 57);
-            this.zedGraphControl5.Name = "zedGraphControl5";
-            this.zedGraphControl5.ScrollGrace = 0D;
-            this.zedGraphControl5.ScrollMaxX = 0D;
-            this.zedGraphControl5.ScrollMaxY = 0D;
-            this.zedGraphControl5.ScrollMaxY2 = 0D;
-            this.zedGraphControl5.ScrollMinX = 0D;
-            this.zedGraphControl5.ScrollMinY = 0D;
-            this.zedGraphControl5.ScrollMinY2 = 0D;
-            this.zedGraphControl5.Size = new System.Drawing.Size(820, 318);
-            this.zedGraphControl5.TabIndex = 0;
+            this.SpikesDelete_Poly.Location = new System.Drawing.Point(130, 19);
+            this.SpikesDelete_Poly.Name = "SpikesDelete_Poly";
+            this.SpikesDelete_Poly.Size = new System.Drawing.Size(117, 23);
+            this.SpikesDelete_Poly.TabIndex = 22;
+            this.SpikesDelete_Poly.Text = "Сгладить спайки";
+            this.SpikesDelete_Poly.UseVisualStyleBackColor = true;
+            this.SpikesDelete_Poly.Click += new System.EventHandler(this.SpikesDelete_Poly_Click);
             // 
-            // zedGraphControl6
+            // SpikesInput_Poly
             // 
-            this.zedGraphControl6.Location = new System.Drawing.Point(0, 381);
-            this.zedGraphControl6.Name = "zedGraphControl6";
-            this.zedGraphControl6.ScrollGrace = 0D;
-            this.zedGraphControl6.ScrollMaxX = 0D;
-            this.zedGraphControl6.ScrollMaxY = 0D;
-            this.zedGraphControl6.ScrollMaxY2 = 0D;
-            this.zedGraphControl6.ScrollMinX = 0D;
-            this.zedGraphControl6.ScrollMinY = 0D;
-            this.zedGraphControl6.ScrollMinY2 = 0D;
-            this.zedGraphControl6.Size = new System.Drawing.Size(820, 320);
-            this.zedGraphControl6.TabIndex = 1;
-            // 
-            // zedGraphControl7
-            // 
-            this.zedGraphControl7.Location = new System.Drawing.Point(826, 57);
-            this.zedGraphControl7.Name = "zedGraphControl7";
-            this.zedGraphControl7.ScrollGrace = 0D;
-            this.zedGraphControl7.ScrollMaxX = 0D;
-            this.zedGraphControl7.ScrollMaxY = 0D;
-            this.zedGraphControl7.ScrollMaxY2 = 0D;
-            this.zedGraphControl7.ScrollMinX = 0D;
-            this.zedGraphControl7.ScrollMinY = 0D;
-            this.zedGraphControl7.ScrollMinY2 = 0D;
-            this.zedGraphControl7.Size = new System.Drawing.Size(425, 318);
-            this.zedGraphControl7.TabIndex = 2;
+            this.SpikesInput_Poly.Location = new System.Drawing.Point(7, 19);
+            this.SpikesInput_Poly.Name = "SpikesInput_Poly";
+            this.SpikesInput_Poly.Size = new System.Drawing.Size(117, 23);
+            this.SpikesInput_Poly.TabIndex = 21;
+            this.SpikesInput_Poly.Text = "Добавить спайки";
+            this.SpikesInput_Poly.UseVisualStyleBackColor = true;
+            this.SpikesInput_Poly.Click += new System.EventHandler(this.SpikesInput_Poly_Click);
             // 
             // zedGraphControl8
             // 
-            this.zedGraphControl8.Location = new System.Drawing.Point(826, 381);
+            this.zedGraphControl8.Location = new System.Drawing.Point(826, 385);
             this.zedGraphControl8.Name = "zedGraphControl8";
             this.zedGraphControl8.ScrollGrace = 0D;
             this.zedGraphControl8.ScrollMaxX = 0D;
@@ -734,18 +743,57 @@
             this.zedGraphControl8.ScrollMinX = 0D;
             this.zedGraphControl8.ScrollMinY = 0D;
             this.zedGraphControl8.ScrollMinY2 = 0D;
-            this.zedGraphControl8.Size = new System.Drawing.Size(425, 320);
+            this.zedGraphControl8.Size = new System.Drawing.Size(425, 341);
             this.zedGraphControl8.TabIndex = 3;
+            // 
+            // zedGraphControl5
+            // 
+            this.zedGraphControl5.Location = new System.Drawing.Point(0, 48);
+            this.zedGraphControl5.Name = "zedGraphControl5";
+            this.zedGraphControl5.ScrollGrace = 0D;
+            this.zedGraphControl5.ScrollMaxX = 0D;
+            this.zedGraphControl5.ScrollMaxY = 0D;
+            this.zedGraphControl5.ScrollMaxY2 = 0D;
+            this.zedGraphControl5.ScrollMinX = 0D;
+            this.zedGraphControl5.ScrollMinY = 0D;
+            this.zedGraphControl5.ScrollMinY2 = 0D;
+            this.zedGraphControl5.Size = new System.Drawing.Size(820, 331);
+            this.zedGraphControl5.TabIndex = 0;
+            // 
+            // zedGraphControl7
+            // 
+            this.zedGraphControl7.Location = new System.Drawing.Point(826, 48);
+            this.zedGraphControl7.Name = "zedGraphControl7";
+            this.zedGraphControl7.ScrollGrace = 0D;
+            this.zedGraphControl7.ScrollMaxX = 0D;
+            this.zedGraphControl7.ScrollMaxY = 0D;
+            this.zedGraphControl7.ScrollMaxY2 = 0D;
+            this.zedGraphControl7.ScrollMinX = 0D;
+            this.zedGraphControl7.ScrollMinY = 0D;
+            this.zedGraphControl7.ScrollMinY2 = 0D;
+            this.zedGraphControl7.Size = new System.Drawing.Size(425, 331);
+            this.zedGraphControl7.TabIndex = 2;
+            // 
+            // zedGraphControl6
+            // 
+            this.zedGraphControl6.Location = new System.Drawing.Point(0, 385);
+            this.zedGraphControl6.Name = "zedGraphControl6";
+            this.zedGraphControl6.ScrollGrace = 0D;
+            this.zedGraphControl6.ScrollMaxX = 0D;
+            this.zedGraphControl6.ScrollMaxY = 0D;
+            this.zedGraphControl6.ScrollMaxY2 = 0D;
+            this.zedGraphControl6.ScrollMinX = 0D;
+            this.zedGraphControl6.ScrollMinY = 0D;
+            this.zedGraphControl6.ScrollMinY2 = 0D;
+            this.zedGraphControl6.Size = new System.Drawing.Size(820, 341);
+            this.zedGraphControl6.TabIndex = 1;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 733);
+            this.ClientSize = new System.Drawing.Size(1264, 753);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.SInputButton);
-            this.Controls.Add(this.SInput);
-            this.Controls.Add(this.label1);
             this.Name = "Form2";
             this.Text = "Form2";
             this.groupBox1.ResumeLayout(false);
@@ -758,9 +806,9 @@
             this.groupBox4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -832,5 +880,9 @@
         private ZedGraph.ZedGraphControl zedGraphControl6;
         private ZedGraph.ZedGraphControl zedGraphControl7;
         private ZedGraph.ZedGraphControl zedGraphControl8;
+        private System.Windows.Forms.Button SpikesDelete_Rand;
+        private System.Windows.Forms.Button SpikesInput_Rand;
+        private System.Windows.Forms.Button SpikesDelete_Poly;
+        private System.Windows.Forms.Button SpikesInput_Poly;
     }
 }
