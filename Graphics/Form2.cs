@@ -21,112 +21,85 @@ namespace Graphics
             InitializeComponent();
             DrawGraph(this.S, this.N);
         }
-        private void SInput_KeyPress(object sender, KeyPressEventArgs e)
+        private static void AddSpikes(CurveItem curve, int m)
+        {
+            PointPairList newList = new PointPairList();
+            Random rand = new Random();
+
+            for (int i = 0; i != m; ++i)
+            {
+                int var = rand.Next(100, curve.Points.Count + 1);
+                curve.Points[var].Y *= 15;
+            }
+
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                newList.Add(curve.Points[i].X, curve.Points[i].Y);
+            }
+            curve.Points = newList;
+        }
+        private static void DeleteSpikes(CurveItem curve, int S)
+        {
+            PointPairList newList = new PointPairList();
+            Random rand = new Random();
+
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                if (Math.Abs(curve.Points[i].Y) > S)
+                {
+                    curve.Points[i].Y = (curve.Points[i - 1].Y + curve.Points[i + 1].Y) / 2;
+                }
+            }
+            for (int i = 0; i != curve.Points.Count; ++i)
+            {
+                newList.Add(curve.Points[i].X, curve.Points[i].Y);
+            }
+            curve.Points = newList;
+        }
+        private void        SInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
             if (!Char.IsDigit(ch) && ch != 8)
                 e.Handled = true;
         }
-        private void SInputButton_Click(object sender, EventArgs e)
+        private void        SInputButton_Click(object sender, EventArgs e)
         {
             S = Convert.ToInt32(SInput.Text);
             DrawGraph(S, N);
         }
-        private void SpikesInput_Rand_Click(object sender, EventArgs e)
+        private void        SpikesInput_Rand_Click(object sender, EventArgs e)
         {
             GraphPane pane = zedGraphControl1.GraphPane;
-            PointPairList newList = new PointPairList();
-            Random rand = new Random();
-            CurveItem curve = pane.CurveList[0];
-
-            for (int i = 0; i != 5; ++i)
-            {
-                int var = rand.Next(100, curve.Points.Count + 1);
-                curve.Points[var].Y = curve.Points[var].Y * 15;
-            }
-
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                newList.Add(curve.Points[i].X, curve.Points[i].Y);
-            }
-            curve.Points = newList;
-
+            AddSpikes(pane.CurveList[0], 5);
             pane.YAxis.Scale.Min = -S * 10;
             pane.YAxis.Scale.Max = S * 10;
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
-        private void SpikesDelete_Rand_Click(object sender, EventArgs e)
+        private void        SpikesDelete_Rand_Click(object sender, EventArgs e)
         {
             GraphPane pane = zedGraphControl1.GraphPane;
-            PointPairList newList = new PointPairList();
-            Random rand = new Random();
-            CurveItem curve = pane.CurveList[0];
-
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                if (Math.Abs(curve.Points[i].Y) > S)
-                {
-                    curve.Points[i].Y = (curve.Points[i - 1].Y + curve.Points[i + 1].Y) / 2;
-                }
-            }
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                newList.Add(curve.Points[i].X, curve.Points[i].Y);
-            }
-            curve.Points = newList;
-
+            DeleteSpikes(pane.CurveList[0], this.S);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
-        private void SpikesInput_Poly_Click(object sender, EventArgs e)
+        private void        SpikesInput_Poly_Click(object sender, EventArgs e)
         {
             GraphPane pane = zedGraphControl6.GraphPane;
-            PointPairList newList = new PointPairList();
-            Random rand = new Random();
-            CurveItem curve = pane.CurveList[0];
-
-            for (int i = 0; i != 5; ++i)
-            {
-                int var = rand.Next(100, curve.Points.Count + 1);
-                curve.Points[var].Y = curve.Points[var].Y * 15;
-            }
-
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                newList.Add(curve.Points[i].X, curve.Points[i].Y);
-            }
-            curve.Points = newList;
-
+            AddSpikes(pane.CurveList[0], 5);
             pane.YAxis.Scale.Min = -S * 10;
             pane.YAxis.Scale.Max = S * 10;
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
-        private void SpikesDelete_Poly_Click(object sender, EventArgs e)
+        private void        SpikesDelete_Poly_Click(object sender, EventArgs e)
         {
             GraphPane pane = zedGraphControl6.GraphPane;
-            PointPairList newList = new PointPairList();
-            Random rand = new Random();
-            CurveItem curve = pane.CurveList[0];
-
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                if (Math.Abs(curve.Points[i].Y) > S)
-                {
-                    curve.Points[i].Y = (curve.Points[i - 1].Y + curve.Points[i + 1].Y) / 2;
-                }
-            }
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                newList.Add(curve.Points[i].X, curve.Points[i].Y);
-            }
-            curve.Points = newList;
-
+            DeleteSpikes(pane.CurveList[0], this.S);
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
-        private void DrawGraph(int S, int N)
+        private void        DrawGraph(int S, int N)
         {
             // Создание объектов с координатами:
             Graph standart = new Graph(S, N, false, false, false);
@@ -169,7 +142,7 @@ namespace Graphics
             s_exctextbox_own.Text = Convert.ToString(my.stationarity[6]);
             
             // Отображение графиков:
-            GraphPane pane = zedGraphControl1.GraphPane;
+            GraphPane pane   = zedGraphControl1.GraphPane;
             GraphPane pane_2 = zedGraphControl2.GraphPane;
             GraphPane pane_3 = zedGraphControl3.GraphPane;
             GraphPane pane_4 = zedGraphControl4.GraphPane;
