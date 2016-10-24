@@ -15,46 +15,19 @@ namespace Graphics
     {
         private int S = 100;
         private int N = 1000;
+        private Graph standart;
+        private Graph my;
+        private Graph notPoly;
+        private Graph poly;
 
         public Form2()
         {
             InitializeComponent();
+            standart = new Graph(this.S, this.N, false, false, false);
+            my       = new Graph(this.S, this.N, true, false, false);
+            notPoly  = new Graph(this.S, this.N, true, true, false);
+            poly     = new Graph(this.S, this.N, true, true, true);
             DrawGraph(this.S, this.N);
-        }
-        private static void AddSpikes(CurveItem curve, int m)
-        {
-            PointPairList newList = new PointPairList();
-            Random rand = new Random();
-
-            for (int i = 0; i != m; ++i)
-            {
-                int var = rand.Next(100, curve.Points.Count + 1);
-                curve.Points[var].Y *= 15;
-            }
-
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                newList.Add(curve.Points[i].X, curve.Points[i].Y);
-            }
-            curve.Points = newList;
-        }
-        private static void DeleteSpikes(CurveItem curve, int S)
-        {
-            PointPairList newList = new PointPairList();
-            Random rand = new Random();
-
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                if (Math.Abs(curve.Points[i].Y) > S)
-                {
-                    curve.Points[i].Y = (curve.Points[i - 1].Y + curve.Points[i + 1].Y) / 2;
-                }
-            }
-            for (int i = 0; i != curve.Points.Count; ++i)
-            {
-                newList.Add(curve.Points[i].X, curve.Points[i].Y);
-            }
-            curve.Points = newList;
         }
         private void        SInput_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -65,81 +38,85 @@ namespace Graphics
         private void        SInputButton_Click(object sender, EventArgs e)
         {
             S = Convert.ToInt32(SInput.Text);
+            my = new Graph(this.S, this.N, true, false, false);
             DrawGraph(S, N);
         }
         private void        SpikesInput_Rand_Click(object sender, EventArgs e)
         {
+            this.my.calculate_spikes(5);
             GraphPane pane = zedGraphControl1.GraphPane;
-            AddSpikes(pane.CurveList[0], 5);
-            pane.YAxis.Scale.Min = -S * 10;
-            pane.YAxis.Scale.Max = S * 10;
+            pane.CurveList.Clear();
+            pane.AddCurve("Кастомный", this.my.create_pair_list(this.my.points, this.my.N), Color.Green, SymbolType.None);
+            pane.YAxis.Scale.Min = -this.my.S * 10;
+            pane.YAxis.Scale.Max = this.my.S * 10;
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
         private void        SpikesDelete_Rand_Click(object sender, EventArgs e)
         {
+            this.my.delete_spikes();
             GraphPane pane = zedGraphControl1.GraphPane;
-            DeleteSpikes(pane.CurveList[0], this.S);
+            pane.CurveList.Clear();
+            pane.AddCurve("Кастомный", this.my.create_pair_list(this.my.points, this.my.N), Color.Green, SymbolType.None);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
         private void        SpikesInput_Poly_Click(object sender, EventArgs e)
         {
+            this.poly.calculate_spikes(5);
             GraphPane pane = zedGraphControl6.GraphPane;
-            AddSpikes(pane.CurveList[0], 5);
-            pane.YAxis.Scale.Min = -S * 10;
-            pane.YAxis.Scale.Max = S * 10;
+            pane.CurveList.Clear();
+            pane.AddCurve("", this.poly.create_pair_list(this.poly.points, this.poly.N), Color.Blue, SymbolType.None);
+            pane.YAxis.Scale.Min = -this.S * 10;
+            pane.YAxis.Scale.Max = this.S * 10;
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
         private void        SpikesDelete_Poly_Click(object sender, EventArgs e)
         {
+            this.poly.delete_spikes();
             GraphPane pane = zedGraphControl6.GraphPane;
-            DeleteSpikes(pane.CurveList[0], this.S);
+            pane.CurveList.Clear();
+            pane.AddCurve("", this.poly.create_pair_list(this.poly.points, this.poly.N), Color.Blue, SymbolType.None);
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
         private void        DrawGraph(int S, int N)
         {
-            // Создание объектов с координатами:
-            Graph standart = new Graph(S, N, false, false, false);
-            Graph my = new Graph(S, N, true, false, false);
-            //double[][] my_more_stat = my.calculate_more_statistics();
-            Graph notPoly = new Graph(S, N, true, true, false);
-            Graph poly = new Graph(S, N, true, true, true);
+            //double[][] my_more_stat = this.my.calculate_more_statistics();
 
             // Отображение статистики:
-            avgtextbox.Text = Convert.ToString(standart.stat[0]);
-            squaredavgtextbox.Text = Convert.ToString(standart.stat[1]);
-            epstextbox.Text = Convert.ToString(standart.stat[2]);
-            dispersiontextbox.Text = Convert.ToString(standart.stat[3]);
-            errtextbox.Text = Convert.ToString(standart.stat[4]);
-            asymtextbox.Text = Convert.ToString(standart.stat[5]);
-            exctextbox.Text = Convert.ToString(standart.stat[6]);
+            avgtextbox.Text = Convert.ToString(this.standart.stat[0]);
+            squaredavgtextbox.Text = Convert.ToString(this.standart.stat[1]);
+            epstextbox.Text = Convert.ToString(this.standart.stat[2]);
+            dispersiontextbox.Text = Convert.ToString(this.standart.stat[3]);
+            errtextbox.Text = Convert.ToString(this.standart.stat[4]);
+            asymtextbox.Text = Convert.ToString(this.standart.stat[5]);
+            exctextbox.Text = Convert.ToString(this.standart.stat[6]);
 
-            avgtextbox_own.Text = Convert.ToString(my.stat[0]);
-            squaredavgtextbox_own.Text = Convert.ToString(my.stat[1]);
-            epstextbox_own.Text = Convert.ToString(my.stat[2]);
-            dispersiontextbox_own.Text = Convert.ToString(my.stat[3]);
-            errtextbox_own.Text = Convert.ToString(my.stat[4]);
-            asymtextbox_own.Text = Convert.ToString(my.stat[5]);
-            exctextbox_own.Text = Convert.ToString(my.stat[6]);
+            avgtextbox_own.Text = Convert.ToString(this.my.stat[0]);
+            squaredavgtextbox_own.Text = Convert.ToString(this.my.stat[1]);
+            epstextbox_own.Text = Convert.ToString(this.my.stat[2]);
+            dispersiontextbox_own.Text = Convert.ToString(this.my.stat[3]);
+            errtextbox_own.Text = Convert.ToString(this.my.stat[4]);
+            asymtextbox_own.Text = Convert.ToString(this.my.stat[5]);
+            exctextbox_own.Text = Convert.ToString(this.my.stat[6]);
 
-            s_avgtextbox.Text = Convert.ToString(standart.stationarity[0]);
-            s_squaredavgtextbox.Text = Convert.ToString(standart.stationarity[1]);
-            s_epstextbox.Text = Convert.ToString(standart.stationarity[2]);
-            s_dispersiontextbox.Text = Convert.ToString(standart.stationarity[3]);
-            s_errtextbox.Text = Convert.ToString(standart.stationarity[4]);
-            s_asymtextbox.Text = Convert.ToString(standart.stationarity[5]);
-            s_exctextbox.Text = Convert.ToString(standart.stationarity[6]);
+            s_avgtextbox.Text = Convert.ToString(this.standart.stationarity[0]);
+            s_squaredavgtextbox.Text = Convert.ToString(this.standart.stationarity[1]);
+            s_epstextbox.Text = Convert.ToString(this.standart.stationarity[2]);
+            s_dispersiontextbox.Text = Convert.ToString(this.standart.stationarity[3]);
+            s_errtextbox.Text = Convert.ToString(this.standart.stationarity[4]);
+            s_asymtextbox.Text = Convert.ToString(this.standart.stationarity[5]);
+            s_exctextbox.Text = Convert.ToString(this.standart.stationarity[6]);
 
-            s_avgtextbox_own.Text = Convert.ToString(my.stationarity[0]);
-            s_squaredavgtextbox_own.Text = Convert.ToString(my.stationarity[1]);
-            s_epstextbox_own.Text = Convert.ToString(my.stationarity[2]);
-            s_dispersiontextbox_own.Text = Convert.ToString(my.stationarity[3]);
-            s_errtextbox_own.Text = Convert.ToString(my.stationarity[4]);
-            s_asymtextbox_own.Text = Convert.ToString(my.stationarity[5]);
-            s_exctextbox_own.Text = Convert.ToString(my.stationarity[6]);
+            s_avgtextbox_own.Text = Convert.ToString(this.my.stationarity[0]);
+            s_squaredavgtextbox_own.Text = Convert.ToString(this.my.stationarity[1]);
+            s_epstextbox_own.Text = Convert.ToString(this.my.stationarity[2]);
+            s_dispersiontextbox_own.Text = Convert.ToString(this.my.stationarity[3]);
+            s_errtextbox_own.Text = Convert.ToString(this.my.stationarity[4]);
+            s_asymtextbox_own.Text = Convert.ToString(this.my.stationarity[5]);
+            s_exctextbox_own.Text = Convert.ToString(this.my.stationarity[6]);
             
             // Отображение графиков:
             GraphPane pane   = zedGraphControl1.GraphPane;
@@ -181,42 +158,30 @@ namespace Graphics
             pane_2.XAxis.Scale.Max = pane_7.XAxis.Scale.Max = 30;
 
             //pane.AddCurve("Стандартный", standart.create_pair_list(standart.points, standart.N), Color.Blue, SymbolType.None);
-            pane.AddCurve("Кастомный", my.create_pair_list(my.points, my.N), Color.Green, SymbolType.None);
+            pane.AddCurve("Кастомный", this.my.create_pair_list(this.my.points, this.my.N), Color.Green, SymbolType.None);
             
-            pane_2.AddCurve("Стандартный генератор", standart.create_pair_list(standart.density, 30), Color.Blue, SymbolType.None);
-            pane_2.AddCurve("Кастомный генератор", my.create_pair_list(my.density, 30), Color.Green, SymbolType.None);
+            pane_2.AddCurve("Стандартный генератор", this.standart.create_pair_list(this.standart.density, 30), Color.Blue, SymbolType.None);
+            pane_2.AddCurve("Кастомный генератор", this.my.create_pair_list(this.my.density, 30), Color.Green, SymbolType.None);
             pane_2.Legend.Position = LegendPos.Float;
             pane_2.Legend.Location.CoordinateFrame = CoordType.ChartFraction;
             pane_2.Legend.Location.AlignH = AlignH.Right;
             pane_2.Legend.Location.AlignV = AlignV.Bottom;
             pane_2.Legend.Location.TopLeft = new PointF(1.0f - 0.02f, 1.0f - 0.02f); 
             
-            pane_3.AddCurve("", my.create_pair_list(my.calculate_more_statistics()[0], my.N), Color.Red, SymbolType.None);
+            pane_3.AddCurve("", this.my.create_pair_list(this.my.calculate_more_statistics()[0], this.my.N), Color.Red, SymbolType.None);
             
-            pane_4.AddCurve("R_XY", my.create_pair_list(my.calculate_more_statistics()[1], my.N), Color.Blue, SymbolType.None);
-            pane_4.AddCurve("R_YX", my.create_pair_list(my.calculate_more_statistics()[2], my.N), Color.Black, SymbolType.None);
+            pane_4.AddCurve("R_XY", this.my.create_pair_list(this.my.calculate_more_statistics()[1], this.my.N), Color.Blue, SymbolType.None);
+            pane_4.AddCurve("R_YX", this.my.create_pair_list(this.my.calculate_more_statistics()[2], this.my.N), Color.Black, SymbolType.None);
             pane_4.Legend.Position = LegendPos.Float;
             pane_4.Legend.Location.CoordinateFrame = CoordType.ChartFraction;
             pane_4.Legend.Location.AlignH = AlignH.Right;
             pane_4.Legend.Location.AlignV = AlignV.Bottom;
-            pane_4.Legend.Location.TopLeft = new PointF(1.0f - 0.02f, 1.0f - 0.02f); 
-            
-            /* Плотность в виде гистограмм:
-            BarItem curve = pane_3.AddBar("Количество значений Y", null, standart.density, Color.Blue);
-            curve.Bar.Fill.Color = Color.YellowGreen;
-            curve.Bar.Fill.Type = FillType.Solid;
-            curve.Bar.Border.IsVisible = false;
+            pane_4.Legend.Location.TopLeft = new PointF(1.0f - 0.02f, 1.0f - 0.02f);
 
-            BarItem curve_2 = pane_4.AddBar("Количество значений Y", null, my.density, Color.Blue);
-            curve_2.Bar.Fill.Color = Color.YellowGreen;
-            curve_2.Bar.Fill.Type = FillType.Solid;
-            curve_2.Bar.Border.IsVisible = false;
-            */
-
-            pane_5.AddCurve("", notPoly.create_pair_list(notPoly.points, notPoly.N), Color.Blue, SymbolType.None);
-            pane_6.AddCurve("", poly.create_pair_list(poly.points, poly.N), Color.Blue, SymbolType.None);
-            pane_7.AddCurve("", poly.create_pair_list(poly.density, 30), Color.Blue, SymbolType.None);
-            pane_8.AddCurve("", poly.create_pair_list(poly.calculate_more_statistics()[0], poly.N), Color.Blue, SymbolType.None);
+            pane_5.AddCurve("", this.notPoly.create_pair_list(this.notPoly.points, this.notPoly.N), Color.Blue, SymbolType.None);
+            pane_6.AddCurve("", this.poly.create_pair_list(this.poly.points, this.poly.N), Color.Blue, SymbolType.None);
+            pane_7.AddCurve("", this.poly.create_pair_list(this.poly.density, 30), Color.Blue, SymbolType.None);
+            pane_8.AddCurve("", this.poly.create_pair_list(this.poly.calculate_more_statistics()[0], this.poly.N), Color.Blue, SymbolType.None);
 
             zedGraphControl1.AxisChange();
             zedGraphControl2.AxisChange();
@@ -236,5 +201,5 @@ namespace Graphics
             zedGraphControl7.Invalidate();
             zedGraphControl8.Invalidate();
         }
-    }
+    } 
 }

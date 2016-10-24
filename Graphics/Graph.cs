@@ -363,19 +363,46 @@ namespace Graphics
             }
 
             return stability;
-        }
+        }  
         public  void          calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
         {
+            // для получения статистики по shift, но без спаек
+            shift(10);
+            this.stat = calculate_statistics();
+            unshift();
+
             Random rand = new Random();
             for (int i = 0; i != m; ++i)
             {
-                int val = rand.Next(0, this.N - 1);
+                int val = rand.Next(0, this.N);
                 this.points[val] = this.points[val] * 10 * (this.points.Max() - this.points.Min());
             }
+            shift(10);
         }
-        public  void          delete_spikes() // удаление неправдоподобных значений 
+        public  void          delete_spikes() // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
         {
-
+            unshift();
+            for (int i = 0; i != this.N - 1; ++i)
+            {
+                if ((Math.Abs(this.points[i]) > this.S) && (Math.Abs(this.points[i + 1]) <= this.S))
+                {
+                    this.points[i] = (this.points[i - 1] + this.points[i + 1]) / 2; // удаляем спайки
+                }
+            }
+        }
+        private void          shift(int n)
+        {
+            for (int i = 0; i != this.N; ++i)
+            {
+                this.points[i] += (n * this.S);
+            }
+        }
+        private void          unshift()
+        {
+            for (int i = 0; i != this.N; ++i)
+            {
+                this.points[i] -= this.stat[0];
+            }
         }
         public  PointPairList create_pair_list(double[] arr, int size)
         {
