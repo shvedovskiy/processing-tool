@@ -15,18 +15,18 @@ namespace Graphics
     {
         private int S = 100;
         private int N = 1000;
-        private Graph standart;
-        private Graph my;
-        private Graph notPoly;
-        private Graph poly;
+        private RandomGraph standart;
+        private RandomGraph my;
+        private PolyGraph notPoly;
+        private PolyGraph poly;
 
         public Form2()
         {
             InitializeComponent();
-            standart = new Graph(this.S, this.N, false, false, false);
-            my       = new Graph(this.S, this.N, true, false, false);
-            notPoly  = new Graph(this.S, this.N, true, true, false);
-            poly     = new Graph(this.S, this.N, true, true, true);
+            standart = new RandomGraph(this.S, this.N, false);
+            my       = new RandomGraph(this.S, this.N, true);
+            notPoly  = new PolyGraph(this.S, this.N, false);
+            poly     = new PolyGraph(this.S, this.N, true);
             DrawGraph(this.S, this.N);
         }
         private void        SInput_KeyPress(object sender, KeyPressEventArgs e)
@@ -38,7 +38,7 @@ namespace Graphics
         private void        SInputButton_Click(object sender, EventArgs e)
         {
             S = Convert.ToInt32(SInput.Text);
-            my = new Graph(this.S, this.N, true, false, false);
+            my = new RandomGraph(this.S, this.N, true);
             DrawGraph(S, N);
         }
         private void        SpikesInput_Rand_Click(object sender, EventArgs e)

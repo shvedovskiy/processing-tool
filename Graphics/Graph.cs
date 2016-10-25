@@ -13,113 +13,19 @@ namespace Graphics
 {
     public class Graph
     {
-        private class MyOwnRandom
-        {
-            private const long _a = 6364136223846793005;
-            private const long _c = 1442695040888963407;
-            private const long _m = 4294967296;
-            private long _last;
-
-            public MyOwnRandom()
-            {
-                _last = (long)Math.Pow(DateTime.Now.TimeOfDay.TotalMilliseconds, 11.0 / 7.0);
-            }
-            public MyOwnRandom(long seed)
-            {
-                _last = seed;
-            }
-            public long Next()
-            {
-                _last = ((_a * _last) + _c) % _m;
-                return _last;
-            }
-            public long Next(long max)
-            {
-                return Next() % max;
-            }
-        }
-
         public int S;                // интервал значений по Y
         public int N;                // интервал значений по X (количество точек)
-        private bool isOwn;          // флаг определения вида рандомайзера
-        private bool isF;            // флаг для Form3
-        private bool isPoly;         // флаг определения полигармонического процесса
-        public double[] points;      // заполняется в Graph() -> create_random_array()
-        public double[] stat;        // заполняется в Graph() -> calculate_statistics()
-        public double[] density;     // заполняется в Graph() -> calculate_density() 
-        public double[] stationarity;// заполняется в Graph() -> calculate_stability()
+        public double[] points;      // заполняется в create_random_array()
+        public double[] stat;        // заполняется в calculate_statistics()
+        public double[] density;     // заполняется в calculate_density() 
+        public double[] stationarity;// заполняется в calculate_stability()
 
-        public Graph(int S, int N, bool isOwn, bool isF, bool isPoly)
+        public Graph(int S, int N)
         {
-            this.S            = S;
-            this.N            = N;
-            this.isOwn        = isOwn;
-            this.isF          = isF;
-            this.isPoly       = isPoly;
-            this.points       = create_points();
-            this.stat         = calculate_statistics();
-            this.density      = calculate_density();
-            this.stationarity = calculate_stability();
+            this.S = S;
+            this.N = N;
         }
-        private double        _f(double k, double A_0, double f_0)
-        {
-            double delta_t = 0.001;
-            return A_0 * Math.Sin(2 * Math.PI * f_0 * k * delta_t);
-        }
-        private double        f(double k)
-        {
-            return _f(k, 100, 51) + _f(k, 15, 5) + _f(k, 20, 250);
-        }
-        private double[]      create_points() // значения функций (общая для рандомных и гармонических функций) 
-        {
-            double[] points = new double[this.N];
-
-            // Гармонический график:
-            if (this.isF) 
-            {
-                if (this.isPoly == true)
-                {
-                    for (int k = 0; k != this.N; ++k)
-                    {
-                        points[k] = f(Convert.ToDouble(k));
-                    }
-                }
-                else
-                {
-                    for (int k = 0; k != this.N; ++k)
-                    {
-                        points[k] = _f(Convert.ToDouble(k), 100, 51);
-                    }
-                }
-            }
-            // Рандомный график:
-            else 
-            {
-                double[] rand_arr = new double[this.N];
-
-                if (this.isOwn == false)
-                {
-                    Random rand = new Random();
-                    for (int i = 0; i != this.N; ++i)
-                        rand_arr[i] = Convert.ToDouble(rand.Next());
-                }
-                else
-                {
-                    MyOwnRandom rand = new MyOwnRandom();
-                    for (int i = 0; i != this.N; ++i)
-                        rand_arr[i] = Convert.ToDouble(rand.Next());
-                }
-
-                double ymax = rand_arr.Max();
-                double ymin = rand_arr.Min();
-
-                // Скорректировать значения в массивах, сформировать список координат:
-                for (int i = 0; i != this.N; ++i)
-                    points[i] = ((rand_arr[i] - ymin) / (ymax - ymin) - 0.5) * (2 * S);
-            }
-            return points;
-        }
-        private double[]      calculate_statistics() // 7 статистических метрик
+        protected double[]      calculate_statistics()  // 7 статистических метрик
         {
             int len = this.points.Length;
             double[] res = new double[7];
@@ -162,7 +68,7 @@ namespace Graphics
 
             return res;
         }
-        private double[]      calculate_statistics(double[] points)
+        protected double[]      calculate_statistics(double[] points)
         {
             int len = points.Length;
             double[] res = new double[7];
@@ -205,52 +111,7 @@ namespace Graphics
 
             return res;
         }
-        public  double[][]    calculate_more_statistics() // aka static; автокорреляция, взаимная корреляция 
-        {
-            double[][] res = new double[3][];
-            res[0] = new double[this.N];
-            res[1] = new double[this.N];
-            res[2] = new double[this.N];
-
-            for (int L = 0; L != this.N - 1; ++L)
-            {
-                double enumerator = 0.0, denominator = 0.0;
-                for (int k = 0; k != this.N - L; ++k)
-                {
-                    enumerator += ((this.points[k] - this.stat[0]) * (this.points[k + L] - this.stat[0]));
-                }
-                for (int k = 0; k != this.N; ++k)
-                {
-                    denominator += Math.Pow((this.points[k] - this.stat[0]), 2.0);
-                }
-                res[0][L] = enumerator / denominator;
-            }
-
-            Graph that = new Graph(this.S, this.N, true, false, false);
-
-            for (int L = 0; L != this.N; ++L)
-            {
-                double sum = 0.0;
-                for (int k = 0; k != this.N - L; ++k)
-                {
-                    sum += ((this.points[k] - this.stat[0]) * (that.points[k + L] - that.stat[0]));
-                }
-                res[1][L] = sum / this.N;
-            }
-
-            for (int L = 0; L != this.N; ++L)
-            {
-                double sum = 0.0;
-                for (int k = 0; k != this.N - L; ++k)
-                {
-                    sum += ((that.points[k] - that.stat[0]) * (this.points[k + L] - this.stat[0]));
-                }
-                res[2][L] = sum / this.N;
-            }
-
-            return res;
-        }
-        private double[]      calculate_density() // плотность распределения
+        protected double[]      calculate_density()     // плотность распределения
         {
             double[] y_counts = new double[30];   // кол-во значений рандомайзера в интервалах
             int y_length = 2 * this.S + 1;  // длина области значений по Y
@@ -301,7 +162,7 @@ namespace Graphics
 
             return y_counts;
         }
-        private double[]      calculate_stability() // стационарность 
+        protected double[]      calculate_stability()   // стационарность 
 
         {
             double[] stability = new double[7];    // Массив усредненных статистик интервалов
@@ -364,7 +225,7 @@ namespace Graphics
 
             return stability;
         }  
-        public  void          calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
+        public    void          calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
         {
             // для получения статистики по shift, но без спаек
             shift(10);
@@ -379,7 +240,7 @@ namespace Graphics
             }
             shift(10);
         }
-        public  void          delete_spikes() // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
+        public    void          delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
         {
             unshift();
             for (int i = 0; i != this.N - 1; ++i)
@@ -390,21 +251,21 @@ namespace Graphics
                 }
             }
         }
-        private void          shift(int n)
+        private   void          shift(int n)
         {
             for (int i = 0; i != this.N; ++i)
             {
                 this.points[i] += (n * this.S);
             }
         }
-        private void          unshift()
+        private   void          unshift()
         {
             for (int i = 0; i != this.N; ++i)
             {
                 this.points[i] -= this.stat[0];
             }
         }
-        public  PointPairList create_pair_list(double[] arr, int size)
+        public    PointPairList create_pair_list(double[] arr, int size)
         {
             PointPairList list = new PointPairList();
             for (int x = 0; x != size; ++x)
@@ -414,4 +275,203 @@ namespace Graphics
             return list;
         }
     }
+
+    public class RandomGraph : Graph
+    {
+        private class MyOwnRandom
+        {
+            private const long _a = 6364136223846793005;
+            private const long _c = 1442695040888963407;
+            private const long _m = 4294967296;
+            private long _last;
+
+            public MyOwnRandom()
+            {
+                _last = (long)Math.Pow(DateTime.Now.TimeOfDay.TotalMilliseconds, 11.0 / 7.0);
+            }
+            public MyOwnRandom(long seed)
+            {
+                _last = seed;
+            }
+            public long Next()
+            {
+                _last = ((_a * _last) + _c) % _m;
+                return _last;
+            }
+            public long Next(long max)
+            {
+                return Next() % max;
+            }
+        }
+
+        private bool isOwn; // флаг определения вида рандомайзера
+
+        public RandomGraph(int S, int N, bool isOwn) : base(S, N)
+        {
+            this.isOwn = isOwn;
+            this.points = create_points();
+            this.stat = calculate_statistics();
+            this.density = calculate_density();
+            this.stationarity = calculate_stability();
+        }
+        private double[]   create_points()
+        {
+            double[] points = new double[this.N];
+            double[] rand_arr = new double[this.N];
+
+            if (this.isOwn == false)
+            {
+                Random rand = new Random();
+                for (int i = 0; i != this.N; ++i)
+                    rand_arr[i] = Convert.ToDouble(rand.Next());
+            }
+            else
+            {
+                MyOwnRandom rand = new MyOwnRandom();
+                for (int i = 0; i != this.N; ++i)
+                    rand_arr[i] = Convert.ToDouble(rand.Next());
+            }
+
+            double ymax = rand_arr.Max();
+            double ymin = rand_arr.Min();
+
+            // Скорректировать значения в массивах, сформировать список координат:
+            for (int i = 0; i != this.N; ++i)
+                points[i] = ((rand_arr[i] - ymin) / (ymax - ymin) - 0.5) * (2 * this.S);
+
+            return points;
+        }
+        public  double[][] calculate_more_statistics() // aka static; автокорреляция, взаимная корреляция 
+        {
+            double[][] res = new double[3][];
+            res[0] = new double[this.N];
+            res[1] = new double[this.N];
+            res[2] = new double[this.N];
+
+            for (int L = 0; L != this.N - 1; ++L)
+            {
+                double enumerator = 0.0, denominator = 0.0;
+                for (int k = 0; k != this.N - L; ++k)
+                {
+                    enumerator += ((this.points[k] - this.stat[0]) * (this.points[k + L] - this.stat[0]));
+                }
+                for (int k = 0; k != this.N; ++k)
+                {
+                    denominator += Math.Pow((this.points[k] - this.stat[0]), 2.0);
+                }
+                res[0][L] = enumerator / denominator;
+            }
+
+            RandomGraph that = new RandomGraph(this.S, this.N, true);
+            for (int L = 0; L != this.N; ++L)
+            {
+                double sum = 0.0;
+                for (int k = 0; k != this.N - L; ++k)
+                {
+                    sum += ((this.points[k] - this.stat[0]) * (that.points[k + L] - that.stat[0]));
+                }
+                res[1][L] = sum / this.N;
+            }
+
+            for (int L = 0; L != this.N; ++L)
+            {
+                double sum = 0.0;
+                for (int k = 0; k != this.N - L; ++k)
+                {
+                    sum += ((that.points[k] - that.stat[0]) * (this.points[k + L] - this.stat[0]));
+                }
+                res[2][L] = sum / this.N;
+            }
+
+            return res;
+        }
+    }
+
+    public class PolyGraph : Graph
+    {
+        private bool isPoly; // флаг определения полигармонического процесса
+
+        public PolyGraph(int S, int N, bool isPoly) : base(S, N)
+        {
+            this.isPoly = isPoly;
+            this.points = create_points();
+            this.stat = this.calculate_statistics();
+            this.density = this.calculate_density();
+            this.stationarity = this.calculate_stability();
+        }
+        private double[]   create_points()
+        {
+            double[] points = new double[this.N];
+
+            if (this.isPoly == true)
+            {
+                for (int k = 0; k != this.N; ++k)
+                {
+                    points[k] = f(Convert.ToDouble(k));
+                }
+            }
+            else
+            {
+                for (int k = 0; k != this.N; ++k)
+                {
+                    points[k] = _f(Convert.ToDouble(k), 100, 51);
+                }
+            }
+            return points;
+        }
+        public  double[][] calculate_more_statistics() // aka static; автокорреляция, взаимная корреляция 
+        {
+            double[][] res = new double[3][];
+            res[0] = new double[this.N];
+            res[1] = new double[this.N];
+            res[2] = new double[this.N];
+
+            for (int L = 0; L != this.N - 1; ++L)
+            {
+                double enumerator = 0.0, denominator = 0.0;
+                for (int k = 0; k != this.N - L; ++k)
+                {
+                    enumerator += ((this.points[k] - this.stat[0]) * (this.points[k + L] - this.stat[0]));
+                }
+                for (int k = 0; k != this.N; ++k)
+                {
+                    denominator += Math.Pow((this.points[k] - this.stat[0]), 2.0);
+                }
+                res[0][L] = enumerator / denominator;
+            }
+
+            PolyGraph that = new PolyGraph(this.S, this.N, false);
+            for (int L = 0; L != this.N; ++L)
+            {
+                double sum = 0.0;
+                for (int k = 0; k != this.N - L; ++k)
+                {
+                    sum += ((this.points[k] - this.stat[0]) * (that.points[k + L] - that.stat[0]));
+                }
+                res[1][L] = sum / this.N;
+            }
+
+            for (int L = 0; L != this.N; ++L)
+            {
+                double sum = 0.0;
+                for (int k = 0; k != this.N - L; ++k)
+                {
+                    sum += ((that.points[k] - that.stat[0]) * (this.points[k + L] - this.stat[0]));
+                }
+                res[2][L] = sum / this.N;
+            }
+
+            return res;
+        }
+        private double     _f(double k, double A_0, double f_0)
+        {
+            double delta_t = 0.001;
+            return A_0 * Math.Sin(2 * Math.PI * f_0 * k * delta_t);
+        }
+        private double     f(double k)
+        {
+            return _f(k, 100, 51) + _f(k, 15, 5) + _f(k, 20, 250);
+        }
+    }
 }
+
