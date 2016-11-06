@@ -44,6 +44,7 @@ namespace Graphics
             GraphPane pane_2 = zedGraphControl2.GraphPane;
             GraphPane pane_3 = zedGraphControl3.GraphPane;
             GraphPane pane_4 = zedGraphControl4.GraphPane;
+            GraphPane pane_5 = zedGraphControl5.GraphPane;
 
             pane.XAxis.Title.Text = pane_2.XAxis.Title.Text = pane_3.XAxis.Title.Text = pane_4.XAxis.Title.Text = "Ось X";
             pane.YAxis.Title.Text = pane_2.YAxis.Title.Text = pane_3.YAxis.Title.Text = pane_4.YAxis.Title.Text = "Ось Y";
@@ -52,16 +53,19 @@ namespace Graphics
             pane_2.Title.Text = "y = -ax + b";
             pane_3.Title.Text = "y = ce^(alpha * x)";
             pane_4.Title.Text = "y = ce^(-alpha * x)";
+            pane_5.Title.Text = "Trend";
 
             pane.CurveList.Clear();
             pane_2.CurveList.Clear();
             pane_3.CurveList.Clear();
             pane_4.CurveList.Clear();
+            pane_5.CurveList.Clear();
 
             PointPairList list = new PointPairList();
             PointPairList list_2 = new PointPairList();
             PointPairList list_3 = new PointPairList();
             PointPairList list_4 = new PointPairList();
+            PointPairList list_5 = new PointPairList();
 
             double xmin = 0;
             double xmax = 100;
@@ -86,10 +90,28 @@ namespace Graphics
                 list_4.Add(x, f_4(x));
             }
 
+            for (int i = 0; i != 250; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), Convert.ToDouble(i));
+            }
+            for (int i = 250; i != 500; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), 321 * Math.Exp(-0.001 * i));
+            }
+            for (int i = 500; i != 750; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), 119 * Math.Exp(0.001 * i));
+            }
+            for (int i = 750; i != 1000; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), -1 * i + 1002);
+            }
+
             pane.AddCurve("", list, Color.Blue, SymbolType.None);
             pane_2.AddCurve("", list_2, Color.Blue, SymbolType.None);
             pane_3.AddCurve("", list_3, Color.Blue, SymbolType.None);
-            pane_4.AddCurve("", list_4, Color.Blue, SymbolType.None);
+            pane_4.AddCurve("", list_4, Color.Blue, SymbolType.None); 
+            pane_5.AddCurve("", list_5, Color.Blue, SymbolType.None);
 
             pane.XAxis.Scale.Min = pane_2.XAxis.Scale.Min = xmin_limit;
             pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = xmax_limit;
@@ -105,11 +127,13 @@ namespace Graphics
             zedGraphControl2.AxisChange();
             zedGraphControl3.AxisChange();
             zedGraphControl4.AxisChange();
+            zedGraphControl5.AxisChange();
 
             zedGraphControl1.Invalidate();
             zedGraphControl2.Invalidate();
             zedGraphControl3.Invalidate();
             zedGraphControl4.Invalidate();
+            zedGraphControl5.Invalidate();
         }
     }
 }

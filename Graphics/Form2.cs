@@ -19,7 +19,9 @@ namespace Graphics
         private RandomGraph my;
         private PolyGraph notPoly;
         private PolyGraph poly;
-
+        private Graph spiked_my;
+        private Graph spiked_poly;
+        
         public Form2()
         {
             InitializeComponent();
@@ -27,6 +29,8 @@ namespace Graphics
             my       = new RandomGraph(this.S, this.N, true);
             notPoly  = new PolyGraph(this.S, this.N, false);
             poly     = new PolyGraph(this.S, this.N, true);
+            spiked_my = new Graph(this.S, this.N);
+            spiked_poly = new Graph(this.S, this.N);
             DrawGraph(this.S, this.N);
         }
         private void        SInput_KeyPress(object sender, KeyPressEventArgs e)
@@ -43,41 +47,47 @@ namespace Graphics
         }
         private void        SpikesInput_Rand_Click(object sender, EventArgs e)
         {
-            this.my.calculate_spikes(5);
+            //this.spiked_my = this.my.calculate_spikes(this.my.points, 5);
+            this.spiked_my = Graph.calculate_spikes(my, 5);
             GraphPane pane = zedGraphControl1.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("Кастомный", this.my.create_pair_list(this.my.points, this.my.N), Color.Green, SymbolType.None);
+            //pane.AddCurve("Кастомный", this.spiked_my.create_pair_list(this.spiked_my.points, this.spiked_my.N), Color.Green, SymbolType.None);
+            pane.AddCurve("Кастомный", Graph.create_pair_list(spiked_my.points, spiked_my.N), Color.Green, SymbolType.None);
             pane.YAxis.Scale.Min = -this.my.S * 10;
-            pane.YAxis.Scale.Max = this.my.S * 10;
+            pane.YAxis.Scale.Max = this.my.S * 50;
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
         private void        SpikesDelete_Rand_Click(object sender, EventArgs e)
         {
-            this.my.delete_spikes();
+            double[] unspiked_points = Graph.delete_spikes(this.spiked_my);
             GraphPane pane = zedGraphControl1.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("Кастомный", this.my.create_pair_list(this.my.points, this.my.N), Color.Green, SymbolType.None);
+            //pane.AddCurve("Кастомный", this.spiked_my.create_pair_list(unspiked_points, this.spiked_my.N), Color.Green, SymbolType.None);
+            pane.AddCurve("Кастомный", Graph.create_pair_list(unspiked_points, spiked_my.N), Color.Green, SymbolType.None);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
         private void        SpikesInput_Poly_Click(object sender, EventArgs e)
         {
-            this.poly.calculate_spikes(5);
+            //this.spiked_poly = this.poly.calculate_spikes(this.poly.points, 5);
+            spiked_poly = Graph.calculate_spikes(poly, 5);
             GraphPane pane = zedGraphControl6.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("", this.poly.create_pair_list(this.poly.points, this.poly.N), Color.Blue, SymbolType.None);
+            //pane.AddCurve("", this.spiked_poly.create_pair_list(this.spiked_poly.points, this.spiked_poly.N), Color.Blue, SymbolType.None);
+            pane.AddCurve("", Graph.create_pair_list(spiked_poly.points, spiked_poly.N), Color.Blue, SymbolType.None);
             pane.YAxis.Scale.Min = -this.S * 10;
-            pane.YAxis.Scale.Max = this.S * 10;
+            pane.YAxis.Scale.Max = this.S * 50;
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
         private void        SpikesDelete_Poly_Click(object sender, EventArgs e)
         {
-            this.poly.delete_spikes();
+            double[] unspiked_points = Graph.delete_spikes(spiked_poly);
             GraphPane pane = zedGraphControl6.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("", this.poly.create_pair_list(this.poly.points, this.poly.N), Color.Blue, SymbolType.None);
+            //pane.AddCurve("", this.spiked_poly.create_pair_list(unspiked_points, this.spiked_poly.N), Color.Blue, SymbolType.None);
+            pane.AddCurve("", Graph.create_pair_list(unspiked_points, spiked_poly.N), Color.Blue, SymbolType.None);
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
@@ -158,30 +168,29 @@ namespace Graphics
             pane_2.XAxis.Scale.Max = pane_7.XAxis.Scale.Max = 30;
 
             //pane.AddCurve("Стандартный", standart.create_pair_list(standart.points, standart.N), Color.Blue, SymbolType.None);
-            pane.AddCurve("Кастомный", this.my.create_pair_list(this.my.points, this.my.N), Color.Green, SymbolType.None);
-            
-            pane_2.AddCurve("Стандартный генератор", this.standart.create_pair_list(this.standart.density, 30), Color.Blue, SymbolType.None);
-            pane_2.AddCurve("Кастомный генератор", this.my.create_pair_list(this.my.density, 30), Color.Green, SymbolType.None);
+            pane.AddCurve("Кастомный", Graph.create_pair_list(this.my.points, this.my.N), Color.Green, SymbolType.None);
+            pane_2.AddCurve("Стандартный генератор", Graph.create_pair_list(this.standart.density, 30), Color.Blue, SymbolType.None);
+            pane_2.AddCurve("Кастомный генератор", Graph.create_pair_list(this.my.density, 30), Color.Green, SymbolType.None);
             pane_2.Legend.Position = LegendPos.Float;
             pane_2.Legend.Location.CoordinateFrame = CoordType.ChartFraction;
             pane_2.Legend.Location.AlignH = AlignH.Right;
             pane_2.Legend.Location.AlignV = AlignV.Bottom;
             pane_2.Legend.Location.TopLeft = new PointF(1.0f - 0.02f, 1.0f - 0.02f); 
             
-            pane_3.AddCurve("", this.my.create_pair_list(this.my.calculate_more_statistics()[0], this.my.N), Color.Red, SymbolType.None);
+            pane_3.AddCurve("", Graph.create_pair_list(this.my.calculate_more_statistics()[0], this.my.N), Color.Red, SymbolType.None);
             
-            pane_4.AddCurve("R_XY", this.my.create_pair_list(this.my.calculate_more_statistics()[1], this.my.N), Color.Blue, SymbolType.None);
-            pane_4.AddCurve("R_YX", this.my.create_pair_list(this.my.calculate_more_statistics()[2], this.my.N), Color.Black, SymbolType.None);
+            pane_4.AddCurve("R_XY", Graph.create_pair_list(this.my.calculate_more_statistics()[1], this.my.N), Color.Blue, SymbolType.None);
+            pane_4.AddCurve("R_YX", Graph.create_pair_list(this.my.calculate_more_statistics()[2], this.my.N), Color.Black, SymbolType.None);
             pane_4.Legend.Position = LegendPos.Float;
             pane_4.Legend.Location.CoordinateFrame = CoordType.ChartFraction;
             pane_4.Legend.Location.AlignH = AlignH.Right;
             pane_4.Legend.Location.AlignV = AlignV.Bottom;
             pane_4.Legend.Location.TopLeft = new PointF(1.0f - 0.02f, 1.0f - 0.02f);
 
-            pane_5.AddCurve("", this.notPoly.create_pair_list(this.notPoly.points, this.notPoly.N), Color.Blue, SymbolType.None);
-            pane_6.AddCurve("", this.poly.create_pair_list(this.poly.points, this.poly.N), Color.Blue, SymbolType.None);
-            pane_7.AddCurve("", this.poly.create_pair_list(this.poly.density, 30), Color.Blue, SymbolType.None);
-            pane_8.AddCurve("", this.poly.create_pair_list(this.poly.calculate_more_statistics()[0], this.poly.N), Color.Blue, SymbolType.None);
+            pane_5.AddCurve("", Graph.create_pair_list(this.notPoly.points, this.notPoly.N), Color.Blue, SymbolType.None);
+            pane_6.AddCurve("", Graph.create_pair_list(this.poly.points, this.poly.N), Color.Blue, SymbolType.None);
+            pane_7.AddCurve("", Graph.create_pair_list(this.poly.density, 30), Color.Blue, SymbolType.None);
+            pane_8.AddCurve("", Graph.create_pair_list(this.poly.calculate_more_statistics()[0], this.poly.N), Color.Blue, SymbolType.None);
 
             zedGraphControl1.AxisChange();
             zedGraphControl2.AxisChange();

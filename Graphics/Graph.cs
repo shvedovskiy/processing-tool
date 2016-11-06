@@ -68,7 +68,7 @@ namespace Graphics
 
             return res;
         }
-        protected double[]      calculate_statistics(double[] points)
+        protected static double[] calculate_statistics(double[] points)
         {
             int len = points.Length;
             double[] res = new double[7];
@@ -240,6 +240,25 @@ namespace Graphics
             }
             shift(10);
         }
+        public static Graph calculate_spikes(Graph graph, int m) {
+            Graph spiked = new Graph(graph.S, graph.N);
+            spiked.points = new double[graph.N];
+            spiked.stat = calculate_statistics(shift(graph, 10));
+
+            for (int i = 0; i != graph.N; ++i)
+            {
+                spiked.points[i] = graph.points[i];
+            }
+
+            Random rand = new Random();
+            for (int i = 0; i != m; ++i) 
+            {
+                int val = rand.Next(0, graph.N);
+                spiked.points[val] = spiked.points[val] * 10 * (spiked.points.Max() - spiked.points.Min());
+            }
+            spiked.points = shift(spiked, 10);
+            return spiked;
+        }
         public    void          delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
         {
             unshift();
@@ -251,12 +270,38 @@ namespace Graphics
                 }
             }
         }
+        public static double[] delete_spikes(Graph graph)
+        {
+            double[] unspiked = new double[graph.N];
+            double[] unshifted = unshift(graph);
+
+            for (int i = 0; i != graph.N - 1; ++i)
+            {
+                if ((Math.Abs(unshifted[i]) > graph.S) && (Math.Abs(unshifted[i + 1]) <= graph.S))
+                {
+                    unspiked[i] = (unshifted[i - 1] + unshifted[i + 1]) / 2; // удаляем спайки
+                    continue;
+                }
+                unspiked[i] = unshifted[i];
+            }
+            unspiked[graph.N - 1] = unshifted[graph.N - 1];
+            return unspiked;
+        }
         private   void          shift(int n)
         {
             for (int i = 0; i != this.N; ++i)
             {
                 this.points[i] += (n * this.S);
             }
+        }
+        public static double[] shift(Graph graph, int n)
+        {
+            double[] shifted = new double[graph.N];
+            for (int i = 0; i != graph.N; ++i)
+            {
+                shifted[i] = graph.points[i] + (n * graph.S);
+            }
+            return shifted;
         }
         private   void          unshift()
         {
@@ -265,7 +310,16 @@ namespace Graphics
                 this.points[i] -= this.stat[0];
             }
         }
-        public    PointPairList create_pair_list(double[] arr, int size)
+        public static double[] unshift(Graph graph)
+        {
+            double[] unshifted = new double[graph.N];
+            for (int i = 0; i != graph.N; ++i)
+            {
+                unshifted[i] = graph.points[i] - graph.stat[0];
+            }
+            return unshifted;
+        }
+        public static PointPairList create_pair_list(double[] arr, int size)
         {
             PointPairList list = new PointPairList();
             for (int x = 0; x != size; ++x)
@@ -385,6 +439,44 @@ namespace Graphics
 
             return res;
         }
+        public void anti_trend()
+        {
+            double[] trended_points = new double[this.N];
+            //double[] shifted_points = shift(this.points, 10);
+            TrendGraph tg = new TrendGraph(this.S, this.N);
+            for (int i = 0; i != this.N; ++i)
+            {
+                //trended_points[i] = this.points[i] + tg.points[i] + shifted_points[i]; 
+            }
+        }
+    }
+
+    public class TrendGraph : Graph
+    {
+        public TrendGraph(int S, int N) : base(S, N)
+        {
+            this.points = create_points();
+        }
+        private double[] create_points() {
+            double[] points = new double[this.N];
+            for (int i = 0; i != 250; ++i)
+            {
+                points[i] = Convert.ToDouble(i);
+            }
+            for (int i = 250; i != 500; ++i)
+            {
+                points[i] = 321 * Math.Exp(-0.001 * i);
+            }
+            for (int i = 500; i != 750; ++i)
+            {
+                points[i] = 119 * Math.Exp(0.001 * i);
+            }
+            for (int i = 750; i != this.N; ++i)
+            {
+                points[i] = Convert.ToDouble(-1 * i + 1002);
+            }
+            return points;
+        }
     }
 
     public class PolyGraph : Graph
@@ -474,4 +566,3 @@ namespace Graphics
         }
     }
 }
-
