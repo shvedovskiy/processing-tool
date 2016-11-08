@@ -18,6 +18,7 @@ namespace Graphics
             InitializeComponent();
             DrawGraph();
         }
+
         private double f_1(double x)
         {
             double a = 2.5, b = 2;
@@ -38,6 +39,7 @@ namespace Graphics
             double c = 5000, alpha = 0.0098;
             return Math.Pow((c * Math.E), (alpha * (-x)));
         }
+
         private void DrawGraph()
         {
             GraphPane pane = zedGraphControl1.GraphPane;
@@ -45,21 +47,24 @@ namespace Graphics
             GraphPane pane_3 = zedGraphControl3.GraphPane;
             GraphPane pane_4 = zedGraphControl4.GraphPane;
             GraphPane pane_5 = zedGraphControl5.GraphPane;
+            GraphPane pane_6 = zedGraphControl6.GraphPane;
 
-            pane.XAxis.Title.Text = pane_2.XAxis.Title.Text = pane_3.XAxis.Title.Text = pane_4.XAxis.Title.Text = "Ось X";
-            pane.YAxis.Title.Text = pane_2.YAxis.Title.Text = pane_3.YAxis.Title.Text = pane_4.YAxis.Title.Text = "Ось Y";
+            pane.XAxis.Title.Text = pane_2.XAxis.Title.Text = pane_3.XAxis.Title.Text = pane_4.XAxis.Title.Text = pane_5.XAxis.Title.Text = pane_6.XAxis.Title.Text = "X";
+            pane.YAxis.Title.Text = pane_2.YAxis.Title.Text = pane_3.YAxis.Title.Text = pane_4.YAxis.Title.Text = pane_5.YAxis.Title.Text = pane_6.YAxis.Title.Text = "Y";
 
             pane.Title.Text = "y = ax + b";
             pane_2.Title.Text = "y = -ax + b";
             pane_3.Title.Text = "y = ce^(alpha * x)";
             pane_4.Title.Text = "y = ce^(-alpha * x)";
-            pane_5.Title.Text = "Trend";
+            pane_5.Title.Text = "Multi Trend";
+            pane_6.Title.Text = "From .dat file";
 
             pane.CurveList.Clear();
             pane_2.CurveList.Clear();
             pane_3.CurveList.Clear();
             pane_4.CurveList.Clear();
             pane_5.CurveList.Clear();
+            pane_6.CurveList.Clear();
 
             PointPairList list = new PointPairList();
             PointPairList list_2 = new PointPairList();
@@ -112,10 +117,12 @@ namespace Graphics
             pane_3.AddCurve("", list_3, Color.Blue, SymbolType.None);
             pane_4.AddCurve("", list_4, Color.Blue, SymbolType.None); 
             pane_5.AddCurve("", list_5, Color.Blue, SymbolType.None);
+            pane_6.AddCurve("", Graph.create_pair_list(@"php.dat"), Color.Red, SymbolType.None);
 
             pane.XAxis.Scale.Min = pane_2.XAxis.Scale.Min = xmin_limit;
             pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = xmax_limit;
             pane_3.XAxis.Scale.Max = x_3max_limit;
+            pane_6.XAxis.Scale.Max = 4000;
             pane_4.XAxis.Scale.Min = x_4min_limit;
             pane_4.XAxis.Scale.Max = x_4max_limit;
 
@@ -128,12 +135,14 @@ namespace Graphics
             zedGraphControl3.AxisChange();
             zedGraphControl4.AxisChange();
             zedGraphControl5.AxisChange();
+            zedGraphControl6.AxisChange();
 
             zedGraphControl1.Invalidate();
             zedGraphControl2.Invalidate();
             zedGraphControl3.Invalidate();
             zedGraphControl4.Invalidate();
             zedGraphControl5.Invalidate();
+            zedGraphControl6.Invalidate();
         }
     }
 }

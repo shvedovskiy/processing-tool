@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +26,31 @@ namespace Graphics
             this.S = S;
             this.N = N;
         }
-        protected double[]      calculate_statistics()  // 7 статистических метрик
+        public Graph(String filename)
+        {
+            Directory.GetFiles(@"C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\bin\Release"); 
+
+            using (BinaryReader b = new BinaryReader(File.Open(filename, FileMode.Open)))
+            {
+                int pos = 0;
+                int len = (int)b.BaseStream.Length;
+                this.N = len;
+                this.points = new double[len];
+
+                while (pos != len)
+                {
+                    this.points[pos] = b.ReadInt32();
+                    pos += sizeof(int);
+                }
+                if (this.points.Max() > Math.Abs(this.points.Min())) {
+                    this.S = Convert.ToInt32(this.points.Max()) + 1;
+                } else {
+                    this.S = Convert.ToInt32(Math.Abs(this.points.Min())) + 1;
+                }
+            }
+        }      // чтение из .dat-файла
+
+        protected double[]        calculate_statistics()  // 7 статистических метрик
         {
             int len = this.points.Length;
             double[] res = new double[7];
@@ -111,7 +136,8 @@ namespace Graphics
 
             return res;
         }
-        protected double[]      calculate_density()     // плотность распределения
+
+        protected double[] calculate_density()     // плотность распределения
         {
             double[] y_counts = new double[30];   // кол-во значений рандомайзера в интервалах
             int y_length = 2 * this.S + 1;  // длина области значений по Y
@@ -162,7 +188,7 @@ namespace Graphics
 
             return y_counts;
         }
-        protected double[]      calculate_stability()   // стационарность 
+        protected double[] calculate_stability()   // стационарность 
 
         {
             double[] stability = new double[7];    // Массив усредненных статистик интервалов
@@ -225,7 +251,8 @@ namespace Graphics
 
             return stability;
         }  
-        public    void          calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
+
+        public void         calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
         {
             // для получения статистики по shift, но без спаек
             shift(10);
@@ -259,7 +286,8 @@ namespace Graphics
             spiked.points = shift(spiked, 10);
             return spiked;
         }
-        public    void          delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
+
+        public void            delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
         {
             unshift();
             for (int i = 0; i != this.N - 1; ++i)
@@ -287,7 +315,8 @@ namespace Graphics
             unspiked[graph.N - 1] = unshifted[graph.N - 1];
             return unspiked;
         }
-        private   void          shift(int n)
+
+        private void              shift(int n)
         {
             for (int i = 0; i != this.N; ++i)
             {
@@ -303,7 +332,8 @@ namespace Graphics
             }
             return shifted;
         }
-        private   void          unshift()
+
+        private void              unshift()
         {
             for (int i = 0; i != this.N; ++i)
             {
@@ -319,12 +349,30 @@ namespace Graphics
             }
             return unshifted;
         }
+
         public static PointPairList create_pair_list(double[] arr, int size)
         {
             PointPairList list = new PointPairList();
             for (int x = 0; x != size; ++x)
             {
                 list.Add(Convert.ToDouble(x), arr[x]);
+            }
+            return list;
+        }
+        public static PointPairList create_pair_list(String filename)
+        {
+            PointPairList list = new PointPairList();
+            Directory.GetFiles(@"C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\bin\Release"); 
+
+            using (BinaryReader b = new BinaryReader(File.Open(filename, FileMode.Open)))
+            {
+                int pos = 0;
+                int len = (int)b.BaseStream.Length;
+                while (pos != len)
+                {
+                    list.Add(Convert.ToDouble(pos), Convert.ToDouble(b.ReadInt32()));
+                    pos += sizeof(int);
+                }
             }
             return list;
         }
@@ -439,14 +487,44 @@ namespace Graphics
 
             return res;
         }
-        public void anti_trend()
+        public  void       add_trend()
         {
-            double[] trended_points = new double[this.N];
-            //double[] shifted_points = shift(this.points, 10);
-            TrendGraph tg = new TrendGraph(this.S, this.N);
+            TrendGraph trend = new TrendGraph(this.S, this.N);
             for (int i = 0; i != this.N; ++i)
             {
-                //trended_points[i] = this.points[i] + tg.points[i] + shifted_points[i]; 
+                this.points[i] += trend.points[i];
+            }
+        }
+        public  void       delete_trend(int w)
+        { // TODO
+            /*double sum;
+            double[] slides = new double[(N - w) - w];
+            int i = 0;
+            for (int m = w; m != this.N - w; ++m)
+            {
+                sum = 0;
+                for (int k = 0; k != w; ++k)
+                {
+                    sum += this.points[k];
+                }
+                slides[i] = sum / w;
+                i++;
+            }
+            return slides;*/
+            double sum;
+            double[] slides = new double[this.N]; 
+            for (int i = 0; i != this.N; ++i)
+            {
+                sum = 0.0;
+                for (int j = i - (w - 1) / 2; j != i + (w - 1) / 2; ++j)
+                {
+                    sum += this.points[j];
+                }
+                slides[i] = sum / w;
+            }
+            for (int i = 0; i != this.N; ++i)
+            {
+                this.points[i] = slides[i];
             }
         }
     }
@@ -563,6 +641,32 @@ namespace Graphics
         private double     f(double k)
         {
             return _f(k, 100, 51) + _f(k, 15, 5) + _f(k, 20, 250);
+        }
+        public double[] add_randoms(int n)
+        {
+            double[] summary = new double[this.N];
+            double[] harmonics = this.points;
+
+            RandomGraph rand = new RandomGraph(this.S, this.N, false);
+            double[] randoms = rand.points;
+            
+            int cnt = 0;
+            while (cnt != n)
+            {
+                PolyGraph tmp = new PolyGraph(this.S / 5, this.N, false);
+                RandomGraph r_tmp = new RandomGraph(this.S, this.N, false);
+                for (int i = 0; i != this.N; ++i)
+                {
+                    harmonics[i] += tmp.points[i];
+                    randoms[i] += r_tmp.points[i];
+                }
+                cnt++;
+            }
+            for (int i = 0; i != this.N; ++i)
+            {
+                summary[i] = (harmonics[i] + randoms[i]) / n;
+            }
+            return summary;
         }
     }
 }

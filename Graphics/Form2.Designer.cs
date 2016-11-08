@@ -29,11 +29,37 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.DeleteTrendButton = new System.Windows.Forms.Button();
+            this.AddTrendButton = new System.Windows.Forms.Button();
+            this.zedGraphControl9 = new ZedGraph.ZedGraphControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ChangeButton = new System.Windows.Forms.Button();
+            this.SpikesDelete_Poly = new System.Windows.Forms.Button();
+            this.SpikesInput_Poly = new System.Windows.Forms.Button();
+            this.zedGraphControl8 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl5 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SpikesDelete_Rand = new System.Windows.Forms.Button();
+            this.SpikesInput_Rand = new System.Windows.Forms.Button();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+            this.SInput = new System.Windows.Forms.TextBox();
+            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
             this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.label1 = new System.Windows.Forms.Label();
-            this.SInput = new System.Windows.Forms.TextBox();
             this.SInputButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.s_kovtextbox_own = new System.Windows.Forms.TextBox();
+            this.s_exctextbox_own = new System.Windows.Forms.TextBox();
+            this.s_asymtextbox_own = new System.Windows.Forms.TextBox();
+            this.s_avgtextbox_own = new System.Windows.Forms.TextBox();
+            this.s_errtextbox_own = new System.Windows.Forms.TextBox();
+            this.s_squaredavgtextbox_own = new System.Windows.Forms.TextBox();
+            this.s_dispersiontextbox_own = new System.Windows.Forms.TextBox();
+            this.s_epstextbox_own = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.kovtextbox = new System.Windows.Forms.TextBox();
@@ -51,7 +77,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.exctextbox_own = new System.Windows.Forms.TextBox();
+            this.kovtextbox_own = new System.Windows.Forms.TextBox();
             this.asymtextbox_own = new System.Windows.Forms.TextBox();
             this.errtextbox_own = new System.Windows.Forms.TextBox();
             this.dispersiontextbox_own = new System.Windows.Forms.TextBox();
@@ -65,11 +94,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.kovtextbox_own = new System.Windows.Forms.TextBox();
-            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.s_kovtextbox = new System.Windows.Forms.TextBox();
             this.s_exctextbox = new System.Windows.Forms.TextBox();
@@ -79,34 +103,213 @@
             this.s_errtextbox = new System.Windows.Forms.TextBox();
             this.s_epstextbox = new System.Windows.Forms.TextBox();
             this.s_dispersiontextbox = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.s_kovtextbox_own = new System.Windows.Forms.TextBox();
-            this.s_exctextbox_own = new System.Windows.Forms.TextBox();
-            this.s_asymtextbox_own = new System.Windows.Forms.TextBox();
-            this.s_avgtextbox_own = new System.Windows.Forms.TextBox();
-            this.s_errtextbox_own = new System.Windows.Forms.TextBox();
-            this.s_squaredavgtextbox_own = new System.Windows.Forms.TextBox();
-            this.s_dispersiontextbox_own = new System.Windows.Forms.TextBox();
-            this.s_epstextbox_own = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.SpikesDelete_Rand = new System.Windows.Forms.Button();
-            this.SpikesInput_Rand = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.SpikesDelete_Poly = new System.Windows.Forms.Button();
-            this.SpikesInput_Poly = new System.Windows.Forms.Button();
-            this.zedGraphControl8 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl5 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl10 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl11 = new ZedGraph.ZedGraphControl();
+            this.tabPage3.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.zedGraphControl11);
+            this.tabPage3.Controls.Add(this.zedGraphControl10);
+            this.tabPage3.Controls.Add(this.DeleteTrendButton);
+            this.tabPage3.Controls.Add(this.AddTrendButton);
+            this.tabPage3.Controls.Add(this.zedGraphControl9);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1282, 726);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Тренды";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // DeleteTrendButton
+            // 
+            this.DeleteTrendButton.Location = new System.Drawing.Point(128, 23);
+            this.DeleteTrendButton.Name = "DeleteTrendButton";
+            this.DeleteTrendButton.Size = new System.Drawing.Size(119, 23);
+            this.DeleteTrendButton.TabIndex = 2;
+            this.DeleteTrendButton.Text = "Сгладить функцию";
+            this.DeleteTrendButton.UseVisualStyleBackColor = true;
+            this.DeleteTrendButton.Click += new System.EventHandler(this.DeleteTrendButton_Click);
+            // 
+            // AddTrendButton
+            // 
+            this.AddTrendButton.Location = new System.Drawing.Point(7, 23);
+            this.AddTrendButton.Name = "AddTrendButton";
+            this.AddTrendButton.Size = new System.Drawing.Size(115, 23);
+            this.AddTrendButton.TabIndex = 1;
+            this.AddTrendButton.Text = "Добавить тренд";
+            this.AddTrendButton.UseVisualStyleBackColor = true;
+            this.AddTrendButton.Click += new System.EventHandler(this.AddTrendButton_Click);
+            // 
+            // zedGraphControl9
+            // 
+            this.zedGraphControl9.Location = new System.Drawing.Point(7, 52);
+            this.zedGraphControl9.Name = "zedGraphControl9";
+            this.zedGraphControl9.ScrollGrace = 0D;
+            this.zedGraphControl9.ScrollMaxX = 0D;
+            this.zedGraphControl9.ScrollMaxY = 0D;
+            this.zedGraphControl9.ScrollMaxY2 = 0D;
+            this.zedGraphControl9.ScrollMinX = 0D;
+            this.zedGraphControl9.ScrollMinY = 0D;
+            this.zedGraphControl9.ScrollMinY2 = 0D;
+            this.zedGraphControl9.Size = new System.Drawing.Size(607, 328);
+            this.zedGraphControl9.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.ChangeButton);
+            this.tabPage2.Controls.Add(this.SpikesDelete_Poly);
+            this.tabPage2.Controls.Add(this.SpikesInput_Poly);
+            this.tabPage2.Controls.Add(this.zedGraphControl8);
+            this.tabPage2.Controls.Add(this.zedGraphControl5);
+            this.tabPage2.Controls.Add(this.zedGraphControl7);
+            this.tabPage2.Controls.Add(this.zedGraphControl6);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1282, 726);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Гармоническая функция";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // ChangeButton
+            // 
+            this.ChangeButton.Location = new System.Drawing.Point(1175, 19);
+            this.ChangeButton.Name = "ChangeButton";
+            this.ChangeButton.Size = new System.Drawing.Size(75, 23);
+            this.ChangeButton.TabIndex = 23;
+            this.ChangeButton.Text = "Пересчёт";
+            this.ChangeButton.UseVisualStyleBackColor = true;
+            this.ChangeButton.Click += new System.EventHandler(this.ChangeButton_Click);
+            // 
+            // SpikesDelete_Poly
+            // 
+            this.SpikesDelete_Poly.Location = new System.Drawing.Point(130, 19);
+            this.SpikesDelete_Poly.Name = "SpikesDelete_Poly";
+            this.SpikesDelete_Poly.Size = new System.Drawing.Size(117, 23);
+            this.SpikesDelete_Poly.TabIndex = 22;
+            this.SpikesDelete_Poly.Text = "Сгладить спайки";
+            this.SpikesDelete_Poly.UseVisualStyleBackColor = true;
+            this.SpikesDelete_Poly.Click += new System.EventHandler(this.SpikesDelete_Poly_Click);
+            // 
+            // SpikesInput_Poly
+            // 
+            this.SpikesInput_Poly.Location = new System.Drawing.Point(7, 19);
+            this.SpikesInput_Poly.Name = "SpikesInput_Poly";
+            this.SpikesInput_Poly.Size = new System.Drawing.Size(117, 23);
+            this.SpikesInput_Poly.TabIndex = 21;
+            this.SpikesInput_Poly.Text = "Добавить спайки";
+            this.SpikesInput_Poly.UseVisualStyleBackColor = true;
+            this.SpikesInput_Poly.Click += new System.EventHandler(this.SpikesInput_Poly_Click);
+            // 
+            // zedGraphControl8
+            // 
+            this.zedGraphControl8.Location = new System.Drawing.Point(826, 385);
+            this.zedGraphControl8.Name = "zedGraphControl8";
+            this.zedGraphControl8.ScrollGrace = 0D;
+            this.zedGraphControl8.ScrollMaxX = 0D;
+            this.zedGraphControl8.ScrollMaxY = 0D;
+            this.zedGraphControl8.ScrollMaxY2 = 0D;
+            this.zedGraphControl8.ScrollMinX = 0D;
+            this.zedGraphControl8.ScrollMinY = 0D;
+            this.zedGraphControl8.ScrollMinY2 = 0D;
+            this.zedGraphControl8.Size = new System.Drawing.Size(425, 341);
+            this.zedGraphControl8.TabIndex = 3;
+            // 
+            // zedGraphControl5
+            // 
+            this.zedGraphControl5.Location = new System.Drawing.Point(0, 48);
+            this.zedGraphControl5.Name = "zedGraphControl5";
+            this.zedGraphControl5.ScrollGrace = 0D;
+            this.zedGraphControl5.ScrollMaxX = 0D;
+            this.zedGraphControl5.ScrollMaxY = 0D;
+            this.zedGraphControl5.ScrollMaxY2 = 0D;
+            this.zedGraphControl5.ScrollMinX = 0D;
+            this.zedGraphControl5.ScrollMinY = 0D;
+            this.zedGraphControl5.ScrollMinY2 = 0D;
+            this.zedGraphControl5.Size = new System.Drawing.Size(820, 331);
+            this.zedGraphControl5.TabIndex = 0;
+            // 
+            // zedGraphControl7
+            // 
+            this.zedGraphControl7.Location = new System.Drawing.Point(826, 48);
+            this.zedGraphControl7.Name = "zedGraphControl7";
+            this.zedGraphControl7.ScrollGrace = 0D;
+            this.zedGraphControl7.ScrollMaxX = 0D;
+            this.zedGraphControl7.ScrollMaxY = 0D;
+            this.zedGraphControl7.ScrollMaxY2 = 0D;
+            this.zedGraphControl7.ScrollMinX = 0D;
+            this.zedGraphControl7.ScrollMinY = 0D;
+            this.zedGraphControl7.ScrollMinY2 = 0D;
+            this.zedGraphControl7.Size = new System.Drawing.Size(425, 331);
+            this.zedGraphControl7.TabIndex = 2;
+            // 
+            // zedGraphControl6
+            // 
+            this.zedGraphControl6.Location = new System.Drawing.Point(0, 385);
+            this.zedGraphControl6.Name = "zedGraphControl6";
+            this.zedGraphControl6.ScrollGrace = 0D;
+            this.zedGraphControl6.ScrollMaxX = 0D;
+            this.zedGraphControl6.ScrollMaxY = 0D;
+            this.zedGraphControl6.ScrollMaxY2 = 0D;
+            this.zedGraphControl6.ScrollMinX = 0D;
+            this.zedGraphControl6.ScrollMinY = 0D;
+            this.zedGraphControl6.ScrollMinY2 = 0D;
+            this.zedGraphControl6.Size = new System.Drawing.Size(820, 341);
+            this.zedGraphControl6.TabIndex = 1;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.SpikesDelete_Rand);
+            this.tabPage1.Controls.Add(this.SpikesInput_Rand);
+            this.tabPage1.Controls.Add(this.zedGraphControl1);
+            this.tabPage1.Controls.Add(this.SInput);
+            this.tabPage1.Controls.Add(this.zedGraphControl4);
+            this.tabPage1.Controls.Add(this.zedGraphControl3);
+            this.tabPage1.Controls.Add(this.zedGraphControl2);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.SInputButton);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1282, 726);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Случайная функция";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // SpikesDelete_Rand
+            // 
+            this.SpikesDelete_Rand.Location = new System.Drawing.Point(953, 11);
+            this.SpikesDelete_Rand.Name = "SpikesDelete_Rand";
+            this.SpikesDelete_Rand.Size = new System.Drawing.Size(117, 23);
+            this.SpikesDelete_Rand.TabIndex = 20;
+            this.SpikesDelete_Rand.Text = "Сгладить спайки";
+            this.SpikesDelete_Rand.UseVisualStyleBackColor = true;
+            this.SpikesDelete_Rand.Click += new System.EventHandler(this.SpikesDelete_Rand_Click);
+            // 
+            // SpikesInput_Rand
+            // 
+            this.SpikesInput_Rand.Location = new System.Drawing.Point(830, 11);
+            this.SpikesInput_Rand.Name = "SpikesInput_Rand";
+            this.SpikesInput_Rand.Size = new System.Drawing.Size(117, 23);
+            this.SpikesInput_Rand.TabIndex = 19;
+            this.SpikesInput_Rand.Text = "Добавить спайки";
+            this.SpikesInput_Rand.UseVisualStyleBackColor = true;
+            this.SpikesInput_Rand.Click += new System.EventHandler(this.SpikesInput_Rand_Click);
             // 
             // zedGraphControl1
             // 
@@ -121,6 +324,42 @@
             this.zedGraphControl1.ScrollMinY2 = 0D;
             this.zedGraphControl1.Size = new System.Drawing.Size(435, 346);
             this.zedGraphControl1.TabIndex = 0;
+            // 
+            // SInput
+            // 
+            this.SInput.Location = new System.Drawing.Point(581, 13);
+            this.SInput.Name = "SInput";
+            this.SInput.Size = new System.Drawing.Size(100, 20);
+            this.SInput.TabIndex = 3;
+            this.SInput.Text = "100";
+            // 
+            // zedGraphControl4
+            // 
+            this.zedGraphControl4.Location = new System.Drawing.Point(830, 397);
+            this.zedGraphControl4.Name = "zedGraphControl4";
+            this.zedGraphControl4.ScrollGrace = 0D;
+            this.zedGraphControl4.ScrollMaxX = 0D;
+            this.zedGraphControl4.ScrollMaxY = 0D;
+            this.zedGraphControl4.ScrollMaxY2 = 0D;
+            this.zedGraphControl4.ScrollMinX = 0D;
+            this.zedGraphControl4.ScrollMinY = 0D;
+            this.zedGraphControl4.ScrollMinY2 = 0D;
+            this.zedGraphControl4.Size = new System.Drawing.Size(430, 329);
+            this.zedGraphControl4.TabIndex = 16;
+            // 
+            // zedGraphControl3
+            // 
+            this.zedGraphControl3.Location = new System.Drawing.Point(830, 43);
+            this.zedGraphControl3.Name = "zedGraphControl3";
+            this.zedGraphControl3.ScrollGrace = 0D;
+            this.zedGraphControl3.ScrollMaxX = 0D;
+            this.zedGraphControl3.ScrollMaxY = 0D;
+            this.zedGraphControl3.ScrollMaxY2 = 0D;
+            this.zedGraphControl3.ScrollMinX = 0D;
+            this.zedGraphControl3.ScrollMinY = 0D;
+            this.zedGraphControl3.ScrollMinY2 = 0D;
+            this.zedGraphControl3.Size = new System.Drawing.Size(430, 346);
+            this.zedGraphControl3.TabIndex = 15;
             // 
             // zedGraphControl2
             // 
@@ -145,14 +384,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Параметр S =";
             // 
-            // SInput
-            // 
-            this.SInput.Location = new System.Drawing.Point(581, 13);
-            this.SInput.Name = "SInput";
-            this.SInput.Size = new System.Drawing.Size(100, 20);
-            this.SInput.TabIndex = 3;
-            this.SInput.Text = "100";
-            // 
             // SInputButton
             // 
             this.SInputButton.Location = new System.Drawing.Point(687, 11);
@@ -162,6 +393,79 @@
             this.SInputButton.Text = "Пересчёт";
             this.SInputButton.UseVisualStyleBackColor = true;
             this.SInputButton.Click += new System.EventHandler(this.SInputButton_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.s_kovtextbox_own);
+            this.groupBox4.Controls.Add(this.s_exctextbox_own);
+            this.groupBox4.Controls.Add(this.s_asymtextbox_own);
+            this.groupBox4.Controls.Add(this.s_avgtextbox_own);
+            this.groupBox4.Controls.Add(this.s_errtextbox_own);
+            this.groupBox4.Controls.Add(this.s_squaredavgtextbox_own);
+            this.groupBox4.Controls.Add(this.s_dispersiontextbox_own);
+            this.groupBox4.Controls.Add(this.s_epstextbox_own);
+            this.groupBox4.Location = new System.Drawing.Point(687, 397);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(137, 329);
+            this.groupBox4.TabIndex = 18;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Стационарность";
+            // 
+            // s_kovtextbox_own
+            // 
+            this.s_kovtextbox_own.Location = new System.Drawing.Point(6, 301);
+            this.s_kovtextbox_own.Name = "s_kovtextbox_own";
+            this.s_kovtextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_kovtextbox_own.TabIndex = 18;
+            // 
+            // s_exctextbox_own
+            // 
+            this.s_exctextbox_own.Location = new System.Drawing.Point(6, 261);
+            this.s_exctextbox_own.Name = "s_exctextbox_own";
+            this.s_exctextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_exctextbox_own.TabIndex = 20;
+            // 
+            // s_asymtextbox_own
+            // 
+            this.s_asymtextbox_own.Location = new System.Drawing.Point(6, 223);
+            this.s_asymtextbox_own.Name = "s_asymtextbox_own";
+            this.s_asymtextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_asymtextbox_own.TabIndex = 19;
+            // 
+            // s_avgtextbox_own
+            // 
+            this.s_avgtextbox_own.Location = new System.Drawing.Point(6, 29);
+            this.s_avgtextbox_own.Name = "s_avgtextbox_own";
+            this.s_avgtextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_avgtextbox_own.TabIndex = 14;
+            // 
+            // s_errtextbox_own
+            // 
+            this.s_errtextbox_own.Location = new System.Drawing.Point(6, 184);
+            this.s_errtextbox_own.Name = "s_errtextbox_own";
+            this.s_errtextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_errtextbox_own.TabIndex = 18;
+            // 
+            // s_squaredavgtextbox_own
+            // 
+            this.s_squaredavgtextbox_own.Location = new System.Drawing.Point(6, 66);
+            this.s_squaredavgtextbox_own.Name = "s_squaredavgtextbox_own";
+            this.s_squaredavgtextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_squaredavgtextbox_own.TabIndex = 15;
+            // 
+            // s_dispersiontextbox_own
+            // 
+            this.s_dispersiontextbox_own.Location = new System.Drawing.Point(6, 144);
+            this.s_dispersiontextbox_own.Name = "s_dispersiontextbox_own";
+            this.s_dispersiontextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_dispersiontextbox_own.TabIndex = 17;
+            // 
+            // s_epstextbox_own
+            // 
+            this.s_epstextbox_own.Location = new System.Drawing.Point(6, 104);
+            this.s_epstextbox_own.Name = "s_epstextbox_own";
+            this.s_epstextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.s_epstextbox_own.TabIndex = 16;
             // 
             // groupBox1
             // 
@@ -316,12 +620,53 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Среднее:";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.exctextbox_own);
+            this.groupBox2.Controls.Add(this.kovtextbox_own);
+            this.groupBox2.Controls.Add(this.asymtextbox_own);
+            this.groupBox2.Controls.Add(this.errtextbox_own);
+            this.groupBox2.Controls.Add(this.dispersiontextbox_own);
+            this.groupBox2.Controls.Add(this.epstextbox_own);
+            this.groupBox2.Controls.Add(this.squaredavgtextbox_own);
+            this.groupBox2.Controls.Add(this.avgtextbox_own);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Location = new System.Drawing.Point(437, 397);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(244, 329);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Статистические показатели";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(7, 304);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(71, 13);
+            this.label17.TabIndex = 17;
+            this.label17.Text = "Ковариация:";
+            // 
             // exctextbox_own
             // 
             this.exctextbox_own.Location = new System.Drawing.Point(114, 262);
             this.exctextbox_own.Name = "exctextbox_own";
             this.exctextbox_own.Size = new System.Drawing.Size(121, 20);
             this.exctextbox_own.TabIndex = 13;
+            // 
+            // kovtextbox_own
+            // 
+            this.kovtextbox_own.Location = new System.Drawing.Point(114, 301);
+            this.kovtextbox_own.Name = "kovtextbox_own";
+            this.kovtextbox_own.Size = new System.Drawing.Size(121, 20);
+            this.kovtextbox_own.TabIndex = 16;
             // 
             // asymtextbox_own
             // 
@@ -428,75 +773,6 @@
             this.label15.TabIndex = 0;
             this.label15.Text = "Среднее:";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.exctextbox_own);
-            this.groupBox2.Controls.Add(this.kovtextbox_own);
-            this.groupBox2.Controls.Add(this.asymtextbox_own);
-            this.groupBox2.Controls.Add(this.errtextbox_own);
-            this.groupBox2.Controls.Add(this.dispersiontextbox_own);
-            this.groupBox2.Controls.Add(this.epstextbox_own);
-            this.groupBox2.Controls.Add(this.squaredavgtextbox_own);
-            this.groupBox2.Controls.Add(this.avgtextbox_own);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Location = new System.Drawing.Point(437, 397);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(244, 329);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Статистические показатели";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(7, 304);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(71, 13);
-            this.label17.TabIndex = 17;
-            this.label17.Text = "Ковариация:";
-            // 
-            // kovtextbox_own
-            // 
-            this.kovtextbox_own.Location = new System.Drawing.Point(114, 301);
-            this.kovtextbox_own.Name = "kovtextbox_own";
-            this.kovtextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.kovtextbox_own.TabIndex = 16;
-            // 
-            // zedGraphControl3
-            // 
-            this.zedGraphControl3.Location = new System.Drawing.Point(830, 43);
-            this.zedGraphControl3.Name = "zedGraphControl3";
-            this.zedGraphControl3.ScrollGrace = 0D;
-            this.zedGraphControl3.ScrollMaxX = 0D;
-            this.zedGraphControl3.ScrollMaxY = 0D;
-            this.zedGraphControl3.ScrollMaxY2 = 0D;
-            this.zedGraphControl3.ScrollMinX = 0D;
-            this.zedGraphControl3.ScrollMinY = 0D;
-            this.zedGraphControl3.ScrollMinY2 = 0D;
-            this.zedGraphControl3.Size = new System.Drawing.Size(430, 346);
-            this.zedGraphControl3.TabIndex = 15;
-            // 
-            // zedGraphControl4
-            // 
-            this.zedGraphControl4.Location = new System.Drawing.Point(830, 397);
-            this.zedGraphControl4.Name = "zedGraphControl4";
-            this.zedGraphControl4.ScrollGrace = 0D;
-            this.zedGraphControl4.ScrollMaxX = 0D;
-            this.zedGraphControl4.ScrollMaxY = 0D;
-            this.zedGraphControl4.ScrollMaxY2 = 0D;
-            this.zedGraphControl4.ScrollMinX = 0D;
-            this.zedGraphControl4.ScrollMinY = 0D;
-            this.zedGraphControl4.ScrollMinY2 = 0D;
-            this.zedGraphControl4.Size = new System.Drawing.Size(430, 329);
-            this.zedGraphControl4.TabIndex = 16;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.s_kovtextbox);
@@ -570,223 +846,44 @@
             this.s_dispersiontextbox.Size = new System.Drawing.Size(121, 20);
             this.s_dispersiontextbox.TabIndex = 17;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.s_kovtextbox_own);
-            this.groupBox4.Controls.Add(this.s_exctextbox_own);
-            this.groupBox4.Controls.Add(this.s_asymtextbox_own);
-            this.groupBox4.Controls.Add(this.s_avgtextbox_own);
-            this.groupBox4.Controls.Add(this.s_errtextbox_own);
-            this.groupBox4.Controls.Add(this.s_squaredavgtextbox_own);
-            this.groupBox4.Controls.Add(this.s_dispersiontextbox_own);
-            this.groupBox4.Controls.Add(this.s_epstextbox_own);
-            this.groupBox4.Location = new System.Drawing.Point(687, 397);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(137, 329);
-            this.groupBox4.TabIndex = 18;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Стационарность";
-            // 
-            // s_kovtextbox_own
-            // 
-            this.s_kovtextbox_own.Location = new System.Drawing.Point(6, 301);
-            this.s_kovtextbox_own.Name = "s_kovtextbox_own";
-            this.s_kovtextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_kovtextbox_own.TabIndex = 18;
-            // 
-            // s_exctextbox_own
-            // 
-            this.s_exctextbox_own.Location = new System.Drawing.Point(6, 261);
-            this.s_exctextbox_own.Name = "s_exctextbox_own";
-            this.s_exctextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_exctextbox_own.TabIndex = 20;
-            // 
-            // s_asymtextbox_own
-            // 
-            this.s_asymtextbox_own.Location = new System.Drawing.Point(6, 223);
-            this.s_asymtextbox_own.Name = "s_asymtextbox_own";
-            this.s_asymtextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_asymtextbox_own.TabIndex = 19;
-            // 
-            // s_avgtextbox_own
-            // 
-            this.s_avgtextbox_own.Location = new System.Drawing.Point(6, 29);
-            this.s_avgtextbox_own.Name = "s_avgtextbox_own";
-            this.s_avgtextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_avgtextbox_own.TabIndex = 14;
-            // 
-            // s_errtextbox_own
-            // 
-            this.s_errtextbox_own.Location = new System.Drawing.Point(6, 184);
-            this.s_errtextbox_own.Name = "s_errtextbox_own";
-            this.s_errtextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_errtextbox_own.TabIndex = 18;
-            // 
-            // s_squaredavgtextbox_own
-            // 
-            this.s_squaredavgtextbox_own.Location = new System.Drawing.Point(6, 66);
-            this.s_squaredavgtextbox_own.Name = "s_squaredavgtextbox_own";
-            this.s_squaredavgtextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_squaredavgtextbox_own.TabIndex = 15;
-            // 
-            // s_dispersiontextbox_own
-            // 
-            this.s_dispersiontextbox_own.Location = new System.Drawing.Point(6, 144);
-            this.s_dispersiontextbox_own.Name = "s_dispersiontextbox_own";
-            this.s_dispersiontextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_dispersiontextbox_own.TabIndex = 17;
-            // 
-            // s_epstextbox_own
-            // 
-            this.s_epstextbox_own.Location = new System.Drawing.Point(6, 104);
-            this.s_epstextbox_own.Name = "s_epstextbox_own";
-            this.s_epstextbox_own.Size = new System.Drawing.Size(121, 20);
-            this.s_epstextbox_own.TabIndex = 16;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(1, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1290, 752);
             this.tabControl1.TabIndex = 19;
             // 
-            // tabPage1
+            // zedGraphControl10
             // 
-            this.tabPage1.Controls.Add(this.SpikesDelete_Rand);
-            this.tabPage1.Controls.Add(this.SpikesInput_Rand);
-            this.tabPage1.Controls.Add(this.zedGraphControl1);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.SInput);
-            this.tabPage1.Controls.Add(this.SInputButton);
-            this.tabPage1.Controls.Add(this.groupBox4);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.zedGraphControl4);
-            this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.zedGraphControl3);
-            this.tabPage1.Controls.Add(this.zedGraphControl2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1282, 726);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Случайная функция";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.zedGraphControl10.Location = new System.Drawing.Point(620, 52);
+            this.zedGraphControl10.Name = "zedGraphControl10";
+            this.zedGraphControl10.ScrollGrace = 0D;
+            this.zedGraphControl10.ScrollMaxX = 0D;
+            this.zedGraphControl10.ScrollMaxY = 0D;
+            this.zedGraphControl10.ScrollMaxY2 = 0D;
+            this.zedGraphControl10.ScrollMinX = 0D;
+            this.zedGraphControl10.ScrollMinY = 0D;
+            this.zedGraphControl10.ScrollMinY2 = 0D;
+            this.zedGraphControl10.Size = new System.Drawing.Size(627, 328);
+            this.zedGraphControl10.TabIndex = 3;
             // 
-            // SpikesDelete_Rand
+            // zedGraphControl11
             // 
-            this.SpikesDelete_Rand.Location = new System.Drawing.Point(953, 11);
-            this.SpikesDelete_Rand.Name = "SpikesDelete_Rand";
-            this.SpikesDelete_Rand.Size = new System.Drawing.Size(117, 23);
-            this.SpikesDelete_Rand.TabIndex = 20;
-            this.SpikesDelete_Rand.Text = "Сгладить спайки";
-            this.SpikesDelete_Rand.UseVisualStyleBackColor = true;
-            this.SpikesDelete_Rand.Click += new System.EventHandler(this.SpikesDelete_Rand_Click);
-            // 
-            // SpikesInput_Rand
-            // 
-            this.SpikesInput_Rand.Location = new System.Drawing.Point(830, 11);
-            this.SpikesInput_Rand.Name = "SpikesInput_Rand";
-            this.SpikesInput_Rand.Size = new System.Drawing.Size(117, 23);
-            this.SpikesInput_Rand.TabIndex = 19;
-            this.SpikesInput_Rand.Text = "Добавить спайки";
-            this.SpikesInput_Rand.UseVisualStyleBackColor = true;
-            this.SpikesInput_Rand.Click += new System.EventHandler(this.SpikesInput_Rand_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.SpikesDelete_Poly);
-            this.tabPage2.Controls.Add(this.SpikesInput_Poly);
-            this.tabPage2.Controls.Add(this.zedGraphControl8);
-            this.tabPage2.Controls.Add(this.zedGraphControl5);
-            this.tabPage2.Controls.Add(this.zedGraphControl7);
-            this.tabPage2.Controls.Add(this.zedGraphControl6);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1282, 726);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Гармоническая функция";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // SpikesDelete_Poly
-            // 
-            this.SpikesDelete_Poly.Location = new System.Drawing.Point(130, 19);
-            this.SpikesDelete_Poly.Name = "SpikesDelete_Poly";
-            this.SpikesDelete_Poly.Size = new System.Drawing.Size(117, 23);
-            this.SpikesDelete_Poly.TabIndex = 22;
-            this.SpikesDelete_Poly.Text = "Сгладить спайки";
-            this.SpikesDelete_Poly.UseVisualStyleBackColor = true;
-            this.SpikesDelete_Poly.Click += new System.EventHandler(this.SpikesDelete_Poly_Click);
-            // 
-            // SpikesInput_Poly
-            // 
-            this.SpikesInput_Poly.Location = new System.Drawing.Point(7, 19);
-            this.SpikesInput_Poly.Name = "SpikesInput_Poly";
-            this.SpikesInput_Poly.Size = new System.Drawing.Size(117, 23);
-            this.SpikesInput_Poly.TabIndex = 21;
-            this.SpikesInput_Poly.Text = "Добавить спайки";
-            this.SpikesInput_Poly.UseVisualStyleBackColor = true;
-            this.SpikesInput_Poly.Click += new System.EventHandler(this.SpikesInput_Poly_Click);
-            // 
-            // zedGraphControl8
-            // 
-            this.zedGraphControl8.Location = new System.Drawing.Point(826, 385);
-            this.zedGraphControl8.Name = "zedGraphControl8";
-            this.zedGraphControl8.ScrollGrace = 0D;
-            this.zedGraphControl8.ScrollMaxX = 0D;
-            this.zedGraphControl8.ScrollMaxY = 0D;
-            this.zedGraphControl8.ScrollMaxY2 = 0D;
-            this.zedGraphControl8.ScrollMinX = 0D;
-            this.zedGraphControl8.ScrollMinY = 0D;
-            this.zedGraphControl8.ScrollMinY2 = 0D;
-            this.zedGraphControl8.Size = new System.Drawing.Size(425, 341);
-            this.zedGraphControl8.TabIndex = 3;
-            // 
-            // zedGraphControl5
-            // 
-            this.zedGraphControl5.Location = new System.Drawing.Point(0, 48);
-            this.zedGraphControl5.Name = "zedGraphControl5";
-            this.zedGraphControl5.ScrollGrace = 0D;
-            this.zedGraphControl5.ScrollMaxX = 0D;
-            this.zedGraphControl5.ScrollMaxY = 0D;
-            this.zedGraphControl5.ScrollMaxY2 = 0D;
-            this.zedGraphControl5.ScrollMinX = 0D;
-            this.zedGraphControl5.ScrollMinY = 0D;
-            this.zedGraphControl5.ScrollMinY2 = 0D;
-            this.zedGraphControl5.Size = new System.Drawing.Size(820, 331);
-            this.zedGraphControl5.TabIndex = 0;
-            // 
-            // zedGraphControl7
-            // 
-            this.zedGraphControl7.Location = new System.Drawing.Point(826, 48);
-            this.zedGraphControl7.Name = "zedGraphControl7";
-            this.zedGraphControl7.ScrollGrace = 0D;
-            this.zedGraphControl7.ScrollMaxX = 0D;
-            this.zedGraphControl7.ScrollMaxY = 0D;
-            this.zedGraphControl7.ScrollMaxY2 = 0D;
-            this.zedGraphControl7.ScrollMinX = 0D;
-            this.zedGraphControl7.ScrollMinY = 0D;
-            this.zedGraphControl7.ScrollMinY2 = 0D;
-            this.zedGraphControl7.Size = new System.Drawing.Size(425, 331);
-            this.zedGraphControl7.TabIndex = 2;
-            // 
-            // zedGraphControl6
-            // 
-            this.zedGraphControl6.Location = new System.Drawing.Point(0, 385);
-            this.zedGraphControl6.Name = "zedGraphControl6";
-            this.zedGraphControl6.ScrollGrace = 0D;
-            this.zedGraphControl6.ScrollMaxX = 0D;
-            this.zedGraphControl6.ScrollMaxY = 0D;
-            this.zedGraphControl6.ScrollMaxY2 = 0D;
-            this.zedGraphControl6.ScrollMinX = 0D;
-            this.zedGraphControl6.ScrollMinY = 0D;
-            this.zedGraphControl6.ScrollMinY2 = 0D;
-            this.zedGraphControl6.Size = new System.Drawing.Size(820, 341);
-            this.zedGraphControl6.TabIndex = 1;
+            this.zedGraphControl11.Location = new System.Drawing.Point(620, 383);
+            this.zedGraphControl11.Name = "zedGraphControl11";
+            this.zedGraphControl11.ScrollGrace = 0D;
+            this.zedGraphControl11.ScrollMaxX = 0D;
+            this.zedGraphControl11.ScrollMaxY = 0D;
+            this.zedGraphControl11.ScrollMaxY2 = 0D;
+            this.zedGraphControl11.ScrollMinX = 0D;
+            this.zedGraphControl11.ScrollMinY = 0D;
+            this.zedGraphControl11.ScrollMinY2 = 0D;
+            this.zedGraphControl11.Size = new System.Drawing.Size(627, 343);
+            this.zedGraphControl11.TabIndex = 4;
             // 
             // Form2
             // 
@@ -796,45 +893,77 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Form2";
             this.Text = "Form2";
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button DeleteTrendButton;
+        private System.Windows.Forms.Button AddTrendButton;
+        private ZedGraph.ZedGraphControl zedGraphControl9;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button ChangeButton;
+        private System.Windows.Forms.Button SpikesDelete_Poly;
+        private System.Windows.Forms.Button SpikesInput_Poly;
+        private ZedGraph.ZedGraphControl zedGraphControl8;
+        private ZedGraph.ZedGraphControl zedGraphControl5;
+        private ZedGraph.ZedGraphControl zedGraphControl7;
+        private ZedGraph.ZedGraphControl zedGraphControl6;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button SpikesDelete_Rand;
+        private System.Windows.Forms.Button SpikesInput_Rand;
         private ZedGraph.ZedGraphControl zedGraphControl1;
+        private System.Windows.Forms.TextBox SInput;
+        private ZedGraph.ZedGraphControl zedGraphControl4;
+        private ZedGraph.ZedGraphControl zedGraphControl3;
         private ZedGraph.ZedGraphControl zedGraphControl2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox SInput;
         private System.Windows.Forms.Button SInputButton;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox s_kovtextbox_own;
+        private System.Windows.Forms.TextBox s_exctextbox_own;
+        private System.Windows.Forms.TextBox s_asymtextbox_own;
+        private System.Windows.Forms.TextBox s_avgtextbox_own;
+        private System.Windows.Forms.TextBox s_errtextbox_own;
+        private System.Windows.Forms.TextBox s_squaredavgtextbox_own;
+        private System.Windows.Forms.TextBox s_dispersiontextbox_own;
+        private System.Windows.Forms.TextBox s_epstextbox_own;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox kovtextbox;
+        private System.Windows.Forms.TextBox exctextbox;
+        private System.Windows.Forms.TextBox asymtextbox;
+        private System.Windows.Forms.TextBox errtextbox;
+        private System.Windows.Forms.TextBox dispersiontextbox;
         private System.Windows.Forms.TextBox epstextbox;
         private System.Windows.Forms.TextBox squaredavgtextbox;
         private System.Windows.Forms.TextBox avgtextbox;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox errtextbox;
-        private System.Windows.Forms.TextBox dispersiontextbox;
-        private System.Windows.Forms.TextBox exctextbox;
-        private System.Windows.Forms.TextBox asymtextbox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox exctextbox_own;
+        private System.Windows.Forms.TextBox kovtextbox_own;
         private System.Windows.Forms.TextBox asymtextbox_own;
         private System.Windows.Forms.TextBox errtextbox_own;
         private System.Windows.Forms.TextBox dispersiontextbox_own;
@@ -848,10 +977,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private ZedGraph.ZedGraphControl zedGraphControl3;
-        private ZedGraph.ZedGraphControl zedGraphControl4;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox s_kovtextbox;
         private System.Windows.Forms.TextBox s_exctextbox;
         private System.Windows.Forms.TextBox s_avgtextbox;
         private System.Windows.Forms.TextBox s_asymtextbox;
@@ -859,30 +986,9 @@
         private System.Windows.Forms.TextBox s_errtextbox;
         private System.Windows.Forms.TextBox s_epstextbox;
         private System.Windows.Forms.TextBox s_dispersiontextbox;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox s_exctextbox_own;
-        private System.Windows.Forms.TextBox s_asymtextbox_own;
-        private System.Windows.Forms.TextBox s_avgtextbox_own;
-        private System.Windows.Forms.TextBox s_errtextbox_own;
-        private System.Windows.Forms.TextBox s_squaredavgtextbox_own;
-        private System.Windows.Forms.TextBox s_dispersiontextbox_own;
-        private System.Windows.Forms.TextBox s_epstextbox_own;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox kovtextbox;
-        private System.Windows.Forms.TextBox s_kovtextbox;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox kovtextbox_own;
-        private System.Windows.Forms.TextBox s_kovtextbox_own;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private ZedGraph.ZedGraphControl zedGraphControl5;
-        private ZedGraph.ZedGraphControl zedGraphControl6;
-        private ZedGraph.ZedGraphControl zedGraphControl7;
-        private ZedGraph.ZedGraphControl zedGraphControl8;
-        private System.Windows.Forms.Button SpikesDelete_Rand;
-        private System.Windows.Forms.Button SpikesInput_Rand;
-        private System.Windows.Forms.Button SpikesDelete_Poly;
-        private System.Windows.Forms.Button SpikesInput_Poly;
+        private ZedGraph.ZedGraphControl zedGraphControl10;
+        private ZedGraph.ZedGraphControl zedGraphControl11;
+
     }
 }
