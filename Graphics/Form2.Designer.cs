@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.zedGraphControl11 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl10 = new ZedGraph.ZedGraphControl();
             this.DeleteTrendButton = new System.Windows.Forms.Button();
             this.AddTrendButton = new System.Windows.Forms.Button();
             this.zedGraphControl9 = new ZedGraph.ZedGraphControl();
@@ -42,6 +44,8 @@
             this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
             this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ShiftButton_Rand = new System.Windows.Forms.Button();
+            this.AntiShiftButton_Rand = new System.Windows.Forms.Button();
             this.SpikesDelete_Rand = new System.Windows.Forms.Button();
             this.SpikesInput_Rand = new System.Windows.Forms.Button();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
@@ -104,8 +108,8 @@
             this.s_epstextbox = new System.Windows.Forms.TextBox();
             this.s_dispersiontextbox = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.zedGraphControl10 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl11 = new ZedGraph.ZedGraphControl();
+            this.ShiftButton_Poly = new System.Windows.Forms.Button();
+            this.AntiShiftButton_Poly = new System.Windows.Forms.Button();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -130,6 +134,34 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Тренды";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // zedGraphControl11
+            // 
+            this.zedGraphControl11.Location = new System.Drawing.Point(620, 383);
+            this.zedGraphControl11.Name = "zedGraphControl11";
+            this.zedGraphControl11.ScrollGrace = 0D;
+            this.zedGraphControl11.ScrollMaxX = 0D;
+            this.zedGraphControl11.ScrollMaxY = 0D;
+            this.zedGraphControl11.ScrollMaxY2 = 0D;
+            this.zedGraphControl11.ScrollMinX = 0D;
+            this.zedGraphControl11.ScrollMinY = 0D;
+            this.zedGraphControl11.ScrollMinY2 = 0D;
+            this.zedGraphControl11.Size = new System.Drawing.Size(627, 343);
+            this.zedGraphControl11.TabIndex = 4;
+            // 
+            // zedGraphControl10
+            // 
+            this.zedGraphControl10.Location = new System.Drawing.Point(620, 52);
+            this.zedGraphControl10.Name = "zedGraphControl10";
+            this.zedGraphControl10.ScrollGrace = 0D;
+            this.zedGraphControl10.ScrollMaxX = 0D;
+            this.zedGraphControl10.ScrollMaxY = 0D;
+            this.zedGraphControl10.ScrollMaxY2 = 0D;
+            this.zedGraphControl10.ScrollMinX = 0D;
+            this.zedGraphControl10.ScrollMinY = 0D;
+            this.zedGraphControl10.ScrollMinY2 = 0D;
+            this.zedGraphControl10.Size = new System.Drawing.Size(627, 328);
+            this.zedGraphControl10.TabIndex = 3;
             // 
             // DeleteTrendButton
             // 
@@ -167,6 +199,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.AntiShiftButton_Poly);
+            this.tabPage2.Controls.Add(this.ShiftButton_Poly);
             this.tabPage2.Controls.Add(this.ChangeButton);
             this.tabPage2.Controls.Add(this.SpikesDelete_Poly);
             this.tabPage2.Controls.Add(this.SpikesInput_Poly);
@@ -194,7 +228,7 @@
             // 
             // SpikesDelete_Poly
             // 
-            this.SpikesDelete_Poly.Location = new System.Drawing.Point(130, 19);
+            this.SpikesDelete_Poly.Location = new System.Drawing.Point(208, 19);
             this.SpikesDelete_Poly.Name = "SpikesDelete_Poly";
             this.SpikesDelete_Poly.Size = new System.Drawing.Size(117, 23);
             this.SpikesDelete_Poly.TabIndex = 22;
@@ -204,7 +238,7 @@
             // 
             // SpikesInput_Poly
             // 
-            this.SpikesInput_Poly.Location = new System.Drawing.Point(7, 19);
+            this.SpikesInput_Poly.Location = new System.Drawing.Point(85, 19);
             this.SpikesInput_Poly.Name = "SpikesInput_Poly";
             this.SpikesInput_Poly.Size = new System.Drawing.Size(117, 23);
             this.SpikesInput_Poly.TabIndex = 21;
@@ -270,6 +304,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ShiftButton_Rand);
+            this.tabPage1.Controls.Add(this.AntiShiftButton_Rand);
             this.tabPage1.Controls.Add(this.SpikesDelete_Rand);
             this.tabPage1.Controls.Add(this.SpikesInput_Rand);
             this.tabPage1.Controls.Add(this.zedGraphControl1);
@@ -291,9 +327,29 @@
             this.tabPage1.Text = "Случайная функция";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // ShiftButton_Rand
+            // 
+            this.ShiftButton_Rand.Location = new System.Drawing.Point(816, 11);
+            this.ShiftButton_Rand.Name = "ShiftButton_Rand";
+            this.ShiftButton_Rand.Size = new System.Drawing.Size(75, 23);
+            this.ShiftButton_Rand.TabIndex = 22;
+            this.ShiftButton_Rand.Text = "Сдвиг";
+            this.ShiftButton_Rand.UseVisualStyleBackColor = true;
+            this.ShiftButton_Rand.Click += new System.EventHandler(this.ShiftButton_Rand_Click);
+            // 
+            // AntiShiftButton_Rand
+            // 
+            this.AntiShiftButton_Rand.Location = new System.Drawing.Point(1143, 11);
+            this.AntiShiftButton_Rand.Name = "AntiShiftButton_Rand";
+            this.AntiShiftButton_Rand.Size = new System.Drawing.Size(104, 23);
+            this.AntiShiftButton_Rand.TabIndex = 21;
+            this.AntiShiftButton_Rand.Text = "Обратный сдвиг";
+            this.AntiShiftButton_Rand.UseVisualStyleBackColor = true;
+            this.AntiShiftButton_Rand.Click += new System.EventHandler(this.AntiShiftButton_Rand_Click);
+            // 
             // SpikesDelete_Rand
             // 
-            this.SpikesDelete_Rand.Location = new System.Drawing.Point(953, 11);
+            this.SpikesDelete_Rand.Location = new System.Drawing.Point(1020, 11);
             this.SpikesDelete_Rand.Name = "SpikesDelete_Rand";
             this.SpikesDelete_Rand.Size = new System.Drawing.Size(117, 23);
             this.SpikesDelete_Rand.TabIndex = 20;
@@ -303,7 +359,7 @@
             // 
             // SpikesInput_Rand
             // 
-            this.SpikesInput_Rand.Location = new System.Drawing.Point(830, 11);
+            this.SpikesInput_Rand.Location = new System.Drawing.Point(897, 11);
             this.SpikesInput_Rand.Name = "SpikesInput_Rand";
             this.SpikesInput_Rand.Size = new System.Drawing.Size(117, 23);
             this.SpikesInput_Rand.TabIndex = 19;
@@ -327,7 +383,7 @@
             // 
             // SInput
             // 
-            this.SInput.Location = new System.Drawing.Point(581, 13);
+            this.SInput.Location = new System.Drawing.Point(92, 13);
             this.SInput.Name = "SInput";
             this.SInput.Size = new System.Drawing.Size(100, 20);
             this.SInput.TabIndex = 3;
@@ -378,7 +434,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(498, 16);
+            this.label1.Location = new System.Drawing.Point(9, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 2;
@@ -386,7 +442,7 @@
             // 
             // SInputButton
             // 
-            this.SInputButton.Location = new System.Drawing.Point(687, 11);
+            this.SInputButton.Location = new System.Drawing.Point(198, 11);
             this.SInputButton.Name = "SInputButton";
             this.SInputButton.Size = new System.Drawing.Size(75, 23);
             this.SInputButton.TabIndex = 4;
@@ -857,33 +913,25 @@
             this.tabControl1.Size = new System.Drawing.Size(1290, 752);
             this.tabControl1.TabIndex = 19;
             // 
-            // zedGraphControl10
+            // ShiftButton_Poly
             // 
-            this.zedGraphControl10.Location = new System.Drawing.Point(620, 52);
-            this.zedGraphControl10.Name = "zedGraphControl10";
-            this.zedGraphControl10.ScrollGrace = 0D;
-            this.zedGraphControl10.ScrollMaxX = 0D;
-            this.zedGraphControl10.ScrollMaxY = 0D;
-            this.zedGraphControl10.ScrollMaxY2 = 0D;
-            this.zedGraphControl10.ScrollMinX = 0D;
-            this.zedGraphControl10.ScrollMinY = 0D;
-            this.zedGraphControl10.ScrollMinY2 = 0D;
-            this.zedGraphControl10.Size = new System.Drawing.Size(627, 328);
-            this.zedGraphControl10.TabIndex = 3;
+            this.ShiftButton_Poly.Location = new System.Drawing.Point(4, 19);
+            this.ShiftButton_Poly.Name = "ShiftButton_Poly";
+            this.ShiftButton_Poly.Size = new System.Drawing.Size(75, 23);
+            this.ShiftButton_Poly.TabIndex = 24;
+            this.ShiftButton_Poly.Text = "Сдвиг";
+            this.ShiftButton_Poly.UseVisualStyleBackColor = true;
+            this.ShiftButton_Poly.Click += new System.EventHandler(this.ShiftButton_Poly_Click);
             // 
-            // zedGraphControl11
+            // AntiShiftButton_Poly
             // 
-            this.zedGraphControl11.Location = new System.Drawing.Point(620, 383);
-            this.zedGraphControl11.Name = "zedGraphControl11";
-            this.zedGraphControl11.ScrollGrace = 0D;
-            this.zedGraphControl11.ScrollMaxX = 0D;
-            this.zedGraphControl11.ScrollMaxY = 0D;
-            this.zedGraphControl11.ScrollMaxY2 = 0D;
-            this.zedGraphControl11.ScrollMinX = 0D;
-            this.zedGraphControl11.ScrollMinY = 0D;
-            this.zedGraphControl11.ScrollMinY2 = 0D;
-            this.zedGraphControl11.Size = new System.Drawing.Size(627, 343);
-            this.zedGraphControl11.TabIndex = 4;
+            this.AntiShiftButton_Poly.Location = new System.Drawing.Point(332, 19);
+            this.AntiShiftButton_Poly.Name = "AntiShiftButton_Poly";
+            this.AntiShiftButton_Poly.Size = new System.Drawing.Size(113, 23);
+            this.AntiShiftButton_Poly.TabIndex = 25;
+            this.AntiShiftButton_Poly.Text = "Обратный сдвиг";
+            this.AntiShiftButton_Poly.UseVisualStyleBackColor = true;
+            this.AntiShiftButton_Poly.Click += new System.EventHandler(this.AntiShiftButton_Poly_Click);
             // 
             // Form2
             // 
@@ -892,7 +940,7 @@
             this.ClientSize = new System.Drawing.Size(1264, 753);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Обработка";
             this.tabPage3.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -989,6 +1037,10 @@
         private System.Windows.Forms.TabControl tabControl1;
         private ZedGraph.ZedGraphControl zedGraphControl10;
         private ZedGraph.ZedGraphControl zedGraphControl11;
+        private System.Windows.Forms.Button AntiShiftButton_Rand;
+        private System.Windows.Forms.Button ShiftButton_Rand;
+        private System.Windows.Forms.Button AntiShiftButton_Poly;
+        private System.Windows.Forms.Button ShiftButton_Poly;
 
     }
 }

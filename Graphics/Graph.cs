@@ -14,12 +14,12 @@ namespace Graphics
 {
     public class Graph
     {
-        public int S;                // интервал значений по Y
-        public int N;                // интервал значений по X (количество точек)
-        public double[] points;      // заполняется в create_random_array()
-        public double[] stat;        // заполняется в calculate_statistics()
-        public double[] density;     // заполняется в calculate_density() 
-        public double[] stationarity;// заполняется в calculate_stability()
+        public int S;                 // интервал значений по Y
+        public int N;                 // интервал значений по X (количество точек)
+        public double[] points;       // заполняется в create_random_array()
+        public double[] stat;         // заполняется в calculate_statistics()
+        public double[] density;      // заполняется в calculate_density() 
+        public double[] stationarity; // заполняется в calculate_stability()
 
         public Graph(int S, int N)
         {
@@ -48,9 +48,9 @@ namespace Graphics
                     this.S = Convert.ToInt32(Math.Abs(this.points.Min())) + 1;
                 }
             }
-        }      // чтение из .dat-файла
+        } // чтение из .dat-файла
 
-        protected double[]        calculate_statistics()  // 7 статистических метрик
+        protected double[]        calculate_statistics() // 7 статистических метрик
         {
             int len = this.points.Length;
             double[] res = new double[7];
@@ -136,8 +136,7 @@ namespace Graphics
 
             return res;
         }
-
-        protected double[] calculate_density()     // плотность распределения
+        protected double[]        calculate_density()    // плотность распределения
         {
             double[] y_counts = new double[30];   // кол-во значений рандомайзера в интервалах
             int y_length = 2 * this.S + 1;  // длина области значений по Y
@@ -188,7 +187,7 @@ namespace Graphics
 
             return y_counts;
         }
-        protected double[] calculate_stability()   // стационарность 
+        protected double[]        calculate_stability()  // стационарность 
 
         {
             double[] stability = new double[7];    // Массив усредненных статистик интервалов
@@ -250,105 +249,56 @@ namespace Graphics
             }
 
             return stability;
-        }  
-
-        public void         calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
-        {
-            // для получения статистики по shift, но без спаек
-            shift(10);
-            this.stat = calculate_statistics();
-            unshift();
-
-            Random rand = new Random();
-            for (int i = 0; i != m; ++i)
-            {
-                int val = rand.Next(0, this.N);
-                this.points[val] = this.points[val] * 10 * (this.points.Max() - this.points.Min());
-            }
-            shift(10);
-        }
-        public static Graph calculate_spikes(Graph graph, int m) {
-            Graph spiked = new Graph(graph.S, graph.N);
-            spiked.points = new double[graph.N];
-            spiked.stat = calculate_statistics(shift(graph, 10));
-
-            for (int i = 0; i != graph.N; ++i)
-            {
-                spiked.points[i] = graph.points[i];
-            }
-
-            Random rand = new Random();
-            for (int i = 0; i != m; ++i) 
-            {
-                int val = rand.Next(0, graph.N);
-                spiked.points[val] = spiked.points[val] * 10 * (spiked.points.Max() - spiked.points.Min());
-            }
-            spiked.points = shift(spiked, 10);
-            return spiked;
         }
 
-        public void            delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
-        {
-            unshift();
-            for (int i = 0; i != this.N - 1; ++i)
-            {
-                if ((Math.Abs(this.points[i]) > this.S) && (Math.Abs(this.points[i + 1]) <= this.S))
-                {
-                    this.points[i] = (this.points[i - 1] + this.points[i + 1]) / 2; // удаляем спайки
-                }
-            }
-        }
-        public static double[] delete_spikes(Graph graph)
-        {
-            double[] unspiked = new double[graph.N];
-            double[] unshifted = unshift(graph);
-
-            for (int i = 0; i != graph.N - 1; ++i)
-            {
-                if ((Math.Abs(unshifted[i]) > graph.S) && (Math.Abs(unshifted[i + 1]) <= graph.S))
-                {
-                    unspiked[i] = (unshifted[i - 1] + unshifted[i + 1]) / 2; // удаляем спайки
-                    continue;
-                }
-                unspiked[i] = unshifted[i];
-            }
-            unspiked[graph.N - 1] = unshifted[graph.N - 1];
-            return unspiked;
-        }
-
-        private void              shift(int n)
+        public void shift(int n)
         {
             for (int i = 0; i != this.N; ++i)
             {
                 this.points[i] += (n * this.S);
             }
-        }
-        public static double[] shift(Graph graph, int n)
+            this.S += n * this.S;
+        } // сдвиг значений в n раз
+
+        public void         calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
         {
-            double[] shifted = new double[graph.N];
-            for (int i = 0; i != graph.N; ++i)
+            Random rand = new Random();
+            Random sgn_rand = new Random();
+            for (int i = 0; i != m; ++i)
             {
-                shifted[i] = graph.points[i] + (n * graph.S);
+                int val = rand.Next(0, this.N);
+                int sgn = sgn_rand.Next(-1, 2);
+                if (sgn < 0)
+                {
+                    this.points[val] = this.points[val] * -10 * (this.points.Max() - this.points.Min());
+                }
+                else
+                {
+                    this.points[val] = this.points[val] * 10 * (this.points.Max() - this.points.Min());
+                }
             }
-            return shifted;
         }
 
-        private void              unshift()
+        public void         delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
         {
+            for (int i = 1; i != this.N - 1; ++i)
+            {
+                if ((Math.Abs(this.points[i]) - Math.Abs(this.points[i - 1])) > this.S &&
+                    (Math.Abs(this.points[i]) - Math.Abs(this.points[i + 1])) > this.S)
+                {
+                    this.points[i] = (this.points[i - 1] + this.points[i + 1]) / 2; // удаляем спайки
+                }
+            }
+        }
+        public void         unshift()
+        {
+            double mean = calculate_statistics()[0];
             for (int i = 0; i != this.N; ++i)
             {
-                this.points[i] -= this.stat[0];
+                this.points[i] -= mean;
             }
-        }
-        public static double[] unshift(Graph graph)
-        {
-            double[] unshifted = new double[graph.N];
-            for (int i = 0; i != graph.N; ++i)
-            {
-                unshifted[i] = graph.points[i] - graph.stat[0];
-            }
-            return unshifted;
-        }
+            //this.S -= Convert.ToInt32(mean) + 1; // TODO сдвинуть S обратно
+        }    // обратный сдвиг значений
 
         public static PointPairList create_pair_list(double[] arr, int size)
         {
@@ -495,36 +445,20 @@ namespace Graphics
                 this.points[i] += trend.points[i];
             }
         }
-        public  void       delete_trend(int w)
-        { // TODO
-            /*double sum;
-            double[] slides = new double[(N - w) - w];
-            int i = 0;
-            for (int m = w; m != this.N - w; ++m)
-            {
-                sum = 0;
-                for (int k = 0; k != w; ++k)
-                {
-                    sum += this.points[k];
-                }
-                slides[i] = sum / w;
-                i++;
-            }
-            return slides;*/
-            double sum;
-            double[] slides = new double[this.N]; 
+        public void delete_trend(int w)
+        {
             for (int i = 0; i != this.N; ++i)
             {
-                sum = 0.0;
+                double tmp = 0;
                 for (int j = i - (w - 1) / 2; j != i + (w - 1) / 2; ++j)
                 {
-                    sum += this.points[j];
+                    if (j > 0 && j < this.N)
+                    {
+                        tmp += this.points[i];
+                    }
                 }
-                slides[i] = sum / w;
-            }
-            for (int i = 0; i != this.N; ++i)
-            {
-                this.points[i] = slides[i];
+                tmp /= w;
+                this.points[i] = tmp;
             }
         }
     }

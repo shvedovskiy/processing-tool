@@ -19,8 +19,6 @@ namespace Graphics
         private RandomGraph my;
         private PolyGraph notPoly;
         private PolyGraph poly;
-        private Graph spiked_my;
-        private Graph spiked_poly;
         private RandomGraph random_trend;
         
         public Form2()
@@ -30,8 +28,6 @@ namespace Graphics
             my           = new RandomGraph(this.S, this.N, true);
             notPoly      = new PolyGraph(this.S, this.N, false);
             poly         = new PolyGraph(this.S, this.N, true);
-            spiked_my    = new Graph(this.S, this.N);
-            spiked_poly  = new Graph(this.S, this.N);
             random_trend = new RandomGraph(this.S, this.N, false);
             DrawGraph(this.S, this.N);
         }
@@ -55,43 +51,78 @@ namespace Graphics
             DrawGraph(S, N);
         }
 
-        private void SpikesInput_Rand_Click(object sender, EventArgs e)
+        private void ShiftButton_Rand_Click(object sender, EventArgs e)
         {
-            this.spiked_my = Graph.calculate_spikes(my, 5);
+            my.shift(10);
             GraphPane pane = zedGraphControl1.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("Кастомный", Graph.create_pair_list(spiked_my.points, spiked_my.N), Color.Green, SymbolType.None);
-            pane.YAxis.Scale.Min = -this.my.S * 10;
-            pane.YAxis.Scale.Max = this.my.S * 50;
+            pane.AddCurve("Кастомный", Graph.create_pair_list(my.points, my.N), Color.Green, SymbolType.None);
+            pane.YAxis.Scale.Max = my.S * 2;
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+        }
+        private void SpikesInput_Rand_Click(object sender, EventArgs e)
+        {
+            my.calculate_spikes(5);
+            GraphPane pane = zedGraphControl1.GraphPane;
+            pane.CurveList.Clear();
+            pane.AddCurve("Кастомный", Graph.create_pair_list(my.points, my.N), Color.Green, SymbolType.None);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
         private void SpikesDelete_Rand_Click(object sender, EventArgs e)
         {
-            double[] unspiked_points = Graph.delete_spikes(this.spiked_my);
+            my.delete_spikes();
             GraphPane pane = zedGraphControl1.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("Кастомный", Graph.create_pair_list(unspiked_points, spiked_my.N), Color.Green, SymbolType.None);
+            pane.AddCurve("Кастомный", Graph.create_pair_list(my.points, my.N), Color.Green, SymbolType.None);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
         }
-        private void SpikesInput_Poly_Click(object sender, EventArgs e)
+        private void AntiShiftButton_Rand_Click(object sender, EventArgs e)
         {
-            spiked_poly = Graph.calculate_spikes(poly, 5);
+            my.unshift();
+            GraphPane pane = zedGraphControl1.GraphPane;
+            pane.CurveList.Clear();
+            pane.AddCurve("Кастомный", Graph.create_pair_list(my.points, my.N), Color.Green, SymbolType.None);
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+        }
+
+        private void ShiftButton_Poly_Click(object sender, EventArgs e)
+        {
+            poly.shift(10);
             GraphPane pane = zedGraphControl6.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("", Graph.create_pair_list(spiked_poly.points, spiked_poly.N), Color.Blue, SymbolType.None);
-            pane.YAxis.Scale.Min = -this.S * 10;
-            pane.YAxis.Scale.Max = this.S * 50;
+            pane.AddCurve("Кастомный", Graph.create_pair_list(poly.points, poly.N), Color.Blue, SymbolType.None);
+            pane.YAxis.Scale.Max = poly.S * 2;
+            zedGraphControl6.AxisChange();
+            zedGraphControl6.Invalidate();
+        }
+        private void SpikesInput_Poly_Click(object sender, EventArgs e)
+        {
+            poly.calculate_spikes(5);
+            GraphPane pane = zedGraphControl6.GraphPane;
+            pane.CurveList.Clear();
+            pane.AddCurve("", Graph.create_pair_list(poly.points, poly.N), Color.Blue, SymbolType.None);
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
         private void SpikesDelete_Poly_Click(object sender, EventArgs e)
         {
-            double[] unspiked_points = Graph.delete_spikes(spiked_poly);
+            poly.delete_spikes();
             GraphPane pane = zedGraphControl6.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("", Graph.create_pair_list(unspiked_points, spiked_poly.N), Color.Blue, SymbolType.None);
+            pane.AddCurve("", Graph.create_pair_list(poly.points, poly.N), Color.Blue, SymbolType.None);
+            zedGraphControl6.AxisChange();
+            zedGraphControl6.Invalidate();
+        }
+        private void AntiShiftButton_Poly_Click(object sender, EventArgs e)
+        {
+            poly.unshift();
+            GraphPane pane = zedGraphControl6.GraphPane;
+            pane.CurveList.Clear();
+            pane.AddCurve("Кастомный", Graph.create_pair_list(poly.points, poly.N), Color.Blue, SymbolType.None);
             zedGraphControl6.AxisChange();
             zedGraphControl6.Invalidate();
         }
@@ -99,12 +130,11 @@ namespace Graphics
         private void AddTrendButton_Click(object sender, EventArgs e)
         {
             random_trend.add_trend();
-            //Graph spiked = Graph.calculate_spikes(random_trend, 5);
-            double[] shifted = Graph.shift(random_trend, 10);
+            random_trend.shift(10);
+            //random_trend.calculate_spikes(5);
             GraphPane pane = zedGraphControl9.GraphPane;
             pane.CurveList.Clear();
-            pane.AddCurve("Кастомный", Graph.create_pair_list(shifted, this.random_trend.N), Color.Green, SymbolType.None);
-            //pane.AddCurve("Кастомный", Graph.create_pair_list(spiked.points, this.random_trend.N), Color.Green, SymbolType.None);
+            pane.AddCurve("Кастомный", Graph.create_pair_list(random_trend.points, this.random_trend.N), Color.Green, SymbolType.None);
             pane.YAxis.Scale.Min = -this.my.S * 10;
             pane.YAxis.Scale.Max = this.my.S * 50;
             zedGraphControl9.AxisChange();
