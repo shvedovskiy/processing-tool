@@ -39,11 +39,11 @@ namespace Graphics
 
                 while (pos != len)
                 {
-                    this.points[pos] = b.ReadInt32();
+                    this.points[pos] = Convert.ToDouble(b.ReadInt32());
                     pos += sizeof(int);
                 }
-                if (this.points.Max() > Math.Abs(this.points.Min())) {
-                    this.S = Convert.ToInt32(this.points.Max()) + 1;
+                if (Math.Abs(this.points.Max()) > Math.Abs(this.points.Min())) {
+                    this.S = Convert.ToInt32(Math.Abs(this.points.Max())) + 1;
                 } else {
                     this.S = Convert.ToInt32(Math.Abs(this.points.Min())) + 1;
                 }
@@ -503,6 +503,7 @@ namespace Graphics
             this.density = this.calculate_density();
             this.stationarity = this.calculate_stability();
         }
+        public PolyGraph(String filename) : base(filename) {  }
         private double[]   create_points()
         {
             double[] points = new double[this.N];
@@ -567,7 +568,7 @@ namespace Graphics
 
             return res;
         }
-        private double     _f(double k, double A_0, double f_0)
+        private double     _f(double k, double A_0, double f_0) // A_0 -- амплитуда, f_0 -- частота
         {
             double delta_t = 0.001;
             return A_0 * Math.Sin(2 * Math.PI * f_0 * k * delta_t);
@@ -576,7 +577,7 @@ namespace Graphics
         {
             return _f(k, 100, 51) + _f(k, 15, 5) + _f(k, 20, 250);
         }
-        public double[] add_randoms(int n)
+        public double[]    add_randoms(int n)
         {
             double[] summary = new double[this.N];
             double[] harmonics = this.points;
@@ -601,6 +602,34 @@ namespace Graphics
                 summary[i] = (harmonics[i] + randoms[i]) / n;
             }
             return summary;
-        }
+        } // добавление шума на полигармонический процесс
+        public double[] spectrum() 
+        {
+            double[] spectre = new double[this.N];
+            double[] spectre_Re = new double[this.N];
+            double[] spectre_Im = new double[this.N];
+
+            double sum_Re, sum_Im;
+            for (int k = 0; k != this.N; ++k)
+            {
+                sum_Re = 0.0;
+                sum_Im = 0.0;
+
+                for (int i = 0; i != this.N; ++i)
+                {
+                    sum_Re += this.points[i] * Math.Cos((2 * Math.PI * k * i) / this.N);
+                    sum_Im += this.points[i] * Math.Sin((2 * Math.PI * k * i) / this.N);
+                }
+                spectre_Re[k] = sum_Re / this.N;
+                spectre_Im[k] = sum_Im / this.N;
+            }
+
+            for (int k = 0; k != this.N; ++k)
+            {
+                spectre[k] = Math.Sqrt(Math.Pow(spectre_Re[k], 2) + Math.Pow(spectre_Im[k], 2));
+            }
+
+            return spectre;
+        }  // спектр Фурье гармоничекого процесса
     }
 }

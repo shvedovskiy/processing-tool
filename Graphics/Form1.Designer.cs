@@ -40,6 +40,7 @@
             this.zedGraphControl5 = new ZedGraph.ZedGraphControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -169,6 +170,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.zedGraphControl7);
             this.tabPage3.Controls.Add(this.zedGraphControl6);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -189,8 +191,22 @@
             this.zedGraphControl6.ScrollMinX = 0D;
             this.zedGraphControl6.ScrollMinY = 0D;
             this.zedGraphControl6.ScrollMinY2 = 0D;
-            this.zedGraphControl6.Size = new System.Drawing.Size(693, 417);
+            this.zedGraphControl6.Size = new System.Drawing.Size(389, 417);
             this.zedGraphControl6.TabIndex = 0;
+            // 
+            // zedGraphControl7
+            // 
+            this.zedGraphControl7.Location = new System.Drawing.Point(391, 0);
+            this.zedGraphControl7.Name = "zedGraphControl7";
+            this.zedGraphControl7.ScrollGrace = 0D;
+            this.zedGraphControl7.ScrollMaxX = 0D;
+            this.zedGraphControl7.ScrollMaxY = 0D;
+            this.zedGraphControl7.ScrollMaxY2 = 0D;
+            this.zedGraphControl7.ScrollMinX = 0D;
+            this.zedGraphControl7.ScrollMinY = 0D;
+            this.zedGraphControl7.ScrollMinY2 = 0D;
+            this.zedGraphControl7.Size = new System.Drawing.Size(294, 413);
+            this.zedGraphControl7.TabIndex = 1;
             // 
             // Form1
             // 
@@ -222,6 +238,7 @@
         private ZedGraph.ZedGraphControl zedGraphControl5;
         private System.Windows.Forms.TabPage tabPage3;
         private ZedGraph.ZedGraphControl zedGraphControl6;
+        private ZedGraph.ZedGraphControl zedGraphControl7;
 
     }
 }
