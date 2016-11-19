@@ -657,12 +657,27 @@ namespace Graphics
         }
         public double[] convolution(int alpha, int M)
         {
-            double[] res = new double[this.N];
-            for (int i = 0; i != this.N; ++i)
+            double[] h = new double[M];
+            double[] y = new double[this.N];
+            double delta_t = 0.005;
+            double a_0 = 1.0;
+
+            double sum;
+
+            for (int k = 0; k != this.N; ++k)
             {
-                res[i] = Math.Pow(Math.E, (-alpha * i)) * 1 * Math.Sin(2 * Math.PI * 14 * i) + this.points[i];
+                sum = 0.0;
+                for (int j = 0; j != M; ++j)
+                {
+                    h[j] = Math.Pow(Math.E, (-alpha * delta_t * j)) * a_0 * Math.Sin(2 * Math.PI * 14 * delta_t * j) + this.points[k];
+                }
+                for (int j = 0; j != M; ++j)
+                {
+                    sum += (this.points[k - j] + 1) * h[j];
+                }
+                y[k] = sum;
             }
-            return res;
-        }
+            return y;
+        } // TODO index
     }
 }
