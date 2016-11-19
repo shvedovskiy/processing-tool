@@ -16,11 +16,11 @@ namespace Graphics
         private int S = 100;
         private int N = 1000;
 
-        private RandomGraph standart;
-        private RandomGraph my;
-        private PolyGraph   notPoly;
-        private PolyGraph   poly;
-        private RandomGraph random_trend;
+        private RandomGraph     standart;
+        private RandomGraph     my;
+        private PolyGraph       notPoly;
+        private PolyGraph       poly;
+        private RandomGraph     random_trend;
         private JustSpikesGraph pulse;
         
         public Form2()
@@ -31,6 +31,7 @@ namespace Graphics
             notPoly      = new PolyGraph(S, N, false);
             poly         = new PolyGraph(S, N, true);
             random_trend = new RandomGraph(S, N, false);
+            pulse        = new JustSpikesGraph(S, N, 3);
 
             DrawGraph_Random(S, N);
             DrawGraph_Poly(S, N);
@@ -303,6 +304,7 @@ namespace Graphics
             GraphPane pane = zedGraphControl9.GraphPane;
             GraphPane pane_2 = zedGraphControl10.GraphPane;
             GraphPane pane_3 = zedGraphControl11.GraphPane;
+            GraphPane pane_4 = zedGraphControl14.GraphPane;
 
             pane.Title.Text = "Добавление тренда, удаление шума";
             pane_2.Title.Text = "Сумма реализаций (10)";
@@ -311,20 +313,24 @@ namespace Graphics
             pane.CurveList.Clear();
             pane_2.CurveList.Clear();
             pane_3.CurveList.Clear();
+            pane_4.CurveList.Clear();
 
-            pane.XAxis.Scale.Max = N;
+            pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = pane_3.XAxis.Scale.Max = pane_4.XAxis.Scale.Max = N;
             
-            pane.AddCurve("", Graph.create_pair_list(this.standart.points, this.standart.N), Color.Blue, SymbolType.None);
-            pane_2.AddCurve("", Graph.create_pair_list(this.notPoly.add_randoms(1), this.notPoly.N), Color.Blue, SymbolType.None);
-            pane_3.AddCurve("", Graph.create_pair_list(this.notPoly.add_randoms(100), this.notPoly.N), Color.Blue, SymbolType.None);
+            pane.AddCurve("", Graph.create_pair_list(standart.points, standart.N), Color.Blue, SymbolType.None);
+            pane_2.AddCurve("", Graph.create_pair_list(notPoly.add_randoms(1), notPoly.N), Color.Blue, SymbolType.None);
+            pane_3.AddCurve("", Graph.create_pair_list(notPoly.add_randoms(100), notPoly.N), Color.Blue, SymbolType.None);
+            pane_4.AddCurve("", Graph.create_pair_list(pulse.convolution(40, 200), pulse.N), Color.Blue, SymbolType.None);
 
             zedGraphControl9.AxisChange();
             zedGraphControl10.AxisChange();
             zedGraphControl11.AxisChange();
+            zedGraphControl14.AxisChange();
 
-            zedGraphControl9.AxisChange();
-            zedGraphControl10.AxisChange();
-            zedGraphControl11.AxisChange();
+            zedGraphControl9.Invalidate();
+            zedGraphControl10.Invalidate();
+            zedGraphControl11.Invalidate();
+            zedGraphControl14.Invalidate();
         }
     } 
 }

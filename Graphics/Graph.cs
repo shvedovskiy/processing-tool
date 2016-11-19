@@ -639,18 +639,30 @@ namespace Graphics
         public JustSpikesGraph(int S, int N, int m) : base(S, N)
         {
             this.points = new double[this.N];
-            calculate_spikes(m);
-            
+            for (int i = 0; i != this.N; ++i)
+            {
+                this.points[i] = 0.0;
+            }
+            add_spikes(m);
         }
-        public void calculate_spikes(int m)
+        public void     add_spikes(int m)
         {
             Random rand = new Random();
-            Random sgn_rand = new Random();
+
             for (int i = 0; i != m; ++i)
             {
                 int val = rand.Next(0, this.N);
-                this.points[val] = (this.points[val] + 1) * 50;
+                this.points[val] = (this.points[val] + 1) * 10;
             }
+        }
+        public double[] convolution(int alpha, int M)
+        {
+            double[] res = new double[this.N];
+            for (int i = 0; i != this.N; ++i)
+            {
+                res[i] = Math.Pow(Math.E, (-alpha * i)) * 1 * Math.Sin(2 * Math.PI * 14 * i) + this.points[i];
+            }
+            return res;
         }
     }
 }
