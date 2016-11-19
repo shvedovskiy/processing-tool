@@ -21,6 +21,7 @@ namespace Graphics
         private PolyGraph   notPoly;
         private PolyGraph   poly;
         private RandomGraph random_trend;
+        private JustSpikesGraph pulse;
         
         public Form2()
         {
@@ -88,8 +89,6 @@ namespace Graphics
         private void DrawGraph_Random(int S, int N)
         {
             //double[][] my_more_stat = this.my.calculate_more_statistics();
-
-            // Отображение статистики:
             avgtextbox.Text        = Convert.ToString(standart.stat[0]);
             squaredavgtextbox.Text = Convert.ToString(standart.stat[1]);
             epstextbox.Text        = Convert.ToString(standart.stat[2]);
@@ -122,7 +121,6 @@ namespace Graphics
             s_asymtextbox_own.Text       = Convert.ToString(my.stationarity[5]);
             s_exctextbox_own.Text        = Convert.ToString(my.stationarity[6]);
 
-            // Отображение графиков:
             GraphPane pane   = zedGraphControl1.GraphPane;
             GraphPane pane_2 = zedGraphControl2.GraphPane;
             GraphPane pane_3 = zedGraphControl3.GraphPane;
@@ -228,6 +226,7 @@ namespace Graphics
             GraphPane pane_3 = zedGraphControl7.GraphPane;
             GraphPane pane_4 = zedGraphControl8.GraphPane;
             GraphPane pane_5 = zedGraphControl12.GraphPane;
+            GraphPane pane_6 = zedGraphControl13.GraphPane;
 
             pane.XAxis.Title.Text = pane_2.XAxis.Title.Text = pane_3.XAxis.Title.Text = pane_4.XAxis.Title.Text = pane_5.XAxis.Title.Text = "Ось X";
             pane.YAxis.Title.Text = pane_2.YAxis.Title.Text = pane_4.YAxis.Title.Text = pane_4.YAxis.Title.Text = pane_5.YAxis.Title.Text = "Ось Y";
@@ -237,12 +236,14 @@ namespace Graphics
             pane_3.Title.Text = "Плотность полигармонического процесса";
             pane_4.Title.Text = "Авторреляция полигармонического процесса";
             pane_5.Title.Text = "Спектр Фурье гармонического процесса";
+            pane_6.Title.Text = "Спектры Фурье полигармонического процесса";
 
             pane.CurveList.Clear();
             pane_2.CurveList.Clear();
             pane_3.CurveList.Clear();
             pane_4.CurveList.Clear();
             pane_5.CurveList.Clear();
+            pane_6.CurveList.Clear();
 
             pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = pane_4.XAxis.Scale.Max = N;
             pane_3.XAxis.Scale.Max = 30;
@@ -255,17 +256,24 @@ namespace Graphics
             pane_4.AddCurve("", Graph.create_pair_list(poly.calculate_more_statistics()[0], poly.N), Color.Blue, SymbolType.None);
             pane_5.AddCurve("", Graph.create_pair_list(notPoly.spectrum(), notPoly.N / 2), Color.Blue, SymbolType.None);
 
+            poly.calculate_spikes(5);
+            pane_6.AddCurve("Со спайками", Graph.create_pair_list(poly.spectrum(), poly.N / 2), Color.Red, SymbolType.None);
+            poly.delete_spikes();
+            pane_6.AddCurve("Без спаек", Graph.create_pair_list(poly.spectrum(), poly.N / 2), Color.Green, SymbolType.None);
+
             zedGraphControl5.AxisChange();
             zedGraphControl6.AxisChange();
             zedGraphControl7.AxisChange();
             zedGraphControl8.AxisChange();
             zedGraphControl12.AxisChange();
+            zedGraphControl13.AxisChange();
 
             zedGraphControl5.Invalidate();
             zedGraphControl6.Invalidate();
             zedGraphControl7.Invalidate();
             zedGraphControl8.Invalidate();
             zedGraphControl12.Invalidate();
+            zedGraphControl13.Invalidate();
         }
 
         private void AddTrendButton_Click(object sender, EventArgs e)

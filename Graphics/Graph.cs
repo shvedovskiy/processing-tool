@@ -258,9 +258,8 @@ namespace Graphics
                 this.points[i] += (n * this.S);
             }
             this.S += n * this.S;
-        } // сдвиг значений в n раз
-
-        public void         calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
+        }         // сдвиг значений в n раз
+        public void calculate_spikes(int m) // неправдоподобные значения, m -- их кол-во
         {
             Random rand = new Random();
             Random sgn_rand = new Random();
@@ -278,8 +277,7 @@ namespace Graphics
                 }
             }
         }
-
-        public void         delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
+        public void delete_spikes()         // удаление неправдоподобных значений (несамостоятельная, только после calculate_spikes())
         {
             for (int i = 1; i != this.N - 1; ++i)
             {
@@ -290,7 +288,7 @@ namespace Graphics
                 }
             }
         }
-        public void         unshift()
+        public void unshift()
         {
             double mean = calculate_statistics()[0];
             for (int i = 0; i != this.N; ++i)
@@ -298,7 +296,7 @@ namespace Graphics
                 this.points[i] -= mean;
             }
             //this.S -= Convert.ToInt32(mean) + 1; // TODO сдвинуть S обратно
-        }    // обратный сдвиг значений
+        }            // обратный сдвиг значений
 
         public static PointPairList create_pair_list(double[] arr, int size)
         {
@@ -504,6 +502,7 @@ namespace Graphics
             this.stationarity = this.calculate_stability();
         }
         public PolyGraph(String filename) : base(filename) {  }
+
         private double[]   create_points()
         {
             double[] points = new double[this.N];
@@ -568,6 +567,7 @@ namespace Graphics
 
             return res;
         }
+
         private double     _f(double k, double A_0, double f_0) // A_0 -- амплитуда, f_0 -- частота
         {
             double delta_t = 0.001;
@@ -577,7 +577,8 @@ namespace Graphics
         {
             return _f(k, 100, 51) + _f(k, 15, 5) + _f(k, 20, 250);
         }
-        public double[]    add_randoms(int n)
+
+        public  double[]   add_randoms(int n)
         {
             double[] summary = new double[this.N];
             double[] harmonics = this.points;
@@ -603,7 +604,7 @@ namespace Graphics
             }
             return summary;
         } // добавление шума на полигармонический процесс
-        public double[] spectrum() 
+        public  double[]   spectrum()            // вычисление спектров Фурье
         {
             double[] spectre = new double[this.N];
             double[] spectre_Re = new double[this.N];
@@ -631,5 +632,25 @@ namespace Graphics
 
             return spectre;
         }  // спектр Фурье гармоничекого процесса
+    }
+
+    public class JustSpikesGraph : Graph
+    {
+        public JustSpikesGraph(int S, int N, int m) : base(S, N)
+        {
+            this.points = new double[this.N];
+            calculate_spikes(m);
+            
+        }
+        public void calculate_spikes(int m)
+        {
+            Random rand = new Random();
+            Random sgn_rand = new Random();
+            for (int i = 0; i != m; ++i)
+            {
+                int val = rand.Next(0, this.N);
+                this.points[val] = (this.points[val] + 1) * 50;
+            }
+        }
     }
 }
