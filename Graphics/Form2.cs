@@ -246,7 +246,7 @@ namespace Graphics
             pane_5.CurveList.Clear();
             pane_6.CurveList.Clear();
 
-            pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = pane_4.XAxis.Scale.Max = N;
+            pane.XAxis.Scale.Max   = pane_2.XAxis.Scale.Max = pane_4.XAxis.Scale.Max = N;
             pane_3.XAxis.Scale.Max = 30;
             pane_2.YAxis.Scale.Min = -200;
             pane_2.YAxis.Scale.Max = 200;
@@ -255,12 +255,12 @@ namespace Graphics
             pane_2.AddCurve("", Graph.create_pair_list(poly.points, poly.N), Color.Blue, SymbolType.None);
             pane_3.AddCurve("", Graph.create_pair_list(poly.density, 30), Color.Blue, SymbolType.None);
             pane_4.AddCurve("", Graph.create_pair_list(poly.calculate_more_statistics()[0], poly.N), Color.Blue, SymbolType.None);
-            pane_5.AddCurve("", Graph.create_pair_list(notPoly.spectrum(), notPoly.N / 2), Color.Blue, SymbolType.None);
+            pane_5.AddCurve("", Graph.create_pair_list(notPoly.spectrum(notPoly.points), notPoly.N / 2), Color.Blue, SymbolType.None);
 
-            poly.calculate_spikes(5);
-            pane_6.AddCurve("Со спайками", Graph.create_pair_list(poly.spectrum(), poly.N / 2), Color.Red, SymbolType.None);
-            poly.delete_spikes();
-            pane_6.AddCurve("Без спаек", Graph.create_pair_list(poly.spectrum(), poly.N / 2), Color.Green, SymbolType.None);
+            //poly.calculate_spikes(5);
+            //pane_6.AddCurve("Со спайками", Graph.create_pair_list(poly.spectrum(), poly.N / 2), Color.Red, SymbolType.None);
+            //poly.delete_spikes();
+            pane_6.AddCurve("", Graph.create_pair_list(poly.spectrum(poly.points), poly.N / 2), Color.Green, SymbolType.None);
 
             zedGraphControl5.AxisChange();
             zedGraphControl6.AxisChange();
@@ -301,36 +301,90 @@ namespace Graphics
         }
         private void DrawGraph_Trends(int S, int N)
         {
-            GraphPane pane = zedGraphControl9.GraphPane;
+            GraphPane pane   = zedGraphControl9.GraphPane;
             GraphPane pane_2 = zedGraphControl10.GraphPane;
             GraphPane pane_3 = zedGraphControl11.GraphPane;
             GraphPane pane_4 = zedGraphControl14.GraphPane;
+            GraphPane pane_5 = zedGraphControl15.GraphPane;
+            GraphPane pane_6 = zedGraphControl16.GraphPane;
+            GraphPane pane_7 = zedGraphControl17.GraphPane;
+            GraphPane pane_8 = zedGraphControl18.GraphPane;
+            GraphPane pane_9 = zedGraphControl19.GraphPane;
+            GraphPane pane_10 = zedGraphControl20.GraphPane;
 
-            pane.Title.Text = "Добавление тренда, удаление шума";
-            pane_2.Title.Text = "Сумма реализаций (10)";
-            pane_3.Title.Text = "Сумма реализаций (100)";
+            pane.Title.Text   = "Добавление тренда, удаление шума";
+            pane_2.Title.Text = "Сумма реализаций (100)";
+            pane_3.Title.Text = "Фильтр высоких частот";
+            pane_4.Title.Text = "Спектр после применения ФВЧ";
+            pane_5.Title.Text = "Фильтр низких частот";
+            pane_6.Title.Text = "Спектр после применения ФНЧ";
+            pane_7.Title.Text = "Полосовой фильтр";
+            pane_8.Title.Text = "Спектр после применения ПФ";
+            pane_9.Title.Text = "Режекторный фильтр";
+            pane_10.Title.Text = "Спектр после применения РФ";
 
             pane.CurveList.Clear();
             pane_2.CurveList.Clear();
             pane_3.CurveList.Clear();
             pane_4.CurveList.Clear();
+            pane_5.CurveList.Clear();
+            pane_6.CurveList.Clear();
+            pane_7.CurveList.Clear();
+            pane_8.CurveList.Clear();
+            pane_9.CurveList.Clear();
+            pane_10.CurveList.Clear();
 
-            pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = pane_3.XAxis.Scale.Max = pane_4.XAxis.Scale.Max = N;
+            pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = N;
             
             pane.AddCurve("", Graph.create_pair_list(standart.points, standart.N), Color.Blue, SymbolType.None);
-            pane_2.AddCurve("", Graph.create_pair_list(notPoly.add_randoms(1), notPoly.N), Color.Blue, SymbolType.None);
-            pane_3.AddCurve("", Graph.create_pair_list(notPoly.add_randoms(100), notPoly.N), Color.Blue, SymbolType.None);
-            pane_4.AddCurve("", Graph.create_pair_list(pulse.convolution(40, 200), pulse.N), Color.Blue, SymbolType.None);
+            pane_2.AddCurve("", Graph.create_pair_list(notPoly.add_randoms(100), notPoly.N), Color.Blue, SymbolType.None);
+
+            //double[] conv = pulse.convolution(40, 200);
+            //pane_4.XAxis.Scale.Max = conv.Length;
+            //pane_4.AddCurve("", Graph.create_pair_list(conv, conv.Length), Color.Blue, SymbolType.None);
+
+            double[] lpw = poly.lowPassFilter(50, 32, 0.001);
+            double[] lpfw = poly.convolution(lpw);
+            pane_3.AddCurve("", Graph.create_pair_list(lpfw, lpfw.Length), Color.Blue, SymbolType.None);
+            pane_4.AddCurve("", Graph.create_pair_list(poly.spectrum(lpfw), lpfw.Length / 2), Color.Blue, SymbolType.None);
+
+            double[] hpw = poly.highPassFilter(30, 32, 0.001);
+            double[] hpfw = poly.convolution(hpw);
+            pane_5.AddCurve("", Graph.create_pair_list(hpfw, hpfw.Length), Color.Blue, SymbolType.None);
+            pane_6.AddCurve("", Graph.create_pair_list(poly.spectrum(hpfw), hpfw.Length / 2), Color.Blue, SymbolType.None);
+
+
+            double[] bpw = poly.bentPassFilter(30, 150, 32, 0.001);
+            double[] bpfw = poly.convolution(bpw);
+            pane_7.AddCurve("", Graph.create_pair_list(bpfw, bpfw.Length), Color.Blue, SymbolType.None);
+            pane_8.AddCurve("", Graph.create_pair_list(poly.spectrum(bpfw), bpfw.Length / 2), Color.Blue, SymbolType.None);
+
+            double[] bspw = poly.bentStopFilter(15, 250, 32, 0.001);
+            double[] bspfw = poly.convolution(bspw);
+            pane_9.AddCurve("", Graph.create_pair_list(bspfw, bspfw.Length), Color.Blue, SymbolType.None);
+            pane_10.AddCurve("", Graph.create_pair_list(poly.spectrum(bspfw), bspfw.Length / 2), Color.Blue, SymbolType.None);
 
             zedGraphControl9.AxisChange();
             zedGraphControl10.AxisChange();
             zedGraphControl11.AxisChange();
             zedGraphControl14.AxisChange();
+            zedGraphControl15.AxisChange();
+            zedGraphControl16.AxisChange();
+            zedGraphControl17.AxisChange();
+            zedGraphControl18.AxisChange();
+            zedGraphControl19.AxisChange();
+            zedGraphControl20.AxisChange();
 
             zedGraphControl9.Invalidate();
             zedGraphControl10.Invalidate();
             zedGraphControl11.Invalidate();
             zedGraphControl14.Invalidate();
+            zedGraphControl15.Invalidate();
+            zedGraphControl16.Invalidate();
+            zedGraphControl17.Invalidate();
+            zedGraphControl18.Invalidate();
+            zedGraphControl19.Invalidate();
+            zedGraphControl20.Invalidate();
         }
     } 
 }

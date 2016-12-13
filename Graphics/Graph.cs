@@ -28,7 +28,7 @@ namespace Graphics
         }
         public Graph(String filename)
         {
-            Directory.GetFiles(@"C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\bin\Release"); 
+            Directory.GetFiles(@"C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\bin\Release");
 
             using (BinaryReader b = new BinaryReader(File.Open(filename, FileMode.Open)))
             {
@@ -42,15 +42,18 @@ namespace Graphics
                     this.points[pos] = Convert.ToDouble(b.ReadInt32());
                     pos += sizeof(int);
                 }
-                if (Math.Abs(this.points.Max()) > Math.Abs(this.points.Min())) {
+                if (Math.Abs(this.points.Max()) > Math.Abs(this.points.Min()))
+                {
                     this.S = Convert.ToInt32(Math.Abs(this.points.Max())) + 1;
-                } else {
+                }
+                else
+                {
                     this.S = Convert.ToInt32(Math.Abs(this.points.Min())) + 1;
                 }
             }
         } // чтение из .dat-файла
 
-        protected double[]        calculate_statistics() // 7 статистических метрик
+        protected double[] calculate_statistics() // 7 статистических метрик
         {
             int len = this.points.Length;
             double[] res = new double[7];
@@ -136,7 +139,7 @@ namespace Graphics
 
             return res;
         }
-        protected double[]        calculate_density()    // плотность распределения
+        protected double[] calculate_density()    // плотность распределения
         {
             double[] y_counts = new double[30];   // кол-во значений рандомайзера в интервалах
             int y_length = 2 * this.S + 1;  // длина области значений по Y
@@ -187,8 +190,7 @@ namespace Graphics
 
             return y_counts;
         }
-        protected double[]        calculate_stability()  // стационарность 
-
+        protected double[] calculate_stability()  // стационарность 
         {
             double[] stability = new double[7];    // Массив усредненных статистик интервалов
             double[][] substats = new double[50][]; // Массив статистик по интервалам
@@ -310,7 +312,7 @@ namespace Graphics
         public static PointPairList create_pair_list(String filename)
         {
             PointPairList list = new PointPairList();
-            Directory.GetFiles(@"C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\bin\Release"); 
+            Directory.GetFiles(@"C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\bin\Release");
 
             using (BinaryReader b = new BinaryReader(File.Open(filename, FileMode.Open)))
             {
@@ -356,7 +358,8 @@ namespace Graphics
 
         private bool isOwn; // флаг определения вида рандомайзера
 
-        public RandomGraph(int S, int N, bool isOwn) : base(S, N)
+        public RandomGraph(int S, int N, bool isOwn)
+            : base(S, N)
         {
             this.isOwn = isOwn;
             this.points = create_points();
@@ -364,7 +367,7 @@ namespace Graphics
             this.density = calculate_density();
             this.stationarity = calculate_stability();
         }
-        private double[]   create_points()
+        private double[] create_points()
         {
             double[] points = new double[this.N];
             double[] rand_arr = new double[this.N];
@@ -391,7 +394,7 @@ namespace Graphics
 
             return points;
         }
-        public  double[][] calculate_more_statistics() // aka static; автокорреляция, взаимная корреляция 
+        public double[][] calculate_more_statistics() // aka static; автокорреляция, взаимная корреляция 
         {
             double[][] res = new double[3][];
             res[0] = new double[this.N];
@@ -435,7 +438,7 @@ namespace Graphics
 
             return res;
         }
-        public  void       add_trend()
+        public void add_trend()
         {
             TrendGraph trend = new TrendGraph(this.S, this.N);
             for (int i = 0; i != this.N; ++i)
@@ -463,11 +466,13 @@ namespace Graphics
 
     public class TrendGraph : Graph
     {
-        public TrendGraph(int S, int N) : base(S, N)
+        public TrendGraph(int S, int N)
+            : base(S, N)
         {
             this.points = create_points();
         }
-        private double[] create_points() {
+        private double[] create_points()
+        {
             double[] points = new double[this.N];
             for (int i = 0; i != 250; ++i)
             {
@@ -493,7 +498,8 @@ namespace Graphics
     {
         private bool isPoly; // флаг определения полигармонического процесса
 
-        public PolyGraph(int S, int N, bool isPoly) : base(S, N)
+        public PolyGraph(int S, int N, bool isPoly)
+            : base(S, N)
         {
             this.isPoly = isPoly;
             this.points = create_points();
@@ -501,9 +507,9 @@ namespace Graphics
             this.density = this.calculate_density();
             this.stationarity = this.calculate_stability();
         }
-        public PolyGraph(String filename) : base(filename) {  }
+        public PolyGraph(String filename) : base(filename) { }
 
-        private double[]   create_points()
+        private double[] create_points()
         {
             double[] points = new double[this.N];
 
@@ -523,7 +529,7 @@ namespace Graphics
             }
             return points;
         }
-        public  double[][] calculate_more_statistics() // aka static; автокорреляция, взаимная корреляция 
+        public double[][] calculate_more_statistics() // aka static; автокорреляция, взаимная корреляция 
         {
             double[][] res = new double[3][];
             res[0] = new double[this.N];
@@ -568,24 +574,24 @@ namespace Graphics
             return res;
         }
 
-        private double     _f(double k, double A_0, double f_0) // A_0 -- амплитуда, f_0 -- частота
+        private double _f(double k, double A_0, double f_0) // A_0 -- амплитуда, f_0 -- частота
         {
             double delta_t = 0.001;
             return A_0 * Math.Sin(2 * Math.PI * f_0 * k * delta_t);
         }
-        private double     f(double k)
+        private double f(double k)
         {
-            return _f(k, 100, 51) + _f(k, 15, 5) + _f(k, 20, 250);
+            return _f(k, 100, 150) + _f(k, 15, 10) + _f(k, 20, 300);
         }
 
-        public  double[]   add_randoms(int n)
+        public double[] add_randoms(int n)
         {
             double[] summary = new double[this.N];
             double[] harmonics = this.points;
 
             RandomGraph rand = new RandomGraph(this.S, this.N, false);
             double[] randoms = rand.points;
-            
+
             int cnt = 0;
             while (cnt != n)
             {
@@ -604,7 +610,7 @@ namespace Graphics
             }
             return summary;
         } // добавление шума на полигармонический процесс
-        public  double[]   spectrum()            // вычисление спектров Фурье
+        public double[] spectrum(double[] points) // вычисление спектров Фурье
         {
             double[] spectre = new double[this.N];
             double[] spectre_Re = new double[this.N];
@@ -618,8 +624,8 @@ namespace Graphics
 
                 for (int i = 0; i != this.N; ++i)
                 {
-                    sum_Re += this.points[i] * Math.Cos((2 * Math.PI * k * i) / this.N);
-                    sum_Im += this.points[i] * Math.Sin((2 * Math.PI * k * i) / this.N);
+                    sum_Re += points[i] * Math.Cos((2 * Math.PI * k * i) / this.N);
+                    sum_Im += points[i] * Math.Sin((2 * Math.PI * k * i) / this.N);
                 }
                 spectre_Re[k] = sum_Re / this.N;
                 spectre_Im[k] = sum_Im / this.N;
@@ -631,12 +637,135 @@ namespace Graphics
             }
 
             return spectre;
-        }  // спектр Фурье гармоничекого процесса
+        }
+        public double[] lowPassFilter(double fcut, int m, double dt) // фильтр низких частот, m=32, dt = 0.001
+        {
+            double[] constants = new double[4];
+            double[] lpwOld = new double[m];
+            double[] lpw = new double[m * 2 - 1];
+            constants[0] = 0.35577019;
+            constants[1] = 0.2436983;
+            constants[2] = 0.07211497;
+            constants[3] = 0.00630165;
+
+            double arg = 2 * fcut * dt;
+            lpwOld[0] = arg;
+            arg *= Math.PI;
+            for (int i = 1; i != m; ++i)
+            {
+                lpwOld[i] = Math.Sin(arg * i) / (Math.PI * i);
+            }
+
+            lpwOld[m - 1] /= 2;
+
+            double sumg = lpwOld[0];
+            for (int i = 1; i != m; ++i)
+            {
+                double sum = constants[0];
+                arg = (Math.PI * i) / m;
+                for (int k = 1; k != 4; ++k)
+                {
+                    sum = sum + 2 * constants[k] * Math.Cos(arg * k);
+                }
+                lpwOld[i] *= sum;
+                sumg = sumg + 2 * lpwOld[i];
+            }
+
+            for (int i = 0; i != m; ++i)
+            {
+                lpwOld[i] /= sumg;
+            }
+
+            int j = 1;
+            for (int i = 0; i != lpw.Length; ++i)
+            {
+                if (i < lpwOld.Length)
+                {
+                    lpw[i] = lpwOld[lpwOld.Length - i - 1];
+                }
+                else
+                {
+                    lpw[i] = lpwOld[j];
+                    j++;
+                }
+            }
+            return lpw;
+        }
+        public double[] highPassFilter(double fcut, int m, double dt) // фильтр высоких частот
+        {
+            double[] hpw = new double[2 * m - 1];
+            double[] lpw = lowPassFilter(fcut, m, dt);
+
+            for (int k = 0; k != (2 * m - 1); ++k)
+            {
+                if (k == (m - 1))
+                {
+                    hpw[k] = 1 - lpw[k];
+                }
+                else
+                {
+                    hpw[k] = -lpw[k];
+                }
+            }
+            return hpw;
+        }
+        public double[] bentPassFilter(double fcut1, double fcut2, int m, double dt) // полосовой фильтр
+        {
+            double[] bpw = new double[2 * m - 1];
+            double[] lpw1 = lowPassFilter(fcut1, m, dt);
+            double[] lpw2 = lowPassFilter(fcut2, m, dt);
+
+            for (int k = 0; k != (2 * m - 1); ++k)
+            {
+                bpw[k] = lpw2[k] - lpw1[k];
+            }
+            return bpw;
+        }
+        public double[] bentStopFilter(double fcut1, double fcut2, int m, double dt) // режекторный фильтр
+        {
+            double[] bsw = new double[2 * m - 1];
+            double[] lpw1 = lowPassFilter(fcut1, m, dt);
+            double[] lpw2 = lowPassFilter(fcut2, m, dt);
+
+            for (int k = 0; k != (2 * m - 1); ++k)
+            {
+                if (k == (m - 1))
+                {
+                    bsw[k] = 1 + lpw1[k] - lpw2[k];
+                }
+                else
+                {
+                    bsw[k] = lpw1[k] - lpw2[k];
+                }
+            }
+            return bsw;
+        }
+        public double[] convolution(double[] h) // свёртка
+        {
+            double[] y = new double[points.Length + h.Length - 1];
+
+            for (int i = 0; i != y.Length; ++i)
+            {
+                int kmin, kmax, j;
+                y[i] = 0.0;
+                kmin = (i >= h.Length - 1) ? i - (h.Length - 1) : 0;
+                kmax = (i < points.Length - 1) ? i : points.Length - 1;
+
+                for (j = kmin; j <= kmax; ++j)
+                {
+                    y[i] += points[j] * h[i - j];
+                }
+            }
+            Array.Copy(y, (h.Length - 2) / 2, y, 0, points.Length);
+            Array.Resize<double>(ref y, points.Length);
+            return y;
+        }
     }
 
     public class JustSpikesGraph : Graph
     {
-        public JustSpikesGraph(int S, int N, int m) : base(S, N)
+        public JustSpikesGraph(int S, int N, int m)
+            : base(S, N)
         {
             this.points = new double[this.N];
             for (int i = 0; i != this.N; ++i)
@@ -645,23 +774,22 @@ namespace Graphics
             }
             add_spikes(m);
         }
-        public void     add_spikes(int m)
+        private void add_spikes(int m)
         {
             Random rand = new Random();
 
             for (int i = 0; i != m; ++i)
             {
                 int val = rand.Next(0, this.N);
-                this.points[val] = (this.points[val] + 1) * 10;
+                this.points[val] = (this.points[val] + 1) * 5;
             }
         }
-        public double[] convolution(int alpha, int M)
+        public double[] convolution(int alpha, int M) // пример свертки, M = 200
         {
             double[] h = new double[M];
             double[] y = new double[this.N];
-            double delta_t = 0.005;
+            double delta_t = 0.001;
             double a_0 = 1.0;
-
             double sum;
 
             for (int k = 0; k != this.N; ++k)
@@ -673,11 +801,18 @@ namespace Graphics
                 }
                 for (int j = 0; j != M; ++j)
                 {
-                    sum += (this.points[k - j] + 1) * h[j];
+                    if ((k - j) < 0)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        sum += this.points[k - j] * h[j];
+                    }
                 }
                 y[k] = sum;
             }
             return y;
-        } // TODO index
+        }
     }
 }

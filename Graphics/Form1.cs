@@ -123,7 +123,7 @@ namespace Graphics
             pane_4.AddCurve("", list_4, Color.Blue, SymbolType.None); 
             pane_5.AddCurve("", list_5, Color.Blue, SymbolType.None);
             pane_6.AddCurve("", Graph.create_pair_list(file.points, file.points.Length), Color.Red, SymbolType.None);
-            pane_7.AddCurve("", Graph.create_pair_list(file.spectrum(), file.points.Length / 2), Color.Red, SymbolType.None);
+            pane_7.AddCurve("", Graph.create_pair_list(file.spectrum(file.points), file.points.Length / 2), Color.Red, SymbolType.None);
 
             pane.XAxis.Scale.Min = pane_2.XAxis.Scale.Min = xmin_limit;
             pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = xmax_limit;
