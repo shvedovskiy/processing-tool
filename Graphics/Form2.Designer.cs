@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.zedGraphControl20 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl19 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl18 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl17 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl16 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl15 = new ZedGraph.ZedGraphControl();
             this.zedGraphControl14 = new ZedGraph.ZedGraphControl();
             this.zedGraphControl11 = new ZedGraph.ZedGraphControl();
             this.zedGraphControl10 = new ZedGraph.ZedGraphControl();
@@ -114,12 +120,8 @@
             this.s_dispersiontextbox = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.zedGraphControl15 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl16 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl17 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl18 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl19 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl20 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl21 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl22 = new ZedGraph.ZedGraphControl();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -128,6 +130,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage3
@@ -151,6 +154,90 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Тренды";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // zedGraphControl20
+            // 
+            this.zedGraphControl20.Location = new System.Drawing.Point(988, 529);
+            this.zedGraphControl20.Name = "zedGraphControl20";
+            this.zedGraphControl20.ScrollGrace = 0D;
+            this.zedGraphControl20.ScrollMaxX = 0D;
+            this.zedGraphControl20.ScrollMaxY = 0D;
+            this.zedGraphControl20.ScrollMaxY2 = 0D;
+            this.zedGraphControl20.ScrollMinX = 0D;
+            this.zedGraphControl20.ScrollMinY = 0D;
+            this.zedGraphControl20.ScrollMinY2 = 0D;
+            this.zedGraphControl20.Size = new System.Drawing.Size(273, 194);
+            this.zedGraphControl20.TabIndex = 11;
+            // 
+            // zedGraphControl19
+            // 
+            this.zedGraphControl19.Location = new System.Drawing.Point(988, 311);
+            this.zedGraphControl19.Name = "zedGraphControl19";
+            this.zedGraphControl19.ScrollGrace = 0D;
+            this.zedGraphControl19.ScrollMaxX = 0D;
+            this.zedGraphControl19.ScrollMaxY = 0D;
+            this.zedGraphControl19.ScrollMaxY2 = 0D;
+            this.zedGraphControl19.ScrollMinX = 0D;
+            this.zedGraphControl19.ScrollMinY = 0D;
+            this.zedGraphControl19.ScrollMinY2 = 0D;
+            this.zedGraphControl19.Size = new System.Drawing.Size(273, 215);
+            this.zedGraphControl19.TabIndex = 10;
+            // 
+            // zedGraphControl18
+            // 
+            this.zedGraphControl18.Location = new System.Drawing.Point(692, 529);
+            this.zedGraphControl18.Name = "zedGraphControl18";
+            this.zedGraphControl18.ScrollGrace = 0D;
+            this.zedGraphControl18.ScrollMaxX = 0D;
+            this.zedGraphControl18.ScrollMaxY = 0D;
+            this.zedGraphControl18.ScrollMaxY2 = 0D;
+            this.zedGraphControl18.ScrollMinX = 0D;
+            this.zedGraphControl18.ScrollMinY = 0D;
+            this.zedGraphControl18.ScrollMinY2 = 0D;
+            this.zedGraphControl18.Size = new System.Drawing.Size(290, 194);
+            this.zedGraphControl18.TabIndex = 9;
+            // 
+            // zedGraphControl17
+            // 
+            this.zedGraphControl17.Location = new System.Drawing.Point(692, 311);
+            this.zedGraphControl17.Name = "zedGraphControl17";
+            this.zedGraphControl17.ScrollGrace = 0D;
+            this.zedGraphControl17.ScrollMaxX = 0D;
+            this.zedGraphControl17.ScrollMaxY = 0D;
+            this.zedGraphControl17.ScrollMaxY2 = 0D;
+            this.zedGraphControl17.ScrollMinX = 0D;
+            this.zedGraphControl17.ScrollMinY = 0D;
+            this.zedGraphControl17.ScrollMinY2 = 0D;
+            this.zedGraphControl17.Size = new System.Drawing.Size(290, 215);
+            this.zedGraphControl17.TabIndex = 8;
+            // 
+            // zedGraphControl16
+            // 
+            this.zedGraphControl16.Location = new System.Drawing.Point(367, 529);
+            this.zedGraphControl16.Name = "zedGraphControl16";
+            this.zedGraphControl16.ScrollGrace = 0D;
+            this.zedGraphControl16.ScrollMaxX = 0D;
+            this.zedGraphControl16.ScrollMaxY = 0D;
+            this.zedGraphControl16.ScrollMaxY2 = 0D;
+            this.zedGraphControl16.ScrollMinX = 0D;
+            this.zedGraphControl16.ScrollMinY = 0D;
+            this.zedGraphControl16.ScrollMinY2 = 0D;
+            this.zedGraphControl16.Size = new System.Drawing.Size(319, 194);
+            this.zedGraphControl16.TabIndex = 7;
+            // 
+            // zedGraphControl15
+            // 
+            this.zedGraphControl15.Location = new System.Drawing.Point(367, 311);
+            this.zedGraphControl15.Name = "zedGraphControl15";
+            this.zedGraphControl15.ScrollGrace = 0D;
+            this.zedGraphControl15.ScrollMaxX = 0D;
+            this.zedGraphControl15.ScrollMaxY = 0D;
+            this.zedGraphControl15.ScrollMaxY2 = 0D;
+            this.zedGraphControl15.ScrollMinX = 0D;
+            this.zedGraphControl15.ScrollMinY = 0D;
+            this.zedGraphControl15.ScrollMinY2 = 0D;
+            this.zedGraphControl15.Size = new System.Drawing.Size(319, 215);
+            this.zedGraphControl15.TabIndex = 6;
             // 
             // zedGraphControl14
             // 
@@ -997,97 +1084,43 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.zedGraphControl22);
+            this.tabPage4.Controls.Add(this.zedGraphControl21);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(1282, 726);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Фильтры";
+            this.tabPage4.Text = "wav-файл";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // zedGraphControl15
+            // zedGraphControl21
             // 
-            this.zedGraphControl15.Location = new System.Drawing.Point(367, 311);
-            this.zedGraphControl15.Name = "zedGraphControl15";
-            this.zedGraphControl15.ScrollGrace = 0D;
-            this.zedGraphControl15.ScrollMaxX = 0D;
-            this.zedGraphControl15.ScrollMaxY = 0D;
-            this.zedGraphControl15.ScrollMaxY2 = 0D;
-            this.zedGraphControl15.ScrollMinX = 0D;
-            this.zedGraphControl15.ScrollMinY = 0D;
-            this.zedGraphControl15.ScrollMinY2 = 0D;
-            this.zedGraphControl15.Size = new System.Drawing.Size(319, 215);
-            this.zedGraphControl15.TabIndex = 6;
+            this.zedGraphControl21.Location = new System.Drawing.Point(0, 261);
+            this.zedGraphControl21.Name = "zedGraphControl21";
+            this.zedGraphControl21.ScrollGrace = 0D;
+            this.zedGraphControl21.ScrollMaxX = 0D;
+            this.zedGraphControl21.ScrollMaxY = 0D;
+            this.zedGraphControl21.ScrollMaxY2 = 0D;
+            this.zedGraphControl21.ScrollMinX = 0D;
+            this.zedGraphControl21.ScrollMinY = 0D;
+            this.zedGraphControl21.ScrollMinY2 = 0D;
+            this.zedGraphControl21.Size = new System.Drawing.Size(1247, 308);
+            this.zedGraphControl21.TabIndex = 0;
             // 
-            // zedGraphControl16
+            // zedGraphControl22
             // 
-            this.zedGraphControl16.Location = new System.Drawing.Point(367, 529);
-            this.zedGraphControl16.Name = "zedGraphControl16";
-            this.zedGraphControl16.ScrollGrace = 0D;
-            this.zedGraphControl16.ScrollMaxX = 0D;
-            this.zedGraphControl16.ScrollMaxY = 0D;
-            this.zedGraphControl16.ScrollMaxY2 = 0D;
-            this.zedGraphControl16.ScrollMinX = 0D;
-            this.zedGraphControl16.ScrollMinY = 0D;
-            this.zedGraphControl16.ScrollMinY2 = 0D;
-            this.zedGraphControl16.Size = new System.Drawing.Size(319, 194);
-            this.zedGraphControl16.TabIndex = 7;
-            // 
-            // zedGraphControl17
-            // 
-            this.zedGraphControl17.Location = new System.Drawing.Point(692, 311);
-            this.zedGraphControl17.Name = "zedGraphControl17";
-            this.zedGraphControl17.ScrollGrace = 0D;
-            this.zedGraphControl17.ScrollMaxX = 0D;
-            this.zedGraphControl17.ScrollMaxY = 0D;
-            this.zedGraphControl17.ScrollMaxY2 = 0D;
-            this.zedGraphControl17.ScrollMinX = 0D;
-            this.zedGraphControl17.ScrollMinY = 0D;
-            this.zedGraphControl17.ScrollMinY2 = 0D;
-            this.zedGraphControl17.Size = new System.Drawing.Size(290, 215);
-            this.zedGraphControl17.TabIndex = 8;
-            // 
-            // zedGraphControl18
-            // 
-            this.zedGraphControl18.Location = new System.Drawing.Point(692, 529);
-            this.zedGraphControl18.Name = "zedGraphControl18";
-            this.zedGraphControl18.ScrollGrace = 0D;
-            this.zedGraphControl18.ScrollMaxX = 0D;
-            this.zedGraphControl18.ScrollMaxY = 0D;
-            this.zedGraphControl18.ScrollMaxY2 = 0D;
-            this.zedGraphControl18.ScrollMinX = 0D;
-            this.zedGraphControl18.ScrollMinY = 0D;
-            this.zedGraphControl18.ScrollMinY2 = 0D;
-            this.zedGraphControl18.Size = new System.Drawing.Size(290, 194);
-            this.zedGraphControl18.TabIndex = 9;
-            // 
-            // zedGraphControl19
-            // 
-            this.zedGraphControl19.Location = new System.Drawing.Point(988, 311);
-            this.zedGraphControl19.Name = "zedGraphControl19";
-            this.zedGraphControl19.ScrollGrace = 0D;
-            this.zedGraphControl19.ScrollMaxX = 0D;
-            this.zedGraphControl19.ScrollMaxY = 0D;
-            this.zedGraphControl19.ScrollMaxY2 = 0D;
-            this.zedGraphControl19.ScrollMinX = 0D;
-            this.zedGraphControl19.ScrollMinY = 0D;
-            this.zedGraphControl19.ScrollMinY2 = 0D;
-            this.zedGraphControl19.Size = new System.Drawing.Size(273, 215);
-            this.zedGraphControl19.TabIndex = 10;
-            // 
-            // zedGraphControl20
-            // 
-            this.zedGraphControl20.Location = new System.Drawing.Point(988, 529);
-            this.zedGraphControl20.Name = "zedGraphControl20";
-            this.zedGraphControl20.ScrollGrace = 0D;
-            this.zedGraphControl20.ScrollMaxX = 0D;
-            this.zedGraphControl20.ScrollMaxY = 0D;
-            this.zedGraphControl20.ScrollMaxY2 = 0D;
-            this.zedGraphControl20.ScrollMinX = 0D;
-            this.zedGraphControl20.ScrollMinY = 0D;
-            this.zedGraphControl20.ScrollMinY2 = 0D;
-            this.zedGraphControl20.Size = new System.Drawing.Size(273, 194);
-            this.zedGraphControl20.TabIndex = 11;
+            this.zedGraphControl22.Location = new System.Drawing.Point(0, 0);
+            this.zedGraphControl22.Name = "zedGraphControl22";
+            this.zedGraphControl22.ScrollGrace = 0D;
+            this.zedGraphControl22.ScrollMaxX = 0D;
+            this.zedGraphControl22.ScrollMaxY = 0D;
+            this.zedGraphControl22.ScrollMaxY2 = 0D;
+            this.zedGraphControl22.ScrollMinX = 0D;
+            this.zedGraphControl22.ScrollMinY = 0D;
+            this.zedGraphControl22.ScrollMinY2 = 0D;
+            this.zedGraphControl22.Size = new System.Drawing.Size(1247, 255);
+            this.zedGraphControl22.TabIndex = 1;
             // 
             // Form2
             // 
@@ -1110,6 +1143,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1207,6 +1241,8 @@
         private ZedGraph.ZedGraphControl zedGraphControl17;
         private ZedGraph.ZedGraphControl zedGraphControl16;
         private ZedGraph.ZedGraphControl zedGraphControl15;
+        private ZedGraph.ZedGraphControl zedGraphControl21;
+        private ZedGraph.ZedGraphControl zedGraphControl22;
 
 
     }

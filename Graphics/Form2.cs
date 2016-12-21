@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZedGraph;
+using NAudio.Wave;
+
 
 namespace Graphics
 {
@@ -36,6 +38,7 @@ namespace Graphics
             DrawGraph_Random(S, N);
             DrawGraph_Poly(S, N);
             DrawGraph_Trends(S, N);
+            LoadWav();
         }
 
         private void SInput_KeyPress(object sender, KeyPressEventArgs e)
@@ -255,12 +258,12 @@ namespace Graphics
             pane_2.AddCurve("", Graph.create_pair_list(poly.points, poly.N), Color.Blue, SymbolType.None);
             pane_3.AddCurve("", Graph.create_pair_list(poly.density, 30), Color.Blue, SymbolType.None);
             pane_4.AddCurve("", Graph.create_pair_list(poly.calculate_more_statistics()[0], poly.N), Color.Blue, SymbolType.None);
-            pane_5.AddCurve("", Graph.create_pair_list(notPoly.spectrum(notPoly.points), notPoly.N / 2), Color.Blue, SymbolType.None);
+            pane_5.AddCurve("", Graph.create_pair_list(PolyGraph.spectrum(notPoly.points, notPoly.N), notPoly.N / 2), Color.Blue, SymbolType.None);
 
             //poly.calculate_spikes(5);
             //pane_6.AddCurve("Со спайками", Graph.create_pair_list(poly.spectrum(), poly.N / 2), Color.Red, SymbolType.None);
             //poly.delete_spikes();
-            pane_6.AddCurve("", Graph.create_pair_list(poly.spectrum(poly.points), poly.N / 2), Color.Green, SymbolType.None);
+            pane_6.AddCurve("", Graph.create_pair_list(PolyGraph.spectrum(poly.points, poly.N), poly.N / 2), Color.Green, SymbolType.None);
 
             zedGraphControl5.AxisChange();
             zedGraphControl6.AxisChange();
@@ -343,26 +346,26 @@ namespace Graphics
             //pane_4.XAxis.Scale.Max = conv.Length;
             //pane_4.AddCurve("", Graph.create_pair_list(conv, conv.Length), Color.Blue, SymbolType.None);
 
-            double[] lpw = poly.lowPassFilter(50, 32, 0.001);
+            double[] lpw = PolyGraph.lowPassFilter(50, 32, 0.001);
             double[] lpfw = poly.convolution(lpw);
+             
             pane_3.AddCurve("", Graph.create_pair_list(lpfw, lpfw.Length), Color.Blue, SymbolType.None);
-            pane_4.AddCurve("", Graph.create_pair_list(poly.spectrum(lpfw), lpfw.Length / 2), Color.Blue, SymbolType.None);
+            pane_4.AddCurve("", Graph.create_pair_list(PolyGraph.spectrum(lpfw, poly.N), lpfw.Length / 2), Color.Blue, SymbolType.None);
 
-            double[] hpw = poly.highPassFilter(30, 32, 0.001);
+            double[] hpw = PolyGraph.highPassFilter(30, 32, 0.001);
             double[] hpfw = poly.convolution(hpw);
             pane_5.AddCurve("", Graph.create_pair_list(hpfw, hpfw.Length), Color.Blue, SymbolType.None);
-            pane_6.AddCurve("", Graph.create_pair_list(poly.spectrum(hpfw), hpfw.Length / 2), Color.Blue, SymbolType.None);
+            pane_6.AddCurve("", Graph.create_pair_list(PolyGraph.spectrum(hpfw, poly.N), hpfw.Length / 2), Color.Blue, SymbolType.None);
 
-
-            double[] bpw = poly.bentPassFilter(30, 150, 32, 0.001);
+            double[] bpw = PolyGraph.bentPassFilter(30, 150, 32, 0.001);
             double[] bpfw = poly.convolution(bpw);
             pane_7.AddCurve("", Graph.create_pair_list(bpfw, bpfw.Length), Color.Blue, SymbolType.None);
-            pane_8.AddCurve("", Graph.create_pair_list(poly.spectrum(bpfw), bpfw.Length / 2), Color.Blue, SymbolType.None);
+            pane_8.AddCurve("", Graph.create_pair_list(PolyGraph.spectrum(bpfw, poly.N), bpfw.Length / 2), Color.Blue, SymbolType.None);
 
-            double[] bspw = poly.bentStopFilter(15, 250, 32, 0.001);
+            double[] bspw = PolyGraph.bentStopFilter(15, 250, 32, 0.001);
             double[] bspfw = poly.convolution(bspw);
             pane_9.AddCurve("", Graph.create_pair_list(bspfw, bspfw.Length), Color.Blue, SymbolType.None);
-            pane_10.AddCurve("", Graph.create_pair_list(poly.spectrum(bspfw), bspfw.Length / 2), Color.Blue, SymbolType.None);
+            pane_10.AddCurve("", Graph.create_pair_list(PolyGraph.spectrum(bspfw, poly.N), bspfw.Length / 2), Color.Blue, SymbolType.None);
 
             zedGraphControl9.AxisChange();
             zedGraphControl10.AxisChange();
@@ -385,6 +388,93 @@ namespace Graphics
             zedGraphControl18.Invalidate();
             zedGraphControl19.Invalidate();
             zedGraphControl20.Invalidate();
+        }
+
+        private double[] wavSpectrum(double[] inreal)
+        {
+            int n = inreal.Length;
+            double[] spectre = new double[n / 2];
+            double[] outreal = new double[n];
+            double[] outimag = new double[n];
+
+            double sumreal;
+            double sumimag;
+            for (int k = 0; k != n; ++k)
+            {
+                sumreal = 0;
+                sumimag = 0;
+                for (int t = 0; t != n; ++t)
+                {
+                    double angle = (2 * Math.PI * t * k) / n;
+                    sumreal += inreal[t] * Math.Cos(angle);
+                    sumimag += -inreal[t] * Math.Sin(angle);
+                }
+                outreal[k] = sumreal;
+                outimag[k] = sumimag;
+            }
+
+            for (int k = 0; k != n / 2; ++k)
+            {
+                spectre[k] = Math.Sqrt(Math.Pow(outreal[k], 2) + Math.Pow(outimag[k], 2));
+            }
+            return spectre;
+        }
+        private void LoadWav()
+        {
+            using (WaveFileReader reader = new WaveFileReader("C:\\Users\\root\\Documents\\Visual Studio 2013\\Projects\\Graphics\\Graphics\\1.wav"))
+            {
+                using (WaveFileWriter writer = new WaveFileWriter("C:\\Users\\root\\Documents\\Visual Studio 2013\\Projects\\Graphics\\Graphics\\test.wav", reader.WaveFormat))
+                {
+                    byte[] bytesBuffer = new byte[reader.Length];
+                    int read = reader.Read(bytesBuffer, 0, bytesBuffer.Length);
+                    short[] test = new short[bytesBuffer.Length / sizeof(short)];
+                    Buffer.BlockCopy(bytesBuffer, 0, test, 0, bytesBuffer.Length);
+                    var floatSamples = new double[read / 2];
+
+                    for (int sampleIndex = 0; sampleIndex < read / 2; sampleIndex++)
+                    {
+                        var intSampleValue = BitConverter.ToInt16(bytesBuffer, sampleIndex * 2);
+                        floatSamples[sampleIndex] = intSampleValue / 32768.0;
+                    }
+
+                    GraphPane pane = zedGraphControl21.GraphPane;
+                    GraphPane pane_2 = zedGraphControl22.GraphPane;
+                    pane.CurveList.Clear();
+                    pane_2.CurveList.Clear();
+                    pane.Title.Text = "Временной ряд файла";
+                    pane_2.Title.Text = "Спектр Фурье файла";
+                    PointPairList lst = new PointPairList();
+
+                    double[] X = new double[read];
+                    for (int i = 1; i != X.Length; ++i)
+                    {
+                        X[i] = 11025 / floatSamples.Length * i;
+                    }
+
+                    byte[] result = new byte[test.Length * sizeof(short)];
+                    Buffer.BlockCopy(test, 0, result, 0, result.Length);
+
+                    double[] spec = wavSpectrum(test.Select(n => (double)n).ToArray());
+
+                    double[] filtered_test = PolyGraph.convolution(test.Select(n => (double)n).ToArray(), PolyGraph.bentPassFilter(2600, 3600, 100, 0.0009));
+                    double[] filtered_spec = wavSpectrum(filtered_test.Select(n => (double)n).ToArray());
+
+                    short[] shortTestFilter = filtered_test.Select(n => (short)n).ToArray();
+                    writer.WriteSamples(shortTestFilter, 0, shortTestFilter.Length);
+
+                    for (int i = 0; i != test.Length; ++i)
+                    {
+                        lst.Add(i, test[i]);
+                    }
+
+                    pane_2.AddCurve("", X, filtered_spec, Color.Blue, SymbolType.None);
+                    pane.AddCurve("", lst, Color.Blue, SymbolType.None);
+                    zedGraphControl21.AxisChange();
+                    zedGraphControl21.Invalidate();
+                    zedGraphControl22.AxisChange();
+                    zedGraphControl22.Invalidate();
+                }
+            }
         }
     } 
 }

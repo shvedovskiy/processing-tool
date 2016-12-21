@@ -610,35 +610,35 @@ namespace Graphics
             }
             return summary;
         } // добавление шума на полигармонический процесс
-        public double[] spectrum(double[] points) // вычисление спектров Фурье
+        public static double[] spectrum(double[] points, int N) // вычисление спектров Фурье
         {
-            double[] spectre = new double[this.N];
-            double[] spectre_Re = new double[this.N];
-            double[] spectre_Im = new double[this.N];
+            double[] spectre = new double[N];
+            double[] spectre_Re = new double[N];
+            double[] spectre_Im = new double[N];
 
             double sum_Re, sum_Im;
-            for (int k = 0; k != this.N; ++k)
+            for (int k = 0; k != N; ++k)
             {
                 sum_Re = 0.0;
                 sum_Im = 0.0;
 
-                for (int i = 0; i != this.N; ++i)
+                for (int i = 0; i != N; ++i)
                 {
-                    sum_Re += points[i] * Math.Cos((2 * Math.PI * k * i) / this.N);
-                    sum_Im += points[i] * Math.Sin((2 * Math.PI * k * i) / this.N);
+                    sum_Re += points[i] * Math.Cos((2 * Math.PI * k * i) / N);
+                    sum_Im += -points[i] * Math.Sin((2 * Math.PI * k * i) / N);
                 }
-                spectre_Re[k] = sum_Re / this.N;
-                spectre_Im[k] = sum_Im / this.N;
+                spectre_Re[k] = sum_Re / N;
+                spectre_Im[k] = sum_Im / N;
             }
 
-            for (int k = 0; k != this.N; ++k)
+            for (int k = 0; k != N; ++k)
             {
                 spectre[k] = Math.Sqrt(Math.Pow(spectre_Re[k], 2) + Math.Pow(spectre_Im[k], 2));
             }
 
             return spectre;
         }
-        public double[] lowPassFilter(double fcut, int m, double dt) // фильтр низких частот, m=32, dt = 0.001
+        public static double[] lowPassFilter(double fcut, int m, double dt) // фильтр низких частот, m=32, dt = 0.001
         {
             double[] constants = new double[4];
             double[] lpwOld = new double[m];
@@ -691,7 +691,7 @@ namespace Graphics
             }
             return lpw;
         }
-        public double[] highPassFilter(double fcut, int m, double dt) // фильтр высоких частот
+        public static double[] highPassFilter(double fcut, int m, double dt) // фильтр высоких частот
         {
             double[] hpw = new double[2 * m - 1];
             double[] lpw = lowPassFilter(fcut, m, dt);
@@ -709,7 +709,7 @@ namespace Graphics
             }
             return hpw;
         }
-        public double[] bentPassFilter(double fcut1, double fcut2, int m, double dt) // полосовой фильтр
+        public static double[] bentPassFilter(double fcut1, double fcut2, int m, double dt) // полосовой фильтр
         {
             double[] bpw = new double[2 * m - 1];
             double[] lpw1 = lowPassFilter(fcut1, m, dt);
@@ -721,7 +721,7 @@ namespace Graphics
             }
             return bpw;
         }
-        public double[] bentStopFilter(double fcut1, double fcut2, int m, double dt) // режекторный фильтр
+        public static double[] bentStopFilter(double fcut1, double fcut2, int m, double dt) // режекторный фильтр
         {
             double[] bsw = new double[2 * m - 1];
             double[] lpw1 = lowPassFilter(fcut1, m, dt);
@@ -758,6 +758,26 @@ namespace Graphics
             }
             Array.Copy(y, (h.Length - 2) / 2, y, 0, points.Length);
             Array.Resize<double>(ref y, points.Length);
+            return y;
+        }
+        public static double[] convolution(double[] x, double[] h)
+        {
+            double[] y = new double[x.Length + h.Length - 1];
+
+            for (int i = 0; i != y.Length; ++i)
+            {
+                int kmin, kmax, j;
+                y[i] = 0.0;
+                kmin = (i >= h.Length - 1) ? i - (h.Length - 1) : 0;
+                kmax = (i < x.Length - 1) ? i : x.Length - 1;
+
+                for (j = kmin; j <= kmax; ++j)
+                {
+                    y[i] += x[j] * h[i - j];
+                }
+            }
+            Array.Copy(y, (h.Length - 2) / 2, y, 0, x.Length);
+            Array.Resize<double>(ref y, x.Length);
             return y;
         }
     }
