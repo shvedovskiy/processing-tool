@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+            this.minusExpControl = new ZedGraph.ZedGraphControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
+            this.linearControl = new ZedGraph.ZedGraphControl();
+            this.expControl = new ZedGraph.ZedGraphControl();
+            this.minusLinearControl = new ZedGraph.ZedGraphControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.zedGraphControl5 = new ZedGraph.ZedGraphControl();
+            this.multiTrendControl = new ZedGraph.ZedGraphControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.zedGraphControl6 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl7 = new ZedGraph.ZedGraphControl();
+            this.spectreFileControl = new ZedGraph.ZedGraphControl();
+            this.fileControl = new ZedGraph.ZedGraphControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -48,29 +48,29 @@
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // zedGraphControl1
+            // minusExpControl
             // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(342, 195);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(338, 208);
-            this.zedGraphControl1.TabIndex = 0;
+            this.minusExpControl.Location = new System.Drawing.Point(342, 195);
+            this.minusExpControl.Name = "minusExpControl";
+            this.minusExpControl.ScrollGrace = 0D;
+            this.minusExpControl.ScrollMaxX = 0D;
+            this.minusExpControl.ScrollMaxY = 0D;
+            this.minusExpControl.ScrollMaxY2 = 0D;
+            this.minusExpControl.ScrollMinX = 0D;
+            this.minusExpControl.ScrollMinY = 0D;
+            this.minusExpControl.ScrollMinY2 = 0D;
+            this.minusExpControl.Size = new System.Drawing.Size(338, 208);
+            this.minusExpControl.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.7076F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.2924F));
-            this.tableLayoutPanel1.Controls.Add(this.zedGraphControl3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.zedGraphControl4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.zedGraphControl1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.zedGraphControl2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.linearControl, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.expControl, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.minusExpControl, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.minusLinearControl, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -79,47 +79,47 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(684, 406);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // zedGraphControl3
+            // linearControl
             // 
-            this.zedGraphControl3.Location = new System.Drawing.Point(3, 3);
-            this.zedGraphControl3.Name = "zedGraphControl3";
-            this.zedGraphControl3.ScrollGrace = 0D;
-            this.zedGraphControl3.ScrollMaxX = 0D;
-            this.zedGraphControl3.ScrollMaxY = 0D;
-            this.zedGraphControl3.ScrollMaxY2 = 0D;
-            this.zedGraphControl3.ScrollMinX = 0D;
-            this.zedGraphControl3.ScrollMinY = 0D;
-            this.zedGraphControl3.ScrollMinY2 = 0D;
-            this.zedGraphControl3.Size = new System.Drawing.Size(333, 186);
-            this.zedGraphControl3.TabIndex = 2;
+            this.linearControl.Location = new System.Drawing.Point(3, 3);
+            this.linearControl.Name = "linearControl";
+            this.linearControl.ScrollGrace = 0D;
+            this.linearControl.ScrollMaxX = 0D;
+            this.linearControl.ScrollMaxY = 0D;
+            this.linearControl.ScrollMaxY2 = 0D;
+            this.linearControl.ScrollMinX = 0D;
+            this.linearControl.ScrollMinY = 0D;
+            this.linearControl.ScrollMinY2 = 0D;
+            this.linearControl.Size = new System.Drawing.Size(333, 186);
+            this.linearControl.TabIndex = 2;
             // 
-            // zedGraphControl4
+            // expControl
             // 
-            this.zedGraphControl4.Location = new System.Drawing.Point(3, 195);
-            this.zedGraphControl4.Name = "zedGraphControl4";
-            this.zedGraphControl4.ScrollGrace = 0D;
-            this.zedGraphControl4.ScrollMaxX = 0D;
-            this.zedGraphControl4.ScrollMaxY = 0D;
-            this.zedGraphControl4.ScrollMaxY2 = 0D;
-            this.zedGraphControl4.ScrollMinX = 0D;
-            this.zedGraphControl4.ScrollMinY = 0D;
-            this.zedGraphControl4.ScrollMinY2 = 0D;
-            this.zedGraphControl4.Size = new System.Drawing.Size(333, 208);
-            this.zedGraphControl4.TabIndex = 3;
+            this.expControl.Location = new System.Drawing.Point(3, 195);
+            this.expControl.Name = "expControl";
+            this.expControl.ScrollGrace = 0D;
+            this.expControl.ScrollMaxX = 0D;
+            this.expControl.ScrollMaxY = 0D;
+            this.expControl.ScrollMaxY2 = 0D;
+            this.expControl.ScrollMinX = 0D;
+            this.expControl.ScrollMinY = 0D;
+            this.expControl.ScrollMinY2 = 0D;
+            this.expControl.Size = new System.Drawing.Size(333, 208);
+            this.expControl.TabIndex = 3;
             // 
-            // zedGraphControl2
+            // minusLinearControl
             // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(342, 3);
-            this.zedGraphControl2.Name = "zedGraphControl2";
-            this.zedGraphControl2.ScrollGrace = 0D;
-            this.zedGraphControl2.ScrollMaxX = 0D;
-            this.zedGraphControl2.ScrollMaxY = 0D;
-            this.zedGraphControl2.ScrollMaxY2 = 0D;
-            this.zedGraphControl2.ScrollMinX = 0D;
-            this.zedGraphControl2.ScrollMinY = 0D;
-            this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(338, 186);
-            this.zedGraphControl2.TabIndex = 1;
+            this.minusLinearControl.Location = new System.Drawing.Point(342, 3);
+            this.minusLinearControl.Name = "minusLinearControl";
+            this.minusLinearControl.ScrollGrace = 0D;
+            this.minusLinearControl.ScrollMaxX = 0D;
+            this.minusLinearControl.ScrollMaxY = 0D;
+            this.minusLinearControl.ScrollMaxY2 = 0D;
+            this.minusLinearControl.ScrollMinX = 0D;
+            this.minusLinearControl.ScrollMinY = 0D;
+            this.minusLinearControl.ScrollMinY2 = 0D;
+            this.minusLinearControl.Size = new System.Drawing.Size(338, 186);
+            this.minusLinearControl.TabIndex = 1;
             // 
             // tabControl1
             // 
@@ -145,7 +145,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.zedGraphControl5);
+            this.tabPage2.Controls.Add(this.multiTrendControl);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -154,24 +154,24 @@
             this.tabPage2.Text = "Мульти тренд";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // zedGraphControl5
+            // multiTrendControl
             // 
-            this.zedGraphControl5.Location = new System.Drawing.Point(-4, 0);
-            this.zedGraphControl5.Name = "zedGraphControl5";
-            this.zedGraphControl5.ScrollGrace = 0D;
-            this.zedGraphControl5.ScrollMaxX = 0D;
-            this.zedGraphControl5.ScrollMaxY = 0D;
-            this.zedGraphControl5.ScrollMaxY2 = 0D;
-            this.zedGraphControl5.ScrollMinX = 0D;
-            this.zedGraphControl5.ScrollMinY = 0D;
-            this.zedGraphControl5.ScrollMinY2 = 0D;
-            this.zedGraphControl5.Size = new System.Drawing.Size(693, 417);
-            this.zedGraphControl5.TabIndex = 0;
+            this.multiTrendControl.Location = new System.Drawing.Point(-4, 0);
+            this.multiTrendControl.Name = "multiTrendControl";
+            this.multiTrendControl.ScrollGrace = 0D;
+            this.multiTrendControl.ScrollMaxX = 0D;
+            this.multiTrendControl.ScrollMaxY = 0D;
+            this.multiTrendControl.ScrollMaxY2 = 0D;
+            this.multiTrendControl.ScrollMinX = 0D;
+            this.multiTrendControl.ScrollMinY = 0D;
+            this.multiTrendControl.ScrollMinY2 = 0D;
+            this.multiTrendControl.Size = new System.Drawing.Size(693, 417);
+            this.multiTrendControl.TabIndex = 0;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.zedGraphControl7);
-            this.tabPage3.Controls.Add(this.zedGraphControl6);
+            this.tabPage3.Controls.Add(this.spectreFileControl);
+            this.tabPage3.Controls.Add(this.fileControl);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -180,33 +180,33 @@
             this.tabPage3.Text = "Чтение из файла";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // zedGraphControl6
+            // spectreFileControl
             // 
-            this.zedGraphControl6.Location = new System.Drawing.Point(-4, 0);
-            this.zedGraphControl6.Name = "zedGraphControl6";
-            this.zedGraphControl6.ScrollGrace = 0D;
-            this.zedGraphControl6.ScrollMaxX = 0D;
-            this.zedGraphControl6.ScrollMaxY = 0D;
-            this.zedGraphControl6.ScrollMaxY2 = 0D;
-            this.zedGraphControl6.ScrollMinX = 0D;
-            this.zedGraphControl6.ScrollMinY = 0D;
-            this.zedGraphControl6.ScrollMinY2 = 0D;
-            this.zedGraphControl6.Size = new System.Drawing.Size(389, 417);
-            this.zedGraphControl6.TabIndex = 0;
+            this.spectreFileControl.Location = new System.Drawing.Point(391, 0);
+            this.spectreFileControl.Name = "spectreFileControl";
+            this.spectreFileControl.ScrollGrace = 0D;
+            this.spectreFileControl.ScrollMaxX = 0D;
+            this.spectreFileControl.ScrollMaxY = 0D;
+            this.spectreFileControl.ScrollMaxY2 = 0D;
+            this.spectreFileControl.ScrollMinX = 0D;
+            this.spectreFileControl.ScrollMinY = 0D;
+            this.spectreFileControl.ScrollMinY2 = 0D;
+            this.spectreFileControl.Size = new System.Drawing.Size(294, 413);
+            this.spectreFileControl.TabIndex = 1;
             // 
-            // zedGraphControl7
+            // fileControl
             // 
-            this.zedGraphControl7.Location = new System.Drawing.Point(391, 0);
-            this.zedGraphControl7.Name = "zedGraphControl7";
-            this.zedGraphControl7.ScrollGrace = 0D;
-            this.zedGraphControl7.ScrollMaxX = 0D;
-            this.zedGraphControl7.ScrollMaxY = 0D;
-            this.zedGraphControl7.ScrollMaxY2 = 0D;
-            this.zedGraphControl7.ScrollMinX = 0D;
-            this.zedGraphControl7.ScrollMinY = 0D;
-            this.zedGraphControl7.ScrollMinY2 = 0D;
-            this.zedGraphControl7.Size = new System.Drawing.Size(294, 413);
-            this.zedGraphControl7.TabIndex = 1;
+            this.fileControl.Location = new System.Drawing.Point(-4, 0);
+            this.fileControl.Name = "fileControl";
+            this.fileControl.ScrollGrace = 0D;
+            this.fileControl.ScrollMaxX = 0D;
+            this.fileControl.ScrollMaxY = 0D;
+            this.fileControl.ScrollMaxY2 = 0D;
+            this.fileControl.ScrollMinX = 0D;
+            this.fileControl.ScrollMinY = 0D;
+            this.fileControl.ScrollMinY2 = 0D;
+            this.fileControl.Size = new System.Drawing.Size(389, 417);
+            this.fileControl.TabIndex = 0;
             // 
             // Form1
             // 
@@ -216,6 +216,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -227,18 +228,18 @@
 
         #endregion
 
-        private ZedGraph.ZedGraphControl zedGraphControl1;
+        private ZedGraph.ZedGraphControl minusExpControl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private ZedGraph.ZedGraphControl zedGraphControl2;
-        private ZedGraph.ZedGraphControl zedGraphControl3;
-        private ZedGraph.ZedGraphControl zedGraphControl4;
+        private ZedGraph.ZedGraphControl minusLinearControl;
+        private ZedGraph.ZedGraphControl linearControl;
+        private ZedGraph.ZedGraphControl expControl;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private ZedGraph.ZedGraphControl zedGraphControl5;
+        private ZedGraph.ZedGraphControl multiTrendControl;
         private System.Windows.Forms.TabPage tabPage3;
-        private ZedGraph.ZedGraphControl zedGraphControl6;
-        private ZedGraph.ZedGraphControl zedGraphControl7;
+        private ZedGraph.ZedGraphControl fileControl;
+        private ZedGraph.ZedGraphControl spectreFileControl;
 
     }
 }

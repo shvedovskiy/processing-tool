@@ -28,7 +28,7 @@ namespace Graphics
         }
         public Graph(String filename)
         {
-            Directory.GetFiles(@"C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\bin\Release");
+            //Directory.GetFiles(@"E:\олег\Graphics\Graphics\bin\Release");
 
             using (BinaryReader b = new BinaryReader(File.Open(filename, FileMode.Open)))
             {
@@ -39,8 +39,8 @@ namespace Graphics
 
                 while (pos != len)
                 {
-                    this.points[pos] = Convert.ToDouble(b.ReadInt32());
-                    pos += sizeof(int);
+                    this.points[pos] = b.ReadSingle();
+                    pos += sizeof(float);
                 }
                 if (Math.Abs(this.points.Max()) > Math.Abs(this.points.Min()))
                 {

@@ -16,7 +16,55 @@ namespace Graphics
         public Form1()
         {
             InitializeComponent();
-            DrawGraph();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            PointPairList list = new PointPairList();
+            PointPairList list_2 = new PointPairList();
+            PointPairList list_3 = new PointPairList();
+            for (double x = 0; x <= 100; x += 0.01)
+            {
+                list.Add(x, f_1(x));
+                list_2.Add(x, f_2(x));
+                list_3.Add(x, f_3(x));
+            }
+            drawGraph(linearControl, list, "y = ax + b", xMin: -1, xMax: 105);
+            drawGraph(minusLinearControl, list_2, "y = -ax + b", xMin: -1, xMax: 105, yMin: -1, yMax: 200);
+            drawGraph(expControl, list_3, "y = ce^(alpha * x)", xMax: 50, yMin: -1, yMax: 200);
+
+
+            PointPairList list_4 = new PointPairList();
+            for (double x = -100; x <= 100; x += 0.01)
+            {
+                list_4.Add(x, f_4(x));
+            }
+            drawGraph(minusExpControl, list_4, "y = ce^(-alpha * x)", xMin: -100, xMax: 200, yMax: 50);
+
+
+            PointPairList list_5 = new PointPairList();
+            for (int i = 0; i != 250; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), Convert.ToDouble(i));
+            }
+            for (int i = 250; i != 500; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), 321 * Math.Exp(-0.001 * i));
+            }
+            for (int i = 500; i != 750; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), 119 * Math.Exp(0.001 * i));
+            }
+            for (int i = 750; i != 1000; ++i)
+            {
+                list_5.Add(Convert.ToDouble(i), -1 * i + 1002);
+            }
+            drawGraph(multiTrendControl, list_5, "Multi Trend", yMax: 500);
+
+
+            PolyGraph file = new PolyGraph(@"E:\олег\Graphics\Graphics\bin\Release\php.dat");
+            drawGraph(fileControl, Graph.create_pair_list(file.points, file.points.Length), "From .dat file", xMax: file.points.Length);
+            drawGraph(spectreFileControl, Graph.create_pair_list(PolyGraph.spectrum(file.points, file.N), file.points.Length / 2), "Спектр Фурье", xMax: file.points.Length / 2);
         }
 
         private double f_1(double x)
@@ -40,118 +88,27 @@ namespace Graphics
             return Math.Pow((c * Math.E), (alpha * (-x)));
         }
 
-        private void DrawGraph()
-        {
-            PolyGraph file = new PolyGraph(@"php.dat");
+        private void drawGraph(ZedGraphControl control, PointPairList list, string title, string xTitle="Ось X", string yTitle="Ось Y", int xMin=0, int xMax=1000, int yMin=0, int yMax=0, bool isClear=true) {
+            GraphPane pane = control.GraphPane;
+            pane.Title.Text = title;
+            pane.XAxis.Title.Text = xTitle;
+            pane.YAxis.Title.Text = yTitle;
 
-            GraphPane pane = zedGraphControl1.GraphPane;
-            GraphPane pane_2 = zedGraphControl2.GraphPane;
-            GraphPane pane_3 = zedGraphControl3.GraphPane;
-            GraphPane pane_4 = zedGraphControl4.GraphPane;
-            GraphPane pane_5 = zedGraphControl5.GraphPane;
-            GraphPane pane_6 = zedGraphControl6.GraphPane;
-            GraphPane pane_7 = zedGraphControl7.GraphPane;
-
-            pane.XAxis.Title.Text = pane_2.XAxis.Title.Text = pane_3.XAxis.Title.Text = pane_4.XAxis.Title.Text = pane_5.XAxis.Title.Text = pane_6.XAxis.Title.Text = "X";
-            pane.YAxis.Title.Text = pane_2.YAxis.Title.Text = pane_3.YAxis.Title.Text = pane_4.YAxis.Title.Text = pane_5.YAxis.Title.Text = pane_6.YAxis.Title.Text = "Y";
-
-            pane.Title.Text = "y = ax + b";
-            pane_2.Title.Text = "y = -ax + b";
-            pane_3.Title.Text = "y = ce^(alpha * x)";
-            pane_4.Title.Text = "y = ce^(-alpha * x)";
-            pane_5.Title.Text = "Multi Trend";
-            pane_6.Title.Text = "From .dat file";
-            pane_7.Title.Text = "Спектр Фурье";
-
-            pane.CurveList.Clear();
-            pane_2.CurveList.Clear();
-            pane_3.CurveList.Clear();
-            pane_4.CurveList.Clear();
-            pane_5.CurveList.Clear();
-            pane_6.CurveList.Clear();
-            pane_7.CurveList.Clear();
-
-            PointPairList list = new PointPairList();
-            PointPairList list_2 = new PointPairList();
-            PointPairList list_3 = new PointPairList();
-            PointPairList list_4 = new PointPairList();
-            PointPairList list_5 = new PointPairList();
-
-            double xmin = 0;
-            double xmax = 100;
-
-            double xmin_limit   = -1;
-            double xmax_limit   = 105;
-            double x_3max_limit = 50;
-            double x_4max_limit = 200;
-            double x_4min_limit = -100;
-            double ymin_limit   = -1;
-            double ymax_limit   = 200;
-            double y_4max_limit = 50;
-
-            for (double x = xmin; x <= xmax; x += 0.01)
+            pane.XAxis.Scale.Min = xMin;
+            pane.XAxis.Scale.Max = xMax;
+            pane.YAxis.Scale.Min = yMin;
+            if (yMax != 0)
             {
-                list.Add(x, f_1(x));
-                list_2.Add(x, f_2(x));
-                list_3.Add(x, f_3(x));
-            }
-            for (double x = -100; x <= xmax; x += 0.01)
-            {
-                list_4.Add(x, f_4(x));
+                pane.YAxis.Scale.Max = yMax;
             }
 
-            for (int i = 0; i != 250; ++i)
+            if (isClear)
             {
-                list_5.Add(Convert.ToDouble(i), Convert.ToDouble(i));
+                pane.CurveList.Clear();
             }
-            for (int i = 250; i != 500; ++i)
-            {
-                list_5.Add(Convert.ToDouble(i), 321 * Math.Exp(-0.001 * i));
-            }
-            for (int i = 500; i != 750; ++i)
-            {
-                list_5.Add(Convert.ToDouble(i), 119 * Math.Exp(0.001 * i));
-            }
-            for (int i = 750; i != 1000; ++i)
-            {
-                list_5.Add(Convert.ToDouble(i), -1 * i + 1002);
-            }
-
             pane.AddCurve("", list, Color.Blue, SymbolType.None);
-            pane_2.AddCurve("", list_2, Color.Blue, SymbolType.None);
-            pane_3.AddCurve("", list_3, Color.Blue, SymbolType.None);
-            pane_4.AddCurve("", list_4, Color.Blue, SymbolType.None); 
-            pane_5.AddCurve("", list_5, Color.Blue, SymbolType.None);
-            pane_6.AddCurve("", Graph.create_pair_list(file.points, file.points.Length), Color.Red, SymbolType.None);
-            pane_7.AddCurve("", Graph.create_pair_list(PolyGraph.spectrum(file.points, file.N), file.points.Length / 2), Color.Red, SymbolType.None);
-
-            pane.XAxis.Scale.Min = pane_2.XAxis.Scale.Min = xmin_limit;
-            pane.XAxis.Scale.Max = pane_2.XAxis.Scale.Max = xmax_limit;
-            pane_3.XAxis.Scale.Max = x_3max_limit;
-            pane_6.XAxis.Scale.Max = file.points.Length;
-            pane_7.XAxis.Scale.Max = file.points.Length / 2;
-            pane_4.XAxis.Scale.Min = x_4min_limit;
-            pane_4.XAxis.Scale.Max = x_4max_limit;
-
-            pane_2.YAxis.Scale.Min = pane_3.YAxis.Scale.Min = ymin_limit;
-            pane_2.YAxis.Scale.Max = pane_3.YAxis.Scale.Max = ymax_limit;
-            pane_4.YAxis.Scale.Max = y_4max_limit;   
-
-            zedGraphControl1.AxisChange();
-            zedGraphControl2.AxisChange();
-            zedGraphControl3.AxisChange();
-            zedGraphControl4.AxisChange();
-            zedGraphControl5.AxisChange();
-            zedGraphControl6.AxisChange();
-            zedGraphControl7.AxisChange();
-
-            zedGraphControl1.Invalidate();
-            zedGraphControl2.Invalidate();
-            zedGraphControl3.Invalidate();
-            zedGraphControl4.Invalidate();
-            zedGraphControl5.Invalidate();
-            zedGraphControl6.Invalidate();
-            zedGraphControl7.Invalidate();
+            control.AxisChange();
+            control.Invalidate();
         }
     }
 }

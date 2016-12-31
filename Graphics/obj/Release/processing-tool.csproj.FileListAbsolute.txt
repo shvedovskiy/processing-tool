@@ -12,3 +12,17 @@ C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\obj\Releas
 C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\obj\Release\Graphics.Properties.Resources.resources
 C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\obj\Release\processing-tool.csproj.GenerateResource.Cache
 C:\Users\root\Documents\Visual Studio 2013\Projects\Graphics\Graphics\obj\Release\Graphics.Form3.resources
+E:\олег\Graphics\Graphics\bin\Release\processing-tool.exe.config
+E:\олег\Graphics\Graphics\obj\Release\processing-tool.exe
+E:\олег\Graphics\Graphics\obj\Release\processing-tool.pdb
+E:\олег\Graphics\Graphics\bin\Release\processing-tool.exe
+E:\олег\Graphics\Graphics\bin\Release\processing-tool.pdb
+E:\олег\Graphics\Graphics\bin\Release\NAudio.dll
+E:\олег\Graphics\Graphics\bin\Release\ZedGraph.dll
+E:\олег\Graphics\Graphics\bin\Release\NAudio.xml
+E:\олег\Graphics\Graphics\obj\Release\processing-tool.csprojResolveAssemblyReference.cache
+E:\олег\Graphics\Graphics\obj\Release\Graphics.Form1.resources
+E:\олег\Graphics\Graphics\obj\Release\Graphics.Form2.resources
+E:\олег\Graphics\Graphics\obj\Release\Graphics.Form3.resources
+E:\олег\Graphics\Graphics\obj\Release\Graphics.Properties.Resources.resources
+E:\олег\Graphics\Graphics\obj\Release\processing-tool.csproj.GenerateResource.Cache
