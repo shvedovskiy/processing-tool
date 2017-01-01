@@ -23,6 +23,5 @@ E:\олег\Graphics\Graphics\bin\Release\NAudio.xml
 E:\олег\Graphics\Graphics\obj\Release\processing-tool.csprojResolveAssemblyReference.cache
 E:\олег\Graphics\Graphics\obj\Release\Graphics.Form1.resources
 E:\олег\Graphics\Graphics\obj\Release\Graphics.Form2.resources
-E:\олег\Graphics\Graphics\obj\Release\Graphics.Form3.resources
 E:\олег\Graphics\Graphics\obj\Release\Graphics.Properties.Resources.resources
 E:\олег\Graphics\Graphics\obj\Release\processing-tool.csproj.GenerateResource.Cache
